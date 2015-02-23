@@ -10,10 +10,10 @@ paginate:         1
 baseurl:          /
 author:
   name:           hugohil
-  url:            https://twitter.com/hugohil
   email:          hugo@soixantecircuits.fr
 
 # Custom vars
 version:          1.0.0
+analytics:        UA-60055019-1
 github:
   repo:           https://github.com/hugohil/hugohil.github.io
