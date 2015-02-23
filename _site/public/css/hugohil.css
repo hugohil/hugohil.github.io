@@ -1,0 +1,93 @@
+.masthead {
+  text-align: center;
+}
+
+.masthead-title {
+  border-bottom: 1px solid #EEE;
+  padding-bottom: 10px;
+}
+
+.masthead nav {
+  padding: 7px 0;
+  border-bottom: 1px solid #EEE;
+}
+.masthead nav div a {
+  color: #505050;
+  font-style: italic;
+}
+
+.masthead nav div.current a {
+  text-decoration: underline;
+  color: #808080;
+}
+
+.masthead nav div:after {
+  content: '-';
+  padding: 0 5px;
+}
+
+.masthead nav div:last-child:after {
+  content: '';
+}
+
+.post.in-index {
+  margin-bottom: 1.5em;
+}
+
+.post.in-index:before {
+  content: '';
+  display: block;
+  width: 50%;
+  border-top: 1px solid #EEE;
+  margin-bottom: .5em;
+}
+.post.in-index:first-child:before {
+  display: none;
+}
+
+.post.in-index time {
+  text-indent: 15px;
+  font-size: .8rem;
+}
+
+.meta {
+  font-size: .8rem;
+  font-style: italic;
+  color: #9A9A9A;
+}
+
+.meta time {
+  margin-right: 25px;
+}
+
+.tag-list {
+  display: inline-block;
+  padding: 0;
+}
+
+.tag-list li {
+  display: inline-block;
+}
+
+.tag-list li:after {
+  content: '/';
+  padding-left: 5px;
+}
+
+.tag-list li:last-child:after {
+  content: '';
+}
+
+.footer {
+  text-align: center;
+}
+
+.svg-icon{
+  transition: transform .3s ease;
+}
+
+.svg-icon:hover{
+  -webkit-transform: rotateZ(30deg);
+  -moz-transform: rotateZ(30deg);
+  transform: rotateZ(30deg);
+}
