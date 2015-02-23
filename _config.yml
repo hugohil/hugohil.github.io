@@ -17,3 +17,12 @@ version:          1.0.0
 analytics:        UA-60055019-1
 github:
   repo:           https://github.com/hugohil/hugohil.github.io
+
+# Social ids
+social:
+  github:         hugohil
+  twitter:        hugohil
+  instagram:      hugohil
+  linkedin:       pub/hugo-hilaire/99/251/64b
+  pinterest:      hugohil/
+  stackoverflow:  # your stackoverflow profile, e.g. "users/50476/bart-kiers"

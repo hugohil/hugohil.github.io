@@ -1,0 +1,45 @@
+.masthead {
+  text-align: center;
+}
+
+.masthead-title {
+  border-bottom: 1px solid #EEE;
+  padding-bottom: 10px;
+}
+
+.masthead nav {
+  padding: 7px 0;
+  border-bottom: 1px solid #EEE;
+}
+.masthead nav div a {
+  color: #505050;
+  font-style: italic;
+}
+
+.masthead nav div.current a {
+  text-decoration: underline;
+  color: #808080;
+}
+
+.masthead nav div:after {
+  content: '-';
+  padding: 0 5px;
+}
+
+.masthead nav div:last-child:after {
+  content: '';
+}
+
+.footer {
+  text-align: center;
+}
+
+.svg-icon{
+  transition: transform .3s ease;
+}
+
+.svg-icon:hover{
+  -webkit-transform: rotateZ(30deg);
+  -moz-transform: rotateZ(30deg);
+  transform: rotateZ(30deg);
+}
