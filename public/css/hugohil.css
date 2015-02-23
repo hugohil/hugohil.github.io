@@ -30,6 +30,54 @@
   content: '';
 }
 
+.post.in-index {
+  margin-bottom: 1.5em;
+}
+
+.post.in-index:before {
+  content: '';
+  display: block;
+  width: 50%;
+  border-top: 1px solid #EEE;
+  margin-bottom: .5em;
+}
+.post.in-index:first-child:before {
+  display: none;
+}
+
+.post.in-index time {
+  text-indent: 15px;
+  font-size: .8rem;
+}
+
+.meta {
+  font-size: .8rem;
+  font-style: italic;
+  color: #9A9A9A;
+}
+
+.meta time {
+  margin-right: 25px;
+}
+
+.tag-list {
+  display: inline-block;
+  padding: 0;
+}
+
+.tag-list li {
+  display: inline-block;
+}
+
+.tag-list li:after {
+  content: '/';
+  padding-left: 5px;
+}
+
+.tag-list li:last-child:after {
+  content: '';
+}
+
 .footer {
   text-align: center;
 }
