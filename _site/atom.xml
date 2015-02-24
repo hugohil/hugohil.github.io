@@ -4,13 +4,22 @@
  <title>hugohil</title>
  <link href="http://hugohil.github.io/atom.xml" rel="self"/>
  <link href="http://hugohil.github.io/"/>
- <updated>2015-02-24T11:47:43+01:00</updated>
+ <updated>2015-02-24T12:57:40+01:00</updated>
  <id>http://hugohil.github.io</id>
  <author>
    <name>hugohil</name>
    <email>hugo@soixantecircuits.fr</email>
  </author>
 
+ 
+ <entry>
+   <title>Lab test</title>
+   <link href="http://hugohil.github.io//2015/02/24/lab-test/"/>
+   <updated>2015-02-24T00:00:00+01:00</updated>
+   <id>http://hugohil.github.io/2015/02/24/lab-test</id>
+   <content type="html">&lt;p&gt;hello &lt;strong&gt;world&lt;/strong&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Test post</title>

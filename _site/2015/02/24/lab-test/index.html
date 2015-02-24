@@ -1,4 +1,6 @@
-<head>
+<!DOCTYPE html>
+<html>
+  <head>
   <meta charset="UTF-8">
   <link href="http://gmpg.org/xfn/11" rel="profile">
 
@@ -6,11 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <title>
-    {% if page.title == "Home" %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
+    
+      Lab test &middot; hugohil
+    
   </title>
 
   <!-- CSS -->
@@ -19,9 +19,24 @@
   <link rel="stylesheet" href="/public/css/hugohil.css">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.baseurl }}public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
+
+  
+    <link rel="stylesheet" type="text/css" href="/public/css/lab/test.css">
+  
+<body>
+  <nav id="lab-nav"><a href="/">&larr;</a></nav>
+  <div class="lab-content" tag="lab">
+    <p>hello <strong>world</strong></p>
+
+  </div>
+  
+    <script src="/public/js/lab/hello.js" type="text/javascript"></script>
+  
+</body>
+</html>
