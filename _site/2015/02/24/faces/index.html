@@ -9,7 +9,7 @@
 
   <title>
     
-      Lab test &middot; hugohil
+      Faces &middot; hugohil
     
   </title>
 
@@ -27,16 +27,18 @@
 </head>
 
   
-    <link rel="stylesheet" type="text/css" href="/public/css/lab/test.css">
-  
 <body>
   <nav id="lab-nav"><a href="/" class="fa fa-hand-o-left"></a></nav>
   <div class="lab-content" id="lab">
-    <p>hello <strong>world</strong></p>
+    <canvas id="cvs" width="480" height="360"></canvas>
+<script src="//code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
+
+<script src="/public/js/lab/lib/paper.js" type="text/javascript"></script>
+
+<script src="/public/js/lab/faces.js" type="text/paperscript" canvas="cvs"></script>
+
 
   </div>
-  
-    <script src="/public/js/lab/hello.js" type="text/javascript"></script>
   
 </body>
 </html>

@@ -100,10 +100,13 @@
 
 #lab-nav a {
   position: absolute;
+  padding: 10px;
   top: 10px;
   left: 15px;
   cursor: pointer;
   color: #505050;
+  z-index: 10;
+  opacity: .8;
   transition: left .3s ease;
 }
 
