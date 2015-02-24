@@ -82,12 +82,18 @@
   text-align: center;
 }
 
-.svg-icon{
-  transition: transform .3s ease;
+.social .fa {
+  width: 20px;
+  height: 20px;
+  margin: 0 .2em;
+  display: inline-block;
+  color: #9A9A9A;
+  transition: color .3s ease;
 }
 
-.svg-icon:hover{
-  -webkit-transform: rotateZ(30deg);
-  -moz-transform: rotateZ(30deg);
-  transform: rotateZ(30deg);
+.social .fa:hover,
+.social .fa:focus,
+.social .fa:active {
+  color: #101010;
+  text-decoration: none;
 }
