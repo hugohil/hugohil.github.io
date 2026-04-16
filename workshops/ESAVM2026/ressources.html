@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ressources ; Systèmes interactifs</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-title">systèmes interactifs ; ESAV Marrakech 2026</a>
+  <nav>
+    <a href="jour-1.html">j.1</a>
+    <a href="jour-2.html">j.2</a>
+    <a href="jour-3.html">j.3</a>
+    <a href="jour-4.html">j.4</a>
+    <a href="jour-5.html">j.5</a>
+    <a href="ressources.html" class="active">ref</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Référence</div>
+  <h1>Ressources</h1>
+  <p class="lead">Référence rapide p5.js, liens et outils.</p>
+
+  <section>
+    <h2 id="structure"><a class="anchor-link" href="#structure">Structure</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>setup()</code><span class="ref-desc">exécuté une seule fois au démarrage</span></div>
+      <div class="ref-row"><code>draw()</code><span class="ref-desc">exécuté en boucle, ~60×/seconde</span></div>
+      <div class="ref-row"><code>createCanvas(w, h)</code><span class="ref-desc">créer la zone de dessin</span></div>
+      <div class="ref-row"><code>background(r, g, b)</code><span class="ref-desc">effacer et remplir le fond</span></div>
+      <div class="ref-row"><code>noLoop()</code><span class="ref-desc">figer l'animation</span></div>
+      <div class="ref-row"><code>frameRate(n)</code><span class="ref-desc">images par seconde</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="formes"><a class="anchor-link" href="#formes">Formes</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>circle(x, y, d)</code><span class="ref-desc">cercle ; centre + diamètre</span></div>
+      <div class="ref-row"><code>ellipse(x, y, w, h)</code><span class="ref-desc">ellipse ; centre + dimensions</span></div>
+      <div class="ref-row"><code>rect(x, y, w, h)</code><span class="ref-desc">rectangle ; coin supérieur gauche</span></div>
+      <div class="ref-row"><code>line(x1, y1, x2, y2)</code><span class="ref-desc">ligne entre deux points</span></div>
+      <div class="ref-row"><code>point(x, y)</code><span class="ref-desc">point</span></div>
+      <div class="ref-row"><code>triangle(x1, y1, x2, y2, x3, y3)</code><span class="ref-desc">triangle</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="couleurs"><a class="anchor-link" href="#couleurs">Couleurs et styles</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>fill(r, g, b)</code><span class="ref-desc">couleur de remplissage (RVB 0–255)</span></div>
+      <div class="ref-row"><code>fill(r, g, b, a)</code><span class="ref-desc">avec transparence (a : 0–255)</span></div>
+      <div class="ref-row"><code>stroke(r, g, b)</code><span class="ref-desc">couleur du contour</span></div>
+      <div class="ref-row"><code>strokeWeight(n)</code><span class="ref-desc">épaisseur du contour en pixels</span></div>
+      <div class="ref-row"><code>noFill()</code><span class="ref-desc">pas de remplissage</span></div>
+      <div class="ref-row"><code>noStroke()</code><span class="ref-desc">pas de contour</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="variables"><a class="anchor-link" href="#variables">Variables système</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>mouseX, mouseY</code><span class="ref-desc">position de la souris</span></div>
+      <div class="ref-row"><code>mouseIsPressed</code><span class="ref-desc">bouton souris enfoncé (true/false)</span></div>
+      <div class="ref-row"><code>keyIsPressed</code><span class="ref-desc">touche clavier enfoncée (true/false)</span></div>
+      <div class="ref-row"><code>key</code><span class="ref-desc">dernière touche pressée</span></div>
+      <div class="ref-row"><code>width, height</code><span class="ref-desc">dimensions du canvas</span></div>
+      <div class="ref-row"><code>frameCount</code><span class="ref-desc">images écoulées depuis le démarrage</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="evenements"><a class="anchor-link" href="#evenements">Événements</a></h2>
+    <div class="code-block">
+      <pre><code>function mousePressed() {
+  // appelé à chaque clic
+}
+
+function keyPressed() {
+  // appelé à chaque touche
+  if (key === 's') saveCanvas('capture', 'png');
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="utilitaires"><a class="anchor-link" href="#utilitaires">Utilitaires</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>random(max)</code><span class="ref-desc">valeur aléatoire entre 0 et max</span></div>
+      <div class="ref-row"><code>random(min, max)</code><span class="ref-desc">valeur aléatoire entre min et max</span></div>
+      <div class="ref-row"><code>random(array)</code><span class="ref-desc">élément aléatoire d'un tableau</span></div>
+      <div class="ref-row"><code>randomSeed(n)</code><span class="ref-desc">figer l'aléatoire (même graine = même résultat)</span></div>
+      <div class="ref-row"><code>noise(x)</code><span class="ref-desc">bruit de Perlin entre 0 et 1</span></div>
+      <div class="ref-row"><code>noise(x, y)</code><span class="ref-desc">bruit de Perlin en 2D</span></div>
+      <div class="ref-row"><code>map(v, a, b, c, d)</code><span class="ref-desc">traduit v de [a, b] vers [c, d]</span></div>
+      <div class="ref-row"><code>constrain(v, a, b)</code><span class="ref-desc">limite v entre a et b</span></div>
+      <div class="ref-row"><code>sin(angle)</code><span class="ref-desc">oscillation entre -1 et 1</span></div>
+      <div class="ref-row"><code>cos(angle)</code><span class="ref-desc">oscillation entre -1 et 1</span></div>
+      <div class="ref-row"><code>abs(n)</code><span class="ref-desc">valeur absolue</span></div>
+      <div class="ref-row"><code>floor(n)</code><span class="ref-desc">arrondi à l'entier inférieur</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="export"><a class="anchor-link" href="#export">Export</a></h2>
+    <div class="code-block">
+      <pre><code>// à appeler dans keyPressed() ou mousePressed()
+saveCanvas('nom-du-fichier', 'png');
+saveCanvas('nom-du-fichier', 'jpg');</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="documentation"><a class="anchor-link" href="#documentation">Documentation</a></h2>
+    <ul class="link-list">
+      <li>
+        <a href="https://p5js.org/reference/" target="_blank">p5js.org/reference</a>
+        <span class="link-desc">référence complète p5.js</span>
+      </li>
+      <li>
+        <a href="https://p5js.org/examples/" target="_blank">p5js.org/examples</a>
+        <span class="link-desc">exemples officiels</span>
+      </li>
+      <li>
+        <a href="https://editor.p5js.org" target="_blank">editor.p5js.org</a>
+        <span class="link-desc">éditeur en ligne</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="aller-plus-loin"><a class="anchor-link" href="#aller-plus-loin">Aller plus loin</a></h2>
+    <ul class="link-list">
+      <li>
+        <a href="https://thecodingtrain.com" target="_blank">thecodingtrain.com</a>
+        <span class="link-desc">Daniel Shiffman ; tutoriels vidéo p5.js</span>
+      </li>
+      <li>
+        <a href="https://natureofcode.com" target="_blank">natureofcode.com</a>
+        <span class="link-desc">The Nature of Code ; systèmes, agents, physique</span>
+      </li>
+      <li>
+        <a href="https://openprocessing.org" target="_blank">openprocessing.org</a>
+        <span class="link-desc">communauté ; sketches open-source</span>
+      </li>
+      <li>
+        <a href="https://generative-gestaltung.de/2" target="_blank">generative-gestaltung.de/2</a>
+        <span class="link-desc">Generative Design ; exemples et livre</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="références"><a class="anchor-link" href="#références">Références</a></h2>
+    <ul class="link-list">
+      <li>
+        <a href="https://10print.org" target="_blank">10print.org</a>
+        <span class="link-desc">10 PRINT ; histoire et analyse</span>
+      </li>
+      <li>
+        <a href="https://isohedral.ca" target="_blank">isohedral.ca</a>
+        <span class="link-desc">Craig S. Kaplan ; motifs islamiques algorithmiques</span>
+      </li>
+      <li>
+        <a href="https://playgameoflife.com" target="_blank">playgameoflife.com</a>
+        <span class="link-desc">Game of Life interactif</span>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+  function copyCode(btn) {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copié';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copier'; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+</script>
+</body>
+</html>

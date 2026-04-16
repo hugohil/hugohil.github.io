@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jour 3 ; Aléatoire &amp;&amp; interaction</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-title">systèmes sensibles ; ESAV Marrakech 2026</a>
+  <nav>
+    <a href="jour-1.html">j.1</a>
+    <a href="jour-2.html">j.2</a>
+    <a href="jour-3.html" class="active">j.3</a>
+    <a href="jour-4.html">j.4</a>
+    <a href="jour-5.html">j.5</a>
+    <a href="ressources.html">ref</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Jour 3 ; matin</div>
+  <h1>Aléatoire &amp;&amp; interaction</h1>
+  <p class="lead">Introduire la variation et le dialogue avec l'utilisateur. Les systèmes commencent à répondre.</p>
+
+  <section>
+    <h2 id="random"><a class="anchor-link" href="#random">random() ; choisir dans un espace</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">random();              // entre 0 et 1
+random(100);           // entre 0 et 100
+random(20, 80);        // entre 20 et 80
+
+let formes = ['cercle', 'carré', 'triangle'];
+let choix = random(formes);  // élément aléatoire du tableau</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Du dé au code</h3>
+
+    <div class="code-block">
+      <pre><code class="language-js">let r = random(6);  // valeur entre 0 et 6
+
+if (r &lt; 1)      { /* action 1 */ }
+else if (r &lt; 2) { /* action 2 */ }
+else if (r &lt; 3) { /* action 3 */ }
+// etc...</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="random-seed"><a class="anchor-link" href="#random-seed">Fixer l'aléatoire ; randomSeed()</a></h2>
+
+    <p>Par défaut, le sketch produit un résultat différent à chaque exécution. Pour obtenir toujours le même :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(500, 500);
+  
+  randomSeed(42);  // n'importe quel nombre
+  random(); // toujours la même valeur à chaque exécution, tant que la seed est la même
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Utile pour travailler sur un résultat précis, itérer dessus, puis changer la seed pour explorer d'autres variations.</p>
+  </section>
+
+  <section>
+    <h2 id="noise"><a class="anchor-link" href="#noise">noise() ; le hasard organique</a></h2>
+
+    <p><code>random()</code> produit des valeurs indépendantes, qui peuvent varier de manière abrupte.</p>
+    <p><code>noise()</code> simule des valeurs continues : deux appels proches donnent des valeurs proches.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// random() : aucun lien entre valeurs successives
+let a = random();   // ex: 0.82
+let b = random();   // ex: 0.14  &larr; sans rapport avec a
+
+// noise() : continuité garantie
+let c = noise(0.1);   // ex: 0.54
+let d = noise(0.11);  // ex: 0.55  &larr; proche de c</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>noise() dans la grille</h3>
+
+    <div class="code-block">
+      <pre><code class="language-js">let n = noise(i * 0.3, j * 0.3);      // valeur entre 0 et 1
+let taille = map(n, 0, 1, 5, cellSize);
+circle(x, y, taille);
+
+// ajouter une dimension temporelle
+let t = frameCount * 0.005;
+let n = noise(i * 0.3, j * 0.3, t);  // le motif évolue dans le temps</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Changer <code>0.3</code> : plus petit &rarr; plus fluide, plus grand &rarr; plus chaotique.</p>
+  </section>
+
+  <section>
+    <h2 id="souris"><a class="anchor-link" href="#souris">Interaction ; souris</a></h2>
+
+    <p><code>mouseX</code> et <code>mouseY</code> sont des variables qui contiennent les coordonnées de la souris à chaque frame.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// la taille dépend de la position horizontale de la souris
+let taille = map(mouseX, 0, width, 5, cellSize);
+circle(x, y, taille);
+
+// l'offset du noise dépend de la souris
+let offsetX = map(mouseX, 0, width, 0, 2);
+let n = noise(i * 0.3 + offsetX, j * 0.3);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>On peut aussi utiliser la souris pour détecter les clics :</p>
+    <div class="code-block">
+      <pre><code class="language-js">function mousePressed() {
+  // appelé une seule fois à chaque clic
+  cellSize = cellSize + 5;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="clavier"><a class="anchor-link" href="#clavier">Interaction ; clavier</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function keyPressed() {
+  // une seule fois, lorsque que la touche est enfoncée
+  if (key === 's') {
+    saveCanvas('capture', 'png');
+  }
+  if (key === ' ') {
+    cellSize = cellSize + 5;
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>sketch ; interaction clavier</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/5C1iw_iKl" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/5C1iw_iKl"
+        title="sketch ; interaction clavier"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="combiner"><a class="anchor-link" href="#combiner">Combiner</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let offsetX = map(mouseX, 0, width, 0, 2);
+let t = frameCount * 0.005;
+
+for (let i = 0; i &lt; cols; i++) {
+  for (let j = 0; j &lt; rows; j++) {
+    let x = i * cellSize + cellSize / 2;
+    let y = j * cellSize + cellSize / 2;
+
+    let n = noise(i * 0.3 + offsetX, j * 0.3, t);
+    let taille = map(n, 0, 1, 4, cellSize * 0.9);
+
+    circle(x, y, taille);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>sketch ; combiner noise + souris</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/O5z_w8zsA" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/O5z_w8zsA"
+        title="sketch ; combiner noise + souris"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>sketch ; noise + souris</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/Zc2u5e1dx" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/hhesavm2026_NOISE"
+        title="sketch ; noise + souris"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="export"><a class="anchor-link" href="#export">Exporter une image</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function keyPressed() {
+  if (key === 's') saveCanvas('capture', 'png');
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour capturer une frame précise, appeler <code>noLoop()</code> juste avant <code>saveCanvas()</code>. Relancer avec <code>loop()</code>.</p>
+  </section>
+
+  <div class="exercise">
+    <div class="exercise-label">mini-exercice</div>
+    <ul>
+      <li>Repartir de la grille du jour 2</li>
+      <li>Remplacer une des dimensions par <code>random()</code> ou <code>noise()</code></li>
+      <li>Faire réagir un paramètre à <code>mouseX</code> ou <code>mouseY</code></li>
+      <li>Exporter une image avec <code>saveCanvas()</code></li>
+      <li>Explorer différentes combinaisons de paramètres librement</li>
+    </ul>
+    <p class="duration">&rarr; 30 minutes</p>
+  </div>
+
+  <section>
+    <h2 id="reference"><a class="anchor-link" href="#reference">Référence rapide</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>random(min, max)</code><span class="ref-desc">valeur aléatoire indépendante</span></div>
+      <div class="ref-row"><code>random(array)</code><span class="ref-desc">élément aléatoire d'un tableau</span></div>
+      <div class="ref-row"><code>randomSeed(n)</code><span class="ref-desc">figer l'aléatoire</span></div>
+      <div class="ref-row"><code>noise(x, y, z)</code><span class="ref-desc">valeur continue entre 0 et 1</span></div>
+      <div class="ref-row"><code>map(v, a, b, c, d)</code><span class="ref-desc">traduire une plage de valeurs</span></div>
+      <div class="ref-row"><code>millis()</code><span class="ref-desc">millisecondes depuis le démarrage</span></div>
+      <div class="ref-row"><code>saveCanvas('nom', 'png')</code><span class="ref-desc">exporter l'image</span></div>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="jour-2.html">&larr; jour 2</a>
+    <a href="jour-4.html" class="next">jour 4 &rarr;</a>
+  </div>
+
+</main>
+
+<script>
+  function copyCode(btn) {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copié';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copier'; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+</script>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

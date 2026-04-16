@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jour 5 ; Restitution</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="site-title">systèmes interactifs ; ESAV Marrakech 2026</a>
+  <nav>
+    <a href="jour-1.html">j.1</a>
+    <a href="jour-2.html">j.2</a>
+    <a href="jour-3.html">j.3</a>
+    <a href="jour-4.html">j.4</a>
+    <a href="jour-5.html" class="active">j.5</a>
+    <a href="ressources.html">ref</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Jour 5</div>
+  <h1>Restitution</h1>
+  <p class="lead">Matin : polish et documentation. Après-midi : démonstrations et critique collective.</p>
+
+  <!-- ── Matin : polish ── -->
+
+  <section>
+    <h2 id="matin-finir-et-documenter"><a class="anchor-link" href="#matin-finir-et-documenter">Matin ; finir et documenter</a></h2>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Stabiliser</p>
+          <p class="checklist-desc">Le sketch tourne sans crasher ; Les cas limites sont gérés (la souris sort du canvas, le frameCount devient très grand, je laise la touche du clavier enfoncée, &hellip;).</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Ajuster les paramètres</p>
+          <p class="checklist-desc">Vitesse, tailles, palette de couleurs, fréquence ; passez du temps à jouer avec les valeurs sans perdre de vue l'objectif final.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Commenter le code</p>
+          <p class="checklist-desc">Une ligne par bloc logique.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Préparer la démo</p>
+          <p class="checklist-desc">Savoir dans quel ordre montrer les choses (vue d'ensemble, cas spécifiques, aspects techniques, dimensions esthétiques, &hellip;) ; Avoir une interaction à proposer, des valeurs intéressantes en tête.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Export ── -->
+
+  <section>
+    <h2 id="exporter"><a class="anchor-link" href="#capturer">Capturer</a></h2>
+
+    <div class="code-block">
+      <pre><code>// image fixe
+function keyPressed() {
+  if (key === 's') saveCanvas('capture', 'png');
+}
+
+// figer puis exporter
+function keyPressed() {
+  if (key === 's') {
+    noLoop();
+    saveCanvas('capture', 'png');
+    loop();
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour une vidéo : utilisez un outil de capture d'écran système.</p>
+
+    <h2 id="exporter"><a class="anchor-link" href="#exporter">Exporter</a></h2>
+
+    <div class="figure">
+      <img src="/workshops/assets/p5-export.png">
+      <p class="figure-caption">Partager le sketch depuis l'éditeur p5.js</p>
+    </div>
+    <div class="figure">
+      <img src="/workshops/assets/p5-export2.png">
+      <p class="figure-caption">Récupérer le lien de partage ou le code embed</p>
+    </div>
+  </section>
+
+  <!-- ── Après-midi : restitution ── -->
+
+  <div class="day-separator">après-midi ; démonstrations</div>
+
+  <section>
+    <h2 id="format-de-présentation"><a class="anchor-link" href="#format-de-présentation">Format de présentation</a></h2>
+    <p>Chaque prototype est présenté en direct, en 5 minutes maximum.</p>
+
+    <div class="tour-de-table">
+      <div class="tour-question">
+        <span class="tour-label">01</span>
+        <p><strong>L'intention</strong> ; quelle thématique vous avez explorée, quel système avez-vous voulu construire ?</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">02</span>
+        <p><strong>La démonstration</strong> ; montrez le prototype en fonctionnement. Faites participer si possible.</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">03</span>
+        <p><strong>Le système</strong> ; expliquez brièvement les règles : qu'est-ce que le code génère, qu'est-ce que l'utilisateur contrôle ?</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">04</span>
+        <p><strong>Ce que vous feriez</strong> ; si vous aviez plus de temps, ou différemment avec le recul.</p>
+      </div>
+    </div>
+
+    <p>Prévoyez également de créer des images de votre projet (images fixes ou enregistrements vidéos) que vous m'enverrez, ainsi qu'un très court texte de présentation.</p>
+  </section>
+
+  <!-- ── Grille de critique ── -->
+
+  <section>
+    <h2 id="grille-de-critique-collective"><a class="anchor-link" href="#grille-de-critique-collective">Grille de critique collective</a></h2>
+    <p class="note">Pour structurer l'écoute et les retours.</p>
+
+    <div class="eval-grid">
+      <div class="eval-item">
+        <p class="eval-label">Clarté de l'intention</p>
+        <div class="eval-scale">
+          <span>opaque &lrarr; limpide</span>
+        </div>
+      </div>
+      <div class="eval-item">
+        <p class="eval-label">Cohérence système / résultat</p>
+        <div class="eval-scale">
+          <span>déconnectés &lrarr; alignés</span>
+        </div>
+      </div>
+      <div class="eval-item">
+        <p class="eval-label">Qualité de l'interaction</p>
+        <div class="eval-scale">
+          <span>absente &lrarr; engageante</span>
+        </div>
+      </div>
+      <div class="eval-item">
+        <p class="eval-label">Originalité de l'approche</p>
+        <div class="eval-scale">
+          <span>attendu &lrarr; inattendue</span>
+        </div>
+      </div>
+      <div class="eval-item">
+        <p class="eval-label">Résultat visuel</p>
+        <div class="eval-scale">
+          <span>brouillon &lrarr; abouti</span>
+        </div>
+      </div>
+    </div>
+
+    <p>Pour chaque prototype : noter une chose qui fonctionne bien, et une piste que la personne pourrait explorer pour pour aller plus loin.</p>
+  </section>
+
+  <div class="page-nav">
+    <a href="jour-4.html">&larr; jour 4</a>
+  </div>
+
+</main>
+
+<script>
+  function copyCode(btn) {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copié';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copier'; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
