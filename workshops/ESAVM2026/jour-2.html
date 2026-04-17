@@ -29,7 +29,7 @@
   <p class="lead">On commence à créer des systèmes.</p>
 
   <section>
-    <h2 id="variables"><a class="anchor-link" href="#variables">Rappel ; une forme, une variable</a></h2>
+    <h2 id="variables"><a class="anchor-link" href="#variables">Rappel</a></h2>
     <p>Avant d'aller plus loin : une variable est une valeur qui peut changer ou être qui peut être partagée.</p>
 
     <div class="code-block">
@@ -52,20 +52,61 @@ function draw() {
   </section>
 
   <section>
+    <h2 id="tableaux"><a class="anchor-link" href="#tableaux">Tableaux</a></h2>
+
+    <p>Un tableau permet de stocker plusieurs valeurs dans une seule variable :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let sizes = [30, 60, 40];  // 3 valeurs dans une variable
+let formes = ["circle", "rectangle", "line"];</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>On accède à une valeur par son index (en commençant par 0) :</p>
+    
+    <div class="code-block">
+      <pre><code class="language-js">sizes[0]   // 30 ; premier élément
+sizes[1]   // 60 ; deuxième élément
+sizes[2]   // 40 ; dernier élément</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Le premier index est 0, pas 1 ; un tableau de 3 éléments va de <code>[0]</code> à <code>[2]</code>.</p>
+  </section>
+
+  <section>
     <h2 id="boucle-for"><a class="anchor-link" href="#boucle-for">La boucle for</a></h2>
     <p>5 cercles en 3 lignes de code. Changez <code>5</code> en <code>50</code> pour avoir 50 cercles ; toujours en 3 lignes.</p>
 
     <div class="code-block">
-      <pre><code class="language-js">for (let i = 0; i &lt; 5; i++) {
+      <pre><code class="language-js">for (let i = 0; i < 5; i++) {
   let x = i * 80;
   circle(x, 200, 40);
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
     
+    <p class="note">On l'a vu, on compte toujours à partir de 0.</p>
     <p>À chaque itération, <code>i</code> augmente et la position change.</p>
     <p>Structure : <code>for (initialisation; condition; incrément)</code></p>
-    <p class="note">En code, on compte toujours à partir de 0.</p>
+
+    <p>On utilise aussi les boucles pour parcourir un tableau :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">
+let posX = [100, 200, 300];
+let sizes = [30, 60, 40];
+let colors = ["red", "green", "blue"];
+
+for (let i = 0; i < sizes.length; i++) {
+  let s = sizes[i];
+  let x = posX[i];
+  fill(colors[i]);
+  circle(x, 200, s);
+}
+      </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
 
   </section>
 
@@ -89,8 +130,8 @@ function setup() {
 function draw() {
   background(240);
 
-  for (let i = 0; i &lt; cols; i++) {
-    for (let j = 0; j &lt; rows; j++) {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       let x = i * cellSize;
       let y = j * cellSize;
       circle(x, y, cellSize);
@@ -137,7 +178,7 @@ if ((i + j) % 2 === 0) {
     </div>
 
     <p class="note">C'est la même logique que le dé.</p>
-    <p>ici, on utilise le modulo (%) pour tester si la somme est paire ou impaire. C'est un opérateur particulier qui permet de déterminer si un nombre est divisible par un autre. On s'en sert souvent dans les programmes pour créer des motifs ou des animations, car a mesure qu'une valeur augmente (dans une boucle par exemple), le resultat va devenir cyclique.</p>
+    <p class="note"><a href="/workshops/ESAVM2026/jour-1.html#types-operations" target="_blank">Rappel sur le modulo.</a></p>
 
     <div class="sketch">
       <div class="sketch-header">
