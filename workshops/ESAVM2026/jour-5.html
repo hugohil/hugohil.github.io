@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jour 5 ; Restitution</title>
   <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 </head>
 <body>
 
@@ -69,7 +71,7 @@
     <h2 id="exporter"><a class="anchor-link" href="#capturer">Capturer</a></h2>
 
     <div class="code-block">
-      <pre><code>// image fixe
+      <pre><code class="language-js">// image fixe
 function keyPressed() {
   if (key === 's') saveCanvas('capture', 'png');
 }
@@ -137,9 +139,9 @@ function keyPressed() {
 
     <div class="eval-grid">
       <div class="eval-item">
-        <p class="eval-label">Clarté de l'intention</p>
+        <p class="eval-label">Intention</p>
         <div class="eval-scale">
-          <span>opaque &lrarr; limpide</span>
+          <span>opaque &lrarr; claire</span>
         </div>
       </div>
       <div class="eval-item">
@@ -187,5 +189,6 @@ function keyPressed() {
     });
   }
 </script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
