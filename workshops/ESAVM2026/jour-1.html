@@ -385,6 +385,33 @@ frameCount        // images écoulées depuis le début
   </section>
 
   <section>
+    <h2 id="types-operations"><a class="anchor-link" href="#types-operations">Types et opérations</a></h2>
+
+    <p>Une variable peut contenir différents types de valeurs :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let x = 200;          // number ; entier
+let vitesse = 0.5;    // number ; décimal
+let nom = "Hugo";     // string ; texte entre guillemets
+let actif = true;     // boolean ; vrai ou faux (true / false)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Sur les nombres, on va faire des opérations :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">x + 2     // addition
+x - 2     // soustraction
+x * 2     // multiplication
+x / 2     // division
+x % 3     // modulo</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Pour le modulo <code>%</code>, pensez à la monnaie du pain : si vous avez 7€ et qu'un objet coûte 3€, vous achetez 2 objets et il vous reste 1€ ; donc <code>7 % 3 = 1</code>. C'est particulièrement utile en design génératif : <code>frameCount % 60</code> donne un compteur qui repart à zéro toutes les 60 frames.</p>
+  </section>
+
+  <section>
     <h2 id="conditions-boucles"><a class="anchor-link" href="#conditions-boucles">Conditions et boucles</a></h2>
 
     <div class="code-block">
