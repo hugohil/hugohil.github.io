@@ -14,10 +14,10 @@
   <a href="index.html" class="site-title">systèmes sensibles ; ESAV Marrakech 2026</a>
   <nav>
     <a href="jour-1.html" class="active">j.1</a>
-    <a href="jour-2.html">j.2</a>
+    <!-- <a href="jour-2.html">j.2</a>
     <a href="jour-3.html">j.3</a>
     <a href="jour-4.html">j.4</a>
-    <a href="jour-5.html">j.5</a>
+    <a href="jour-5.html">j.5</a> -->
     <a href="ressources.html">ref</a>
   </nav>
 </header>
@@ -152,7 +152,7 @@
   <div class="day-separator">pause (15min.)</div>
 
   <section>
-    <h2 id="automates-cellulaires"><a class="anchor-link" href="#automates-cellulaires">Les automates cellulaires</a></h2>
+    <h2 id="automates-cellulaires"><a class="anchor-link" href="#automates-cellulaires">Les automates cellulaires (cellular automaton)</a></h2>
     <blockquote>
       <p>“une grille régulière de « cellules » contenant chacune un « état » [...] À chaque nouvelle unité de temps, les mêmes règles sont appliquées simultanément à toutes les cellules de la grille, produisant une nouvelle « génération » de cellules dépendant entièrement de la génération précédente.” (Wikipédia)</p>
     </blockquote>
@@ -162,8 +162,8 @@
     <h2 id="game-of-life"><a class="anchor-link" href="#game-of-life">John Conway's Game of Life (1970)</a></h2>
 
     <div class="figure">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/eMn43As24Bo?si=ajXUpCq9aFO4AbPc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      <p class="figure-caption">EGO - Le Jeu de la Vie</p>
+      <img src="/workshops/assets/blinker.png" alt="Conway's Game of Life ; exemple de grille">
+      <p class="figure-caption">Le motif du "blinker"</p>
     </div>
     <p>Chaque cellule est vivante ou morte. Elle a 8 voisines. À chaque génération :</p>
     <ul>
@@ -172,13 +172,14 @@
       <li>une cellule vivante avec plus de 3 voisines vivantes meurt (surpopulation)</li>
       <li>une cellule morte avec exactement 3 voisines vivantes devient vivante</li>
     </ul>
+    <p>4 règles simples créent des comportements impossibles à prévoir.</p>
+    <p><a href="https://playgameoflife.com" target="_blank">&rarr; playgameoflife.com &larr;</a></p>
 
     <div class="figure">
-      <img src="/workshops/assets/blinker.png" alt="Conway's Game of Life ; exemple de grille">
-      <p class="figure-caption">Le motif du "blinker"</p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/eMn43As24Bo?si=DpwiOIUg3kL4WIZa&amp;start=340" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <p class="figure-caption">EGO - Le Jeu de la Vie</p>
     </div>
 
-    <p>4 règles simples créent des comportements impossibles à prévoir. &rarr; <a href="https://playgameoflife.com" target="_blank">playgameoflife.com</a></p>
   </section>
 
   <section>
@@ -457,53 +458,19 @@ for (let i = 0; i < 5; i++) {
 
   <!-- ── Brief projet ── -->
 
-  <div class="day-separator">pause ; mise en place des projets</div>
+  <div class="day-separator">pause (15min.)</div>
 
 
   <section>
-    <h2 id="projets"><a class="anchor-link" href="#projets">Vos projets</a></h2>
-
-    <p>Le projet doit incorporer au moins un aspect procédural et/ou interactif. Choisissez des contraintes techniques pour vous aider.</p>
-
-    <h3>Sur les LLM</h3>
-    <p>Les outils d'IA (ChatGPT, Claude, Copilot&hellip;) peuvent aider à débugger ou comprendre la syntaxe. En revanche, déléguer la conception du système à un LLM vide le projet de son sens.</p>
-    <p>Une question pour vous guider : <strong>avez-vous décidé ce que fait votre système, et savez-vous pourquoi il le fait ?</strong></p>
+    <h2 id="exploration"><a class="anchor-link" href="#exploration">Exploration libre</a></h2>
+    <p>À partir de ce qu'on a vu jusqu'à présent, prenez un moment pour expérimenter librement avec l'éditeur p5.js et vous familiariser avec.</p>
+    <p class="note">N'hésitez pas à créer autant de sketchs que nécessaire. C'est toujours intéressant de pouvoir revenir sur vos travaux précédents.</p>
   </section>
 
-  <section>
-    <h2 id="interactions"><a class="anchor-link" href="#interactions">Exemples d'interactions</a></h2>
-    <h3>Inputs</h3>
-    <ul>
-      <li>Clavier ou interface MIDI</li>
-      <li>Flux vidéo temps-réel (webcam)</li>
-      <li>Accéléromètre, gyroscope</li>
-      <li>Touch / Multitouch</li>
-      <li>Son temps-réel (micro)</li>
-      <li>Position (GPS)</li>
-      <li>etc &hellip;</li>
-    </ul>
-
-    <h3>Outputs</h3>
-    <ul>
-      <li>Visuel généré en temps réel</li>
-      <li>Typographie générative</li>
-      <li>Son généré / modulé</li>
-      <li>Animation procédurale</li>
-      <li>Visualisation de données</li>
-      <li>Mini-jeu</li>
-      <li>etc &hellip;</li>
-    </ul>
-  </section>
-
-  <section>
-    <blockquote>
-      <p>&laquo;&nbsp;La simplicité consiste à soustraire ce qui est évident et à ajouter ce qui a du sens.&nbsp;&raquo; &mdash; John Maeda</p>
-    </blockquote>
-  </section>
 
   <div class="page-nav">
     <a href="index.html">&larr; programme</a>
-    <a href="jour-2.html" class="next">jour 2 &rarr;</a>
+    <!-- <a href="jour-2.html" class="next">jour 2 &rarr;</a> -->
   </div>
 
 </main>
