@@ -25,8 +25,62 @@
 <main>
 
   <div class="eyebrow">Jour 3 ; matin</div>
-  <h1>Aléatoire &amp;&amp; interaction</h1>
-  <p class="lead">Introduire la variation et le dialogue avec l'utilisateur. Les systèmes commencent à répondre.</p>
+  <h1>Aléatoire, interaction && mouvement</h1>
+  <p class="lead">Introduire la variation et le dialogue avec l'utilisateur.</p>
+
+  <section>
+    <h2 id="osc"><a class="anchor-link" href="#osc">Mouvements organiques ; pulsation</a></h2>
+
+    <p><code>sin()</code> produit une valeur oscillant entre &minus;1 et 1.</p>
+    <div class="code-block">
+      <pre><code class="language-js">
+        let osc = sin(frameCount * 0.02);
+        let taille = (osc + 1) * 20; // on recentre l'oscillation entre 0 et 2, puis on la multiplie pour avoir un radius entre 0 et 40
+        circle(x, y, taille);</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)">copier</button>
+      </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>sketch ; oscillation avec sin()</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/_WqxUZu_W" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/_WqxUZu_W"
+        title="sketch ; oscillation avec sin()"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>sketch ; oscillations multiples</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/eqoSlU17d" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/eqoSlU17d"
+        title="sketch ; oscillations multiples"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="map"><a class="anchor-link" href="#map">map() ; traduire une plage de valeurs</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">// map(valeur, min_entrée, max_entrée, min_sortie, max_sortie)
+let t = sin(frameCount * 0.02);  // entre -1 et 1
+let taille = map(t, -1, 1, 5, cellSize);  // entre 5 et cellSize</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>map()</code> traduit une valeur d'une plage vers une autre. Vous allez l'utiliser partout.</p>
+  </section>
 
   <section>
     <h2 id="random"><a class="anchor-link" href="#random">random()</a></h2>

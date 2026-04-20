@@ -15,9 +15,9 @@
   <nav>
     <a href="jour-1.html">j.1</a>
     <a href="jour-2.html" class="active">j.2</a>
-    <a href="jour-3.html">j.3</a>
+    <!-- <a href="jour-3.html">j.3</a>
     <a href="jour-4.html">j.4</a>
-    <a href="jour-5.html">j.5</a>
+    <a href="jour-5.html">j.5</a> -->
     <a href="ressources.html">ref</a>
   </nav>
 </header>
@@ -25,7 +25,7 @@
 <main>
 
   <div class="eyebrow">Jour 2 ; matin</div>
-  <h1>Boucles, grilles &amp;&amp; mouvement</h1>
+  <h1>Boucles, grilles && images</h1>
   <p class="lead">On commence à créer des systèmes.</p>
 
   <section>
@@ -49,6 +49,40 @@ function draw() {
     </div>
 
     <p class="note">Si <code>x</code> était déclaré à l'intérieur de <code>draw()</code>, il serait recréé à zéro à chaque frame. Son <strong>scope</strong> ; l'endroit où il est déclaré ; détermine où il existe et si il persiste.</p>
+  </section>
+
+  <section>
+    <h2 id="couleurs"><a class="anchor-link" href="#couleurs">Couleurs</a></h2>
+    <p>On peut définir les couleurs de plusieurs façons :</p>
+    <div class="code-block">
+      <pre><code class="language-js">
+// couleurs
+// fill() pour la couleur de remplissage
+fill(255, 0, 0); // rouge (R, G, B)
+fill(0, 255, 0, 127); // vert semi-transparent (R, G, B, A)
+fill('turquoise'); // une couleur nommée (voir la liste ci-dessous)
+fill('#c35272'); // couleur hexadecimale
+noFill(); // pas de couleur de remplissage
+
+// stroke() pour la couleur du contour
+stroke(0); // contour noir
+strokeWeight(3); // épaisseur du contour
+noStroke(); // pas de contour
+        </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note">Pour connaître la liste des couleurs nommées disponibles : <a href="https://www.w3schools.com/cssref/css_colors.php" target="_blank">CSS Color List</a></p>
+
+    <p>Pour stocker une couleur dans une variable :</p>
+      <pre><code class="language-js">
+  let c = color(255, 204, 0); // ou n'importe quelle autre notation
+
+  fill(c);
+  background(c);
+  stroke(c);
+        </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
   </section>
 
   <section>
@@ -112,6 +146,30 @@ for (let i = 0; i < sizes.length; i++) {
   <div class="day-separator">pause (15min.)</div>
 
   <section>
+    <h2 id="image"><a class="anchor-link" href="#image">Afficher des images</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">
+let img;
+
+function preload() {
+  img = loadImage('/assets/myimage.jpg');
+}
+
+function setup() {
+  createCanvas(400, 400);
+  image(img, 0, 0); // image à 0,0 à sa taille d'origine
+  image(img, 0, 0, width, height); // image à 0,0 à la taille du canvas (potentiellement déformée)
+}
+      </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>image()</code> a beaucoup de configurations de paramètres possibles : allez voir <a href="https://p5js.org/reference/p5/image/" target="_blank">la documentation</a></p>
+  
+  </section>
+
+  <section>
     <h2 id="grille"><a class="anchor-link" href="#grille">La grille ; boucles imbriquées</a></h2>
     <p><code>i</code> parcourt les colonnes &rarr; ; <code>j</code> parcourt les lignes &darr;.</p>
     <p>À chaque combinaison <code>(i, j)</code> correspond une cellule.</p>
@@ -155,6 +213,44 @@ function draw() {
         allowfullscreen>
       </iframe>
     </div>
+  </section>
+
+
+  <section>
+    <h2 id="image-manip"><a class="anchor-link" href="#image-manip">Utiliser des images</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">
+img.loadPixels(); // important, sinon on a pas accès après
+
+for (let x = 0; x < img.width; x += 1) {
+  for (let y = 0; y < img.height; y += 1) {
+    if (x > mouseX) {
+      img.set(x, y, 0); // on change la valeur du pixel
+    }
+  }
+}
+img.updatePixels(); // on applique la modification
+
+image(img, 0, 0);
+      </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="sketch">
+      <div class="sketch-header">
+        <span>image ; sample pixel</span>
+        <a href="https://editor.p5js.org/hugohil/sketches/HMqmjc_QX" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+      </div>
+      <iframe
+        class="sketch-frame"
+        src="https://editor.p5js.org/hugohil/embed/HMqmjc_QX"
+        title="sketch ; grille animée"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  
   </section>
 
   <section>
@@ -222,64 +318,12 @@ circle(x, y, taille);</code></pre>
         allowfullscreen>
       </iframe>
     </div>
-
-    <div class="code-block">
-      <pre><code class="language-js">
-        let osc = sin(frameCount * 0.02);
-        let taille = (osc + 1) * 20; // on recentre l'oscillation entre 0 et 2, puis on la multiplie pour avoir un radius entre 0 et 40
-        circle(x, y, taille);</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)">copier</button>
-      </div>
-      <p><code>sin()</code> produit une valeur oscillant entre &minus;1 et 1.</p>
-
-    <div class="sketch">
-      <div class="sketch-header">
-        <span>sketch ; oscillation avec sin()</span>
-        <a href="https://editor.p5js.org/hugohil/sketches/_WqxUZu_W" target="_blank">ouvrir dans l'éditeur &rarr;</a>
-      </div>
-      <iframe
-        class="sketch-frame"
-        src="https://editor.p5js.org/hugohil/embed/_WqxUZu_W"
-        title="sketch ; oscillation avec sin()"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="sketch">
-      <div class="sketch-header">
-        <span>sketch ; oscillations multiples</span>
-        <a href="https://editor.p5js.org/hugohil/sketches/eqoSlU17d" target="_blank">ouvrir dans l'éditeur &rarr;</a>
-      </div>
-      <iframe
-        class="sketch-frame"
-        src="https://editor.p5js.org/hugohil/embed/eqoSlU17d"
-        title="sketch ; oscillations multiples"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-  </section>
-
-  <section>
-    <h2 id="map"><a class="anchor-link" href="#map">map() ; traduire une plage de valeurs</a></h2>
-
-    <div class="code-block">
-      <pre><code class="language-js">// map(valeur, min_entrée, max_entrée, min_sortie, max_sortie)
-let t = sin(frameCount * 0.02);  // entre -1 et 1
-let taille = map(t, -1, 1, 5, cellSize);  // entre 5 et cellSize</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">copier</button>
-    </div>
-
-    <p><code>map()</code> traduit une valeur d'une plage vers une autre. Vous allez l'utiliser partout.</p>
   </section>
 
   <div class="exercise">
     <div class="exercise-label">mini-exercice</div>
     <ul>
       <li>Partir du sketch de grille <a href="https://editor.p5js.org/hugohil/sketches/B1gwOVCI-" target="_blank">ci-dessus</a></li>
-      <li>Faire varier la taille des formes en fonction du temps (<code>frameCount</code> + <code>sin()</code>)</li>
       <li>Faire varier la couleur selon la position dans la grille (<code>i</code> et <code>j</code>)</li>
       <li>Remplacer les cercles par d'autres formes</li>
       <li>Experimenter ce qui vous plaît</li>
@@ -290,10 +334,9 @@ let taille = map(t, -1, 1, 5, cellSize);  // entre 5 et cellSize</code></pre>
   <section>
     <h2 id="reference"><a class="anchor-link" href="#reference">Référence rapide</a></h2>
     <div class="ref-table">
-      <div class="ref-row"><code>frameCount</code><span class="ref-desc">images écoulées depuis le début</span></div>
-      <div class="ref-row"><code>sin(angle)</code><span class="ref-desc">oscillation entre &minus;1 et 1</span></div>
-      <div class="ref-row"><code>map(v, a, b, c, d)</code><span class="ref-desc">traduit v de [a,b] vers [c,d]</span></div>
-      <div class="ref-row"><code>frameRate(n)</code><span class="ref-desc">images par seconde</span></div>
+      <div class="ref-row"><code>image(x, y)</code><span class="ref-desc">dessiner une image</span></div>
+      <div class="ref-row"><code>frameCount</code><span class="ref-desc">frames écoulées depuis le début</span></div>
+      <div class="ref-row"><code>frameRate(n)</code><span class="ref-desc">frames par seconde</span></div>
       <div class="ref-row"><code>i % 2 === 0</code><span class="ref-desc">vrai si i est pair</span></div>
       <div class="ref-row"><code>noLoop()</code><span class="ref-desc">figer l'animation</span></div>
     </div>
