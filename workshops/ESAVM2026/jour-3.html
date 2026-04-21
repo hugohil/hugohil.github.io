@@ -16,8 +16,8 @@
     <a href="jour-1.html">j.1</a>
     <a href="jour-2.html">j.2</a>
     <a href="jour-3.html" class="active">j.3</a>
-    <a href="jour-4.html">j.4</a>
-    <a href="jour-5.html">j.5</a>
+    <!-- <a href="jour-4.html">j.4</a>
+    <a href="jour-5.html">j.5</a> -->
     <a href="ressources.html">ref</a>
   </nav>
 </header>
@@ -32,13 +32,15 @@
     <h2 id="osc"><a class="anchor-link" href="#osc">Mouvements organiques ; pulsation</a></h2>
 
     <p><code>sin()</code> produit une valeur oscillant entre &minus;1 et 1.</p>
+    <p class="note"><code>cos()</code> suit le même mouvement que <code>sin()</code> mais décalé d'un quart de cycle</p>
     <div class="code-block">
       <pre><code class="language-js">
-        let osc = sin(frameCount * 0.02);
-        let taille = (osc + 1) * 20; // on recentre l'oscillation entre 0 et 2, puis on la multiplie pour avoir un radius entre 0 et 40
-        circle(x, y, taille);</code></pre>
-        <button class="copy-btn" onclick="copyCode(this)">copier</button>
-      </div>
+let osc = sin(frameCount * 0.02);
+let taille = map(osc, -1, 1, 0, 40);
+circle(x, y, taille);
+      </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
 
     <div class="sketch">
       <div class="sketch-header">
@@ -52,6 +54,11 @@
         loading="lazy"
         allowfullscreen>
       </iframe>
+    </div>
+
+    <div class="figure">
+      <img src="/workshops/assets/noc_oscillation.webp" alt="y = sin(x)">
+      <p class="figure-caption">y = sin(x) ; courtesy of natureofcode.com</p>
     </div>
 
     <div class="sketch">
@@ -74,12 +81,12 @@
 
     <div class="code-block">
       <pre><code class="language-js">// map(valeur, min_entrée, max_entrée, min_sortie, max_sortie)
-let t = sin(frameCount * 0.02);  // entre -1 et 1
-let taille = map(t, -1, 1, 5, cellSize);  // entre 5 et cellSize</code></pre>
+let t = sin(frameCount * 0.02); // entre -1 et 1
+let taille = map(t, -1, 1, 0, width); // entre 0 et width</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
 
-    <p><code>map()</code> traduit une valeur d'une plage vers une autre. Vous allez l'utiliser partout.</p>
+    <p><code>map()</code> traduit une valeur d'une plage vers une autre. Vous allez l'utiliser souvent.</p>
   </section>
 
   <section>
@@ -137,30 +144,25 @@ else            { /* le dé est tombé sur 5 */ }
     <p><code>noise()</code> simule des valeurs continues : deux appels proches donnent des valeurs proches.</p>
 
     <div class="code-block">
-      <pre><code class="language-js">// random() : aucun lien entre valeurs successives
+      <pre><code class="language-js">
+// random() : changements chaotiques
 let a = random();   // ex: 0.82
 let b = random();   // ex: 0.14  ; sans rapport avec a
 
-// noise() : continuité garantie
+// noise() : plus harmonieux
 let c = noise(0.1);   // ex: 0.54
-let d = noise(0.11);  // ex: 0.55  ; proche de c</code></pre>
+let d = noise(0.11);  // ex: 0.55  ; proche de c
+
+// example avec les couleurs
+fill(random(255), random(255), random(255));
+circle(100, height / 2, 150);
+
+let t = frameCount * 0.1;
+fill(noise(t) * 255, noise(t + 1234) * 255, noise(t + 4567) * 255);
+circle(300, height / 2, 150);
+        </code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
-
-    <h3>noise() dans la grille</h3>
-
-    <div class="code-block">
-      <pre><code class="language-js">let n = noise(i * 0.3, j * 0.3);      // valeur entre 0 et 1
-let taille = map(n, 0, 1, 5, cellSize);
-circle(x, y, taille);
-
-// ajouter une dimension temporelle
-let t = frameCount * 0.005;
-let n = noise(i * 0.3, j * 0.3, t);  // le motif évolue dans le temps</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">copier</button>
-    </div>
-
-    <p>Changer <code>0.3</code> : plus petit &rarr; plus fluide, plus grand &rarr; plus chaotique.</p>
   </section>
 
   <section>
@@ -204,20 +206,6 @@ let n = noise(i * 0.3 + offsetX, j * 0.3);</code></pre>
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
-
-    <div class="sketch">
-      <div class="sketch-header">
-        <span>sketch ; interaction clavier</span>
-        <a href="https://editor.p5js.org/hugohil/sketches/5C1iw_iKl" target="_blank">ouvrir dans l'éditeur &rarr;</a>
-      </div>
-      <iframe
-        class="sketch-frame"
-        src="https://editor.p5js.org/hugohil/embed/5C1iw_iKl"
-        title="sketch ; interaction clavier"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
-    </div>
   </section>
 
   <section>
@@ -243,13 +231,13 @@ for (let i = 0; i &lt; cols; i++) {
 
     <div class="sketch">
       <div class="sketch-header">
-        <span>sketch ; combiner noise + souris</span>
+        <span>sketch ; grille noise + souris</span>
         <a href="https://editor.p5js.org/hugohil/sketches/O5z_w8zsA" target="_blank">ouvrir dans l'éditeur &rarr;</a>
       </div>
       <iframe
         class="sketch-frame"
         src="https://editor.p5js.org/hugohil/embed/O5z_w8zsA"
-        title="sketch ; combiner noise + souris"
+        title="sketch ; grille noise + souris"
         loading="lazy"
         allowfullscreen>
       </iframe>
@@ -258,7 +246,7 @@ for (let i = 0; i &lt; cols; i++) {
     <div class="sketch">
       <div class="sketch-header">
         <span>sketch ; noise + souris</span>
-        <a href="https://editor.p5js.org/hugohil/sketches/Zc2u5e1dx" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+        <a href="https://editor.p5js.org/hugohil/sketches/hhesavm2026_NOISE" target="_blank">ouvrir dans l'éditeur &rarr;</a>
       </div>
       <iframe
         class="sketch-frame"
@@ -283,17 +271,99 @@ for (let i = 0; i &lt; cols; i++) {
     <p class="note">Pour capturer une frame précise, appeler <code>noLoop()</code> juste avant <code>saveCanvas()</code>. Relancer avec <code>loop()</code>.</p>
   </section>
 
-  <div class="exercise">
-    <div class="exercise-label">mini-exercice</div>
-    <ul>
-      <li>Repartir de la grille du jour 2</li>
-      <li>Remplacer une des dimensions par <code>random()</code> ou <code>noise()</code></li>
-      <li>Faire réagir un paramètre à <code>mouseX</code> ou <code>mouseY</code></li>
-      <li>Exporter une image avec <code>saveCanvas()</code></li>
-      <li>Explorer différentes combinaisons de paramètres librement</li>
-    </ul>
-    <p class="duration">&rarr; 30 minutes</p>
+<section>
+  <h2 id="push-pop"><a class="anchor-link" href="#push-pop">Transformations ; push() &amp;&amp; pop()</a></h2>
+
+  <p>On permet de déplacer (translation), tourner (rotation) et redimensionner (scale) le système de coordonnées entier plutôt que de calculer chaque position à la main.</p>
+
+  <div class="code-block">
+    <pre><code class="language-js">translate(x, y);   // déplace l'origine
+rotate(angle);     // tourne autour de l'origine (en radians)
+scale(facteur);    // redimensionne</code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
   </div>
+
+  <p>Ces transformations s'accumulent. <code>push()</code> sauvegarde l'état actuel, <code>pop()</code> et le restaure ; ça permet d'isoler les transformations :</p>
+
+  <div class="code-block">
+    <pre><code class="language-js">
+rectMode(CENTER);
+
+// on démarre les transformations
+push();
+translate(width / 2, height / 2); // on déplace l'origine au centre
+rotate(frameCount * 0.02); // on tourne
+
+rect(0, 0, 50, 50);
+circle(100, 0, 50, 50);
+pop();
+// on arrête les transformations
+
+rect(0, 0, 50, 50);
+circle(100, 0, 50, 50);
+    </code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
+  </div>
+
+  <p class="note">Sans <code>push()</code>/<code>pop()</code>, chaque <code>rotate()</code> dans une boucle s'additionne au précédent. Avec, on peut isoler les transformations.</p>
+</section>
+
+<section>
+  <h2 id="texte-typo"><a class="anchor-link" href="#texte-typo">Texte &amp;&amp; typographie</a></h2>
+
+  <p>On peut afficher et manipuler du texte comme n'importe quelle forme.</p>
+
+  <div class="code-block">
+    <pre><code class="language-js">textSize(32);
+textAlign(CENTER, CENTER);  // alignement horizontal et vertical
+fill(0);
+text("hello", x, y);        // affiche le texte à la position (x, y)</code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
+  </div>
+
+  <p>On peut charger une police externe depuis Google Fonts — dans le HTML, avant le sketch :</p>
+
+  <div class="code-block">
+    <pre><code class="language-html">&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"&gt;</code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
+  </div>
+
+  <div class="code-block">
+    <pre><code class="language-js">function setup() {
+  createCanvas(500, 500);
+  textFont('IBM Plex Mono');
+}</code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
+  </div>
+
+  <p>Comme pour les formes, toutes les propriétés peuvent être pilotées par des variables :</p>
+
+  <div class="code-block">
+    <pre><code class="language-js">
+let n = noise(frameCount * 0.025);
+let ts = map(n, 0, 1, 12, 48);
+textSize(ts);
+
+textAlign(CENTER, CENTER);
+text("hello", width / 2, height / 2);
+    </code></pre>
+    <button class="copy-btn" onclick="copyCode(this)">copier</button>
+  </div>
+
+    <div class="sketch">
+    <div class="sketch-header">
+      <span>text</span>
+      <a href="https://editor.p5js.org/hugohil/sketches/lKECiF7X6" target="_blank">ouvrir dans l'éditeur &rarr;</a>
+    </div>
+    <iframe
+      class="sketch-frame"
+      src="https://editor.p5js.org/hugohil/embed/lKECiF7X6"
+      title="text"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
 
   <section>
     <h2 id="reference"><a class="anchor-link" href="#reference">Référence rapide</a></h2>
@@ -308,48 +378,23 @@ for (let i = 0; i &lt; cols; i++) {
     </div>
   </section>
 
-  <div class="day-separator">après-midi ; démarrage des projets</div>
+  <div class="day-separator">après-midi ; poster</div>
 
-  <section>
-    <h2 id="projets"><a class="anchor-link" href="#projets">Vos projets</a></h2>
+  <p>Prenez le thème qui vous plaît (un festival, un groupe de musique, un film, un livre, &hellip;) et créez un poster.</p>
+  <p>Vous devez m'envoyer un export PNG avant 17h ainsi que le lien vers votre sketch pour que je puisse voir votre code.</p>
+  <p class="note">n'hésitez pas à commencer sur du papier !</p>
 
-    <p>Le projet doit incorporer au moins un aspect procédural et/ou interactif. Choisissez des contraintes techniques pour vous aider.</p>
-
-    <h3>Sur les LLM</h3>
-    <p>Les outils d'IA (ChatGPT, Claude, Copilot&hellip;) peuvent aider à débugger ou comprendre la syntaxe. En revanche, déléguer la conception du système à un LLM vide le projet de son sens.</p>
-    <p>Une question pour vous guider : <strong>avez-vous décidé ce que fait votre système, et savez-vous pourquoi il le fait ?</strong></p>
-  </section>
-
-  <section>
-    <h2 id="interactions"><a class="anchor-link" href="#interactions">Exemples d'interactions</a></h2>
-    <h3>Inputs</h3>
+  <div class="exercise">
+    <div class="exercise-label">exercice ; poster génératif</div>
     <ul>
-      <li>Clavier ou interface MIDI</li>
-      <li>Flux vidéo temps-réel (webcam)</li>
-      <li>Accéléromètre, gyroscope</li>
-      <li>Touch / Multitouch</li>
-      <li>Son temps-réel (micro)</li>
-      <li>Position (GPS)</li>
-      <li>etc &hellip;</li>
+      <li>Canvas en format affiche : <code>createCanvas(500, 700)</code></li>
+      <li>Un mot, un chiffre ou une lettre comme élément central</li>
+      <li>Au moins une transformation (<code>rotate()</code>, <code>scale()</code>, <code>translate()</code>)</li>
+      <li>Au moins un paramètre piloté par <code>noise()</code></li>
     </ul>
-
-    <h3>Outputs</h3>
-    <ul>
-      <li>Visuel généré en temps réel</li>
-      <li>Typographie générative</li>
-      <li>Son généré / modulé</li>
-      <li>Animation procédurale</li>
-      <li>Visualisation de données</li>
-      <li>Mini-jeu</li>
-      <li>etc &hellip;</li>
-    </ul>
-  </section>
-
-  <section>
-    <blockquote>
-      <p>&laquo;&nbsp;La simplicité consiste à soustraire ce qui est évident et à ajouter ce qui a du sens.&nbsp;&raquo; &mdash; John Maeda</p>
-    </blockquote>
-  </section>
+    <p class="duration">&rarr; après-midi ; présentation collective à 17h00</p>
+  </div>
+  <p class="note">n'oubliez pas : <code>noLoop()</code> peut vous être utile pour créer des images fixes.</p>
 
   <div class="page-nav">
     <a href="jour-2.html">&larr; jour 2</a>
