@@ -33,12 +33,13 @@
     <p>Avant d'aller plus loin : une variable est une valeur qui peut changer ou être qui peut être partagée.</p>
 
     <div class="code-block">
-      <pre><code class="language-js">let x = 0;
-let r = 50;
+      <pre><code class="language-js">
+let x = 0;
 
 function draw() {
   background(220);
 
+  let r = 50;
   rect(150, 150, r, r);
 
   circle(x, 200, r);
