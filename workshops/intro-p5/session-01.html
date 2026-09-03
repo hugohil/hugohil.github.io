@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>session 1 ; premiers pas</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">session 1 ; premiers pas</span>
+  <!--
+    <nav>
+      <a href="../doc/syntaxe.html" target="_blank">syntaxe</a>
+      <a href="../doc/formes.html" target="_blank">formes</a>
+      <a href="../doc/couleurs.html" target="_blank">couleurs</a>
+    </nav>
+    -->
+</header>
+
+<main>
+
+  <div class="eyebrow">Session 1</div>
+  <h1>Premiers pas</h1>
+  <p class="lead">Découvrir p5.js et l'éditeur en ligne.</p>
+
+  <section>
+    <h2 id="editeur"><a class="anchor-link" href="#editeur">L'éditeur en ligne</a></h2>
+    <p>Tout se passe dans le navigateur, pas d'installation. &rarr; <a href="https://editor.p5js.org" target="_blank">editor.p5js.org</a></p>
+    <p>
+      <ul>
+        <li>éditeur de code à gauche</li>
+        <li>aperçu en direct à droite</li>
+        <li>console en bas pour les erreurs</li>
+      </ul>
+    </p>
+    <div class="figure">
+      <img src="/workshops/assets/p5-editor.png" alt="éditeur p5.js">
+      <p class="figure-caption">L'éditeur en ligne p5.js</p>
+    </div>
+    <p>Créez un compte pour sauvegarder votre travail.</p>
+    <p>Raccourcis : <code>Cmd/Ctrl + Enter</code> pour lancer, <code>Cmd/Ctrl + /</code> pour commenter, <code>Cmd/Ctrl + S</code> pour sauvegarder.</p>
+
+    <br><br>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  circle(200, 200, 100); // <---- ajoutez cette ligne
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+  </section>
+
+  <section>
+    <h2 id="setup-draw"><a class="anchor-link" href="#setup-draw">setup et draw</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  // UNE FOIS, au démarrage
+}
+
+function draw() {
+  // EN BOUCLE, environ 60 fois par seconde
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Testez ces deux versions l'une après l'autre.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// version A ; background dans draw
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  circle(200, 200, 100);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">// version B ; background dans setup
+function setup() {
+  createCanvas(400, 400);
+  background(220);
+}
+
+function draw() {
+  circle(200, 200, 100);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <br><br>
+    <p>Remplacez <code>circle(200, 200, 100)</code> par <code>circle(mouseX, mouseY, 100)</code> et comparez A et B à nouveau.</p>
+  </section>
+
+  <section>
+    <h2 id="coordonnees"><a class="anchor-link" href="#coordonnees">Le repère</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">//  (0,0) ──────────────→ x
+//    │
+//    │      · (300, 200)
+//    │
+//    ↓ y</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2><code>width</code> et <code>height</code></h2>
+    <p><code>width</code> et <code>height</code> contiennent les dimensions du canvas.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(220);
+  rect(mouseX, mouseY, width, height);
+  circle(width / 2, height / 2, 100); // toujours au centre
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Testez de changer le format dans <code>createCanvas()</code>.</p>
+  </section>
+
+  <section>
+    <h2 id="formes"><a class="anchor-link" href="#formes">Les formes de base</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>circle(x, y, d)</code><span class="ref-desc">cercle ; <strong>centre</strong> + diamètre</span></div>
+      <div class="ref-row"><code>rect(x, y, w, h)</code><span class="ref-desc">rectangle ; <strong>coin supérieur gauche</strong> + dimensions</span></div>
+      <div class="ref-row"><code>line(x1, y1, x2, y2)</code><span class="ref-desc">segment entre deux points</span></div>
+      <div class="ref-row"><code>triangle(x1, y1, x2, y2, x3, y3)</code><span class="ref-desc">trois sommets</span></div>
+    </div>
+
+    <p class="note">Attention aux points d'ancrage !</p>
+
+    <div class="exercise">
+      <div class="exercise-label">exercice</div>
+      <ul>
+        <li>Un cercle dans chaque coin du canvas, tangent aux bords</li>
+        <li>Puis la même chose avec des carrés</li>
+        <li>Bonus : Ajoutez une marge</li>
+      </ul>
+      <p class="duration">&rarr; 5 minutes</p>
+      <p class="note">Utilisez <code>width</code> et <code>height</code></p>
+    </div>
+
+    <div>
+      <img src="../assets/intro-circles" width="360">
+      <img src="../assets/intro-rect.png" width="360">
+    </div>
+  </section>
+
+  <section>
+    <h2 id="appel"><a class="anchor-link" href="#appel">Appeler une fonction</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">background(220); // un seul paramètre
+
+circle(300, 200, 80);
+//     └─┬─┘ └┬┘ └┬┘
+//       x    y  diamètre
+
+noFill(); // aucun paramètre, mais les parenthèses restent obligatoires</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>L'ordre n'est pas modifiable et ne se devine pas toujours. Il est écrit dans <a href="https://p5js.org/reference/" target="_blank">la documentation de p5.js</a>.</p>
+
+    <p>Ouvrez <a href="https://p5js.org/reference/p5/rect/" target="_blank">la page de <code>rect()</code></a> dans la référence. Trois sections :</p>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Les <strong>exemples</strong></p>
+          <p class="checklist-desc">Souvent exécutables directement dans la page</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La <strong>syntaxe</strong></p>
+          <p class="checklist-desc">Les noms des paramètres, dans l'ordre. Certains sont optionnels.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La liste des <strong>paramètres</strong>/p>
+          <p class="checklist-desc">Ce que chacun signifie, et lesquels sont optionnels.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">« quels sont les paramètres de &hellip; ? » &rarr; <a href="https://p5js.org/reference/" target="_blank">la documentation de p5.js</a>.</p>
+  </section>
+
+  <section>
+    <h2 id="couleurs"><a class="anchor-link" href="#couleurs">Remplissage et contour</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">fill(255, 0, 0);      // couleur de remplissage (R, V, B de 0 à 255)
+fill(128);            // une seule valeur (niveau de gris)
+fill('turquoise');    // couleur nommée
+fill('#c35272');      // hexadécimal
+
+stroke(0);            // contour noir
+strokeWeight(4);      // épaisseur du trait
+
+noFill();             // pas de remplissage
+noStroke();           // pas de contour</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>fill()</code> (ou <code>stroke()</code>) n'est pas un paramètre de la forme, c'est la &laquo; couleur de votre crayon &raquo;. Toutes les formes suivantes auront cette couleur.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">fill(255, 0, 0);
+circle(150, 200, 100);
+circle(300, 200, 100);   // rouge aussi</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+</section>
+
+<section>
+    <h2>L'ordre de dessin</h2>
+    <div class="code-block">
+      <pre><code class="language-js">background(240);
+
+fill(255, 0, 0);
+circle(200, 200, 200);   // dessiné en premier
+
+fill(0, 0, 255);
+circle(200, 200, 100);   // dessiné après (dessus)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="exercice"><a class="anchor-link" href="#exercice">Exercice</a></h2>
+
+    <div class="exercise">
+      <div class="exercise-label">composition géométrique</div>
+      <ul>
+        <li>Reproduisez la composition ci-dessous</li>
+        <li>Canvas 600 &times; 400</li>
+        <li>Vous aurez besoin (en plus <code>createCanvas()</code> et <code>background()</code>) de, au minimum :
+          <ul>
+            <li><a href="https://p5js.org/reference/p5/rect" target="_blank"><code>rect()</code></a>
+            <li><a href="https://p5js.org/reference/p5/circle" target="_blank"><code>circle()</code></a>
+            <li><a href="https://p5js.org/reference/p5/triangle" target="_blank"><code>triangle()</code></a>
+            <li><a href="https://p5js.org/reference/p5/fill" target="_blank"><code>fill()</code></a>
+            <li><a href="https://p5js.org/reference/p5/stroke" target="_blank"><code>stroke()</code></a>
+            <li><a href="https://p5js.org/reference/p5/noFill" target="_blank"><code>noFill()</code></a>
+            <li><a href="https://p5js.org/reference/p5/noStroke" target="_blank"><code>noStroke()</code></a>
+          </ul>
+        </li>
+        <li>Sauvegardez votre sketch</li>
+      </ul>
+    </div>
+
+      <div class="figure">
+      <img src="/workshops/assets/intro-shapes.png" alt="">
+    </div>
+
+  </section>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
