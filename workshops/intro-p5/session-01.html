@@ -130,7 +130,6 @@ function draw() {
 
 function draw() {
   background(220);
-  rect(mouseX, mouseY, width, height);
   circle(width / 2, height / 2, 100); // toujours au centre
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
@@ -150,22 +149,6 @@ function draw() {
     </div>
 
     <p class="note">Attention aux points d'ancrage !</p>
-
-    <div class="exercise">
-      <div class="exercise-label">exercice</div>
-      <ul>
-        <li>Un cercle dans chaque coin du canvas, tangent aux bords</li>
-        <li>Puis la même chose avec des carrés</li>
-        <li>Bonus : Ajoutez une marge</li>
-      </ul>
-      <p class="duration">&rarr; 5 minutes</p>
-      <p class="note">Utilisez <code>width</code> et <code>height</code></p>
-    </div>
-
-    <div>
-      <img src="../assets/intro-circles" width="360">
-      <img src="../assets/intro-rect.png" width="360">
-    </div>
   </section>
 
   <section>
@@ -190,6 +173,13 @@ noFill(); // aucun paramètre, mais les parenthèses restent obligatoires</code>
       <div class="checklist-item">
         <span class="checklist-marker">&rarr;</span>
         <div>
+          <p class="checklist-label">La <strong>description</strong></p>
+          <p class="checklist-desc">Le fonctionnement et l'utilisation de la fonction expliqués, avec des mots.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
           <p class="checklist-label">Les <strong>exemples</strong></p>
           <p class="checklist-desc">Souvent exécutables directement dans la page</p>
         </div>
@@ -211,6 +201,24 @@ noFill(); // aucun paramètre, mais les parenthèses restent obligatoires</code>
     </div>
 
     <p class="note">« quels sont les paramètres de &hellip; ? » &rarr; <a href="https://p5js.org/reference/" target="_blank">la documentation de p5.js</a>.</p>
+
+    <br><br>
+
+    <div class="exercise">
+      <div class="exercise-label">exercice</div>
+      <ul>
+        <li>Un cercle dans chaque coin du canvas, tangent aux bords</li>
+        <li>Puis la même chose avec des carrés</li>
+        <li>Bonus : Ajoutez une marge</li>
+      </ul>
+      <p class="duration">&rarr; 5 minutes</p>
+      <p class="note">Utilisez <code>width</code> et <code>height</code></p>
+    </div>
+
+    <div>
+      <img src="../assets/intro-circles" width="360">
+      <img src="../assets/intro-rect.png" width="360">
+    </div>
   </section>
 
   <section>
