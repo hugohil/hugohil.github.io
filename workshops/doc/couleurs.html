@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Couleurs ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html" class="active">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Couleurs</h1>
+  <p class="lead">Remplissage, contour, transparence.</p>
+
+  <!-- ── Remplissage et contour ── -->
+
+  <section>
+    <h2 id="fill-stroke"><a class="anchor-link" href="#fill-stroke">Remplissage et contour</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">fill(255, 0, 0);     // intérieur rouge
+stroke(0);           // contour noir
+strokeWeight(3);     // épaisseur du trait en pixels
+circle(300, 300, 100);
+
+noFill();            // aucun remplissage ; seulement le contour
+noStroke();          // aucun contour ; seulement le remplissage</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Ces réglages sont <strong>persistants</strong> : une fois posés, ils s'appliquent à toutes les formes suivantes jusqu'au prochain changement.</p>
+  </section>
+
+  <!-- ── Notations ── -->
+
+  <section>
+    <h2 id="notations"><a class="anchor-link" href="#notations">Les notations</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">fill(255, 0, 0);        // RVB ; trois valeurs de 0 à 255
+fill(128);              // niveau de gris
+fill(0);                // noir
+fill(255);              // blanc
+fill('turquoise');      // couleur nommée CSS
+fill('#c35272');        // hexadécimal
+fill(255, 0, 0, 127);   // RVB + alpha
+fill(255, 127);   // niveau de gris + alpha</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Toutes ces notations fonctionnent avec <code>fill()</code>, <code>stroke()</code> et <code>background()</code> indifféremment.</p>
+
+    <p class="note">Liste des couleurs nommées : <a href="https://www.w3schools.com/cssref/css_colors.php" target="_blank">CSS Color List</a>.</p>
+  </section>
+
+  <!-- ── Variables ── -->
+
+  <section>
+    <h2 id="variables"><a class="anchor-link" href="#variables">Variable de couleur</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let fond;
+let accent;
+
+function setup() {
+  createCanvas(600, 600);
+  fond = color(20, 20, 30);
+  accent = color('#e8543f');
+}
+
+function draw() {
+  background(fond);
+  fill(accent);
+  circle(300, 300, 200);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note"><code>color()</code> doit être appelé <strong>après</strong> la création du canvas ; le déclarer en haut du fichier mais l'assigner dans <code>setup()</code>.</p>
+  </section>
+
+  <!-- ── HSB ── -->
+
+  <section>
+    <h2 id="hsb"><a class="anchor-link" href="#hsb">HSB ; teinte, saturation, luminosité</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(600, 600);
+  colorMode(HSB, 360, 100, 100);   // teinte 0–360, saturation 0–100, luminosité 0–100
+}
+
+function draw() {
+  background(0, 0, 95);
+  noStroke()
+  for (let i = 0; i < 12; i++) {
+    fill(i * 30, 70, 90);          // seule la teinte change
+    rect(i * 50, 0, width/12, height);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>H</code><span class="ref-desc">teinte ; position sur la roue chromatique (0–360)</span></div>
+      <div class="ref-row"><code>S</code><span class="ref-desc">saturation ; du gris à la couleur pure</span></div>
+      <div class="ref-row"><code>B</code><span class="ref-desc">luminosité ; du noir à la couleur pleine</span></div>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="formes.html">&larr; formes</a>
+    <a href="boucles.html" class="next">boucles &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

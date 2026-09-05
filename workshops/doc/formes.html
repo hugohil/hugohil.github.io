@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formes ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html" class="active">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Formes</h1>
+  <p class="lead">Le canvas est une grille de pixels.</p>
+
+  <!-- ── Coordonnées ── -->
+
+  <section>
+    <h2 id="coordonnees"><a class="anchor-link" href="#coordonnees">Le système de coordonnées</a></h2>
+    <div class="code-block">
+      <pre><code class="language-js">//  (0,0) ──────────────→ x
+//    │
+//    │      · (300, 200)
+//    │
+//    ↓ y
+//                    (width, height)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="width-height"><a href="#width-height" class="anchor-link">width et height</a></h2>
+    <p>p5 met à disposition deux variables qui contiennent les dimensions du canvas.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(240);
+  circle(width / 2, height / 2, 100);   // toujours centré
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Primitives ── -->
+
+  <section>
+    <h2 id="primitives"><a class="anchor-link" href="#primitives">Les formes de base</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>point(x, y)</code><span class="ref-desc">un pixel</span></div>
+      <div class="ref-row"><code>line(x1, y1, x2, y2)</code><span class="ref-desc">segment entre deux points</span></div>
+      <div class="ref-row"><code>circle(x, y, d)</code><span class="ref-desc">cercle ; centre + diamètre</span></div>
+      <div class="ref-row"><code>ellipse(x, y, w, h)</code><span class="ref-desc">ellipse ; centre + largeur et hauteur</span></div>
+      <div class="ref-row"><code>square(x, y, c)</code><span class="ref-desc">carré ; coin supérieur gauche + côté</span></div>
+      <div class="ref-row"><code>rect(x, y, w, h)</code><span class="ref-desc">rectangle ; coin supérieur gauche + dimensions</span></div>
+      <div class="ref-row"><code>triangle(x1, y1, x2, y2, x3, y3)</code><span class="ref-desc">triangle ; trois sommets</span></div>
+      <div class="ref-row"><code>arc(x, y, w, h, start, fin)</code><span class="ref-desc">portion d'ellipse ; angles en radians</span></div>
+    </div>
+
+    <p class="note">Attention aux points d'ancrage !</p>
+  </section>
+
+  <!-- ── Modes ── -->
+
+  <section>
+    <h2 id="modes"><a class="anchor-link" href="#modes">Changer le point d'ancrage</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">rectMode(CENTER);      // rect() se positionne par son centre
+rectMode(CORNER);      // valeur par défaut
+
+ellipseMode(CORNER);   // ellipse() se positionne par son coin
+ellipseMode(CENTER);   // valeur par défaut</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Coins arrondis</h3>
+    <div class="code-block">
+      <pre><code class="language-js">rect(100, 100, 200, 100, 20);          // même rayon aux 4 coins
+rect(100, 100, 200, 100, 20, 0, 20, 0); // haut-gauche, haut-droit, bas-droit, bas-gauche</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Ordre ── -->
+
+  <section>
+    <h2 id="ordre"><a class="anchor-link" href="#ordre">L'ordre de dessin</a></h2>
+
+    <p>Le code s'exécute ligne par ligne, de haut en bas. Chaque forme se dessine <strong>par-dessus</strong> les précédentes. Il n'y a pas de calques ou de <code>z-index</code>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">background(240);
+
+fill(255, 0, 0);
+circle(200, 200, 200);   // dessiné en premier
+
+fill(0, 0, 255);
+circle(200, 200, 100);   // dessiné après (dessus)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Formes libres ── -->
+
+  <section>
+    <h2 id="formes-libres"><a class="anchor-link" href="#formes-libres">Formes libres</a></h2>
+
+    <p>Pour dessiner un polygone, on décrit chaque sommets avec `vertex(x, y)` entre <code>beginShape()</code> et <code>endShape()</code>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">beginShape();
+vertex(100, 100);
+vertex(300, 150);
+vertex(250, 350);
+vertex(120, 280);
+endShape(CLOSE);   // CLOSE referme la forme sur le premier point</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Transformations ── -->
+
+  <section>
+    <h2 id="transformations"><a class="anchor-link" href="#transformations">Déplacer et tourner le repère</a></h2>
+
+    <p>Plutôt que de recalculer les coordonnées de chaque point, on peut déplacer le repère lui-même.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">push();                    // sauvegarde l'état actuel
+translate(width/2, height/2);       // l'origine (0,0) se déplace ici
+rect(0, 0, 100, 100);         // dessiné au centre
+rotate(PI / 4);              // rotation autour de la nouvelle origine
+rect(0, 0, 100, 100);       // dessiné à 45°
+pop();                     // restaure l'état sauvegardé
+rect(0, 0, 100, 100);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>translate(x, y)</code><span class="ref-desc">déplace l'origine</span></div>
+      <div class="ref-row"><code>rotate(angle)</code><span class="ref-desc">tourne le repère ; angle en radians</span></div>
+      <div class="ref-row"><code>scale(n)</code><span class="ref-desc">agrandit ou réduit</span></div>
+      <div class="ref-row"><code>push()</code><span class="ref-desc">mémorise l'état (repère + styles)</span></div>
+      <div class="ref-row"><code>pop()</code><span class="ref-desc">revient à l'état mémorisé</span></div>
+    </div>
+
+    <p>Les angles sont en <strong>radians</strong> par défaut : un tour complet vaut <code>TWO_PI</code> ou <code>2 * PI</code>. Pour passer en degrés :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">angleMode(DEGREES);   // dans setup()
+rotate(45);           // désormais en degrés
+
+// ou ponctuellement
+rotate(radians(45));</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="syntaxe.html">&larr; syntaxe</a>
+    <a href="couleurs.html" class="next">couleurs &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

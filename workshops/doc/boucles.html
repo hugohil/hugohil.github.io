@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boucles ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html" class="active">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Boucles</h1>
+  <p class="lead">Répéter une instruction.</p>
+
+  <!-- ── La boucle for ── -->
+
+  <section>
+    <h2 id="for"><a class="anchor-link" href="#for">La boucle for</a></h2>
+
+    <p>Changez <code>5</code> en <code>50</code> pour en avoir cinquante ;</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < 5; i++) {
+  let x = i * 10;
+  circle(x, 200, 40);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>let i = 0</code> ; on crée une variable qui va nous dire à combien de répétition on est.</p>
+    <p><code>i &lt; 5</code> ; avant chaque tour, on vérifie. Si c'est vrai, on exécute le bloc, si c'est faux, on sort.</p>
+    <p><code>i++</code> ; après chaque répétition, on ajoute 1 au compteur puis on retourne à l'étape précédente</p>
+
+
+    <p>Les valeurs prises par <code>i</code> sont donc : 0, 1, 2, 3, 4.</p>
+
+    <p class="note">On compte à partir de 0.</p>
+  </section>
+
+  <!-- ── Répartir ── -->
+
+  <section>
+    <h2 id="repartir"><a class="anchor-link" href="#repartir">Répartir sur toute la largeur</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let total = 12;
+let span = width / total;
+
+for (let i = 0; i < total; i++) {
+  let x = (i * span); 
+  circle(x, height / 2, span;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <br><br>
+    <p>On peut aussi faire avancer le compteur par pas plutôt que par unité.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let step = 20;
+for (let x = 0; x < width; x += step) {   // x avance de`step` en `step`
+  line(x, 0, x, height);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Tableaux ── -->
+
+  <section>
+    <h2 id="tableaux"><a class="anchor-link" href="#tableaux">Tableaux</a></h2>
+
+    <p>Un tableau stocke plusieurs valeurs dans une seule variable.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let sizes = [30, 60, 40];
+let shapes = ["cercle", "carré", "triangle"];
+let palette = ['#0d0d0d', '#e8543f', '#f2e8d5'];</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>On accède à une valeur par son index, en commençant à 0.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">sizes[0]      // 30 ; premier élément
+sizes[1]      // 60
+sizes[2]      // 40 ; dernier élément
+sizes.length  // 3  ; le nombre d'éléments</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Parcourir un tableau</h3>
+    <p>La boucle et le tableau vont ensemble, on va utiliser <code>i</code> comme index.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let positionsX = [100, 200, 300];
+let sizes = [30, 60, 40];
+
+let colorA = color(220, 0, 15);
+let colorB = color(25, 180, 120);
+let colorC = color(120, 120, 200);
+let palette = [colorA, colorB, colorC];
+
+for (let i = 0; i < sizes.length; i++) {
+  fill(palette[i]);
+  circle(positionsX[i], 200, sizes[i]);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Ajouter au fil du temps</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let points = [];              // tableau vide au départ
+
+function setup() {
+  createCanvas(600, 600);
+}
+
+function mousePressed() {
+  points.push({ x: mouseX, y: mouseY });   // on ajoute à la fin
+}
+
+function draw() {
+  background(240);
+  for (let i = 0; i < points.length; i++) {
+    circle(points[i].x, points[i].y, 20);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Grille ── -->
+
+  <section>
+    <h2 id="grille"><a class="anchor-link" href="#grille">Extension ; la grille</a></h2>
+
+    <p>Une boucle à l'intérieur d'une autre boucle produit une grille. La boucle extérieure parcourt les colonnes, l'intérieure parcourt les lignes.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let colonnes = 10;
+let lignes = 10;
+let cellule;
+
+function setup() {
+  createCanvas(500, 500);
+  cellule = width / colonnes;
+}
+
+function draw() {
+  background(240);
+
+  for (let i = 0; i < colonnes; i++) {       // i → colonnes, de gauche à droite
+    for (let j = 0; j < lignes; j++) {       // j → lignes, de haut en bas
+      let x = i * cellule + cellule/2;
+      let y = j * cellule + cellule/2;
+      circle(x, y, cellule);
+      // text('i:'+i+'\nj:'+j, x, y);
+    }
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Pièges ── -->
+
+  <section>
+    <h2 id="pieges"><a class="anchor-link" href="#pieges">Pièges fréquents</a></h2>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Boucle infinie</p>
+          <p class="checklist-desc">La condition de sortie n'est jamais fausse.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Toutes est au même endroit</p>
+          <p class="checklist-desc">Aucun paramètre ne dépend de <code>i</code>.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Le sketch rame</p>
+          <p class="checklist-desc">Une grille 200 &times; 200 fait 40 000 formes par frame.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="couleurs.html">&larr; couleurs</a>
+    <a href="variation.html" class="next">variation &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

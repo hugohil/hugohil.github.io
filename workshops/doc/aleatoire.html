@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aléatoire ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html" class="active">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Aléatoire</h1>
+  <p class="lead">Deux outils : <code>random()</code> et <code>noise()</code>.</p>
+
+  <!-- ── random ── -->
+
+  <section>
+    <h2 id="random"><a class="anchor-link" href="#random">random</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>random()</code><span class="ref-desc">valeur entre 0 et 1</span></div>
+      <div class="ref-row"><code>random(max)</code><span class="ref-desc">valeur entre 0 et max</span></div>
+      <div class="ref-row"><code>random(min, max)</code><span class="ref-desc">valeur entre min et max</span></div>
+      <div class="ref-row"><code>random(tableau)</code><span class="ref-desc">un élément au hasard du tableau</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">let palette = ['#0d0d0d', '#e8543f', '#f2e8d5'];
+
+for (let i = 0; i < 50; i++) {
+  fill(random(palette));
+  circle(random(width), random(height), random(10, 60));
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Stabiliser ── -->
+
+  <section>
+    <h2 id="stabiliser"><a class="anchor-link" href="#stabiliser">Stabiliser l'aléatoire</a></h2>
+
+    <h3>Tirer une seule fois</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let positions = [];
+
+function setup() {
+  createCanvas(600, 600);
+  for (let i = 0; i < 50; i++) {
+    positions.push({ x: random(width), y: random(height) });
+  }
+}
+
+function draw() {
+  background(240);
+  for (let i = 0; i < positions.length; i++) {
+    let p = positions[i];
+    circle(p.x, p.y, 20);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Fixer la seed</h3>
+    <p><code>randomSeed()</code> rend la séquence reproductible : même seed, même suite de tirages.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function draw() {
+  randomSeed(25);            // toujours la même série
+  background(240);
+  for (let i = 0; i < 50; i++) {
+    circle(random(width), random(height), 20);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── noise ── -->
+
+  <section>
+    <h2 id="noise"><a class="anchor-link" href="#noise">noise</a></h2>
+
+    <p><code>noise()</code> renvoie une valeur entre <strong>0 et 1</strong>, comme <code>random()</code>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// random ; chaque valeur ignore la précédente
+random(), random(), random()   // 0.83 ; 0.12 ; 0.67
+
+// noise ; les valeurs voisines se ressemblent
+noise(0.1), noise(0.2), noise(0.3)   // 0.51 ; 0.54 ; 0.58</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Une valeur qui dérive dans le temps</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let t = 0;
+let step = 0.01;
+
+function draw() {
+  background(240);
+  let x = noise(t) * width;
+  let y = noise(t + 1000) * height;
+  circle(x, y, 40);
+  t += step;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Le step est le principal paramètre : <code>0.001</code> mouvement lent/lisse, <code>0.1</code> nerveux, <code>1</code> proche du <code>random()</code>.</p>
+  </section>
+
+  <!-- ── noise 2D ── -->
+
+  <section>
+    <h2 id="noise-2d"><a class="anchor-link" href="#noise-2d">noise 2D</a></h2>
+
+    <p><code>noise(x, y)</code> varie selon 2 paramètres</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let scale = 0.01;
+
+for (let x = 0; x < width; x += 10) {
+  for (let y = 0; y < height; y += 10) {
+    let n = noise(x * scale, y * scale);
+    fill(n * 255);
+    noStroke();
+    rect(x, y, 10, 10);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>noise 3D</h3>
+    <div class="code-block">
+      <pre><code class="language-js">function draw() {
+  for (let x = 0; x < width; x += 10) {
+    for (let y = 0; y < height; y += 10) {
+      let n = noise(x * 0.01, y * 0.01, frameCount * 0.01);
+      //                                └────────┬────────┘
+      //                            le noise évolue organiquement
+      fill(n * 255);
+      rect(x, y, 10, 10);
+    }
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="animation.html">&larr; animation</a>
+    <a href="interaction.html" class="next">interaction &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session 2 ; variables et répétition</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">session 2 ; variables et répétition</span>
+  <nav>
+    <a href="/workshops/doc/syntaxe.html">syntaxe</a>
+    <a href="/workshops/doc/couleurs.html">couleurs</a>
+    <a href="/workshops/doc/boucles.html">boucles</a>
+    <a href="/workshops/doc/variation.html">variation</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Session 2</div>
+  <h1>Variables et répétition</h1>
+  <p class="lead">Manipuler les valeurs, puis répéter une instruction en la faisant varier.</p>
+
+  <section>
+    <h2 id="reprise"><a class="anchor-link" href="#reprise">Ce qui casse</a></h2>
+
+    <p>Changez la taille de votre dernier sketch :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">createCanvas(600, 900);   // au lieu de 600, 600 par ex.</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Si plus rien n'est calé, il faut remplacer les valeurs absolues par des valeurs relatives (utilisants <code>width</code> et <code>height</code>).</p>
+
+  </section>
+
+  <section>
+    <h2 id="variables"><a class="anchor-link" href="#variables">Variables</a></h2>
+
+    <p>Documentation : <a href="/workshops/doc/syntaxe.html">variables & scope</a></p>
+  </section>
+
+  <section>
+    <h2 id="parametrer"><a class="anchor-link" href="#parametrer">Paramétrer sa composition</a></h2>
+
+    <p>Retour sur votre sketch de la session 1.</p>
+
+    <div class="exercise">
+      <div class="exercise-label">reprise</div>
+      <ul>
+        <li>Centralisez dans le scope global les valeurs répétées ou liées entre elles</li>
+        <li>Donnez-leur des noms explicites</li>
+        <li>Remplacez les positions absolues par des calculs à partir de <code>width</code> et <code>height</code></li>
+        <li>Faites le test : changer les dimensions de votre canvas</li>
+      </ul>
+      <p class="duration">&rarr; 15 minutes</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="tableaux"><a class="anchor-link" href="#tableaux">Boucles & tableaux</a></h2>
+
+    <p>Documentation : <a href="/workshops/doc/boucles.html#tableaux">boucles & tableaux</a></p>
+  </section>
+
+  <section>
+    <h2 id="variations"><a class="anchor-link" href="#variations">Variation</a></h2>
+
+    <p>Documentation : <a href="/workshops/doc/boucles.html#variations">variations</a></p>
+  </section>
+
+  <section>
+    <h2 id="exercice"><a class="anchor-link" href="#exercice">Exercice ; une série</a></h2>
+
+    <div class="exercise">
+      <div class="exercise-label">contraintes</div>
+      <ul>
+        <li>Canvas 600 &times; 900, format portrait</li>
+        <li>Une boucle <code>for</code></li>
+        <li>Deux paramètres visuels qui varient dans la boucle</li>
+        <li>Palette de trois couleurs maximum</li>
+      </ul>
+    </div>
+
+    <h3>Méthode</h3>
+
+    <div class="tour-de-table">
+      <div class="tour-question">
+        <span class="tour-label">01</span>
+        <p>Partir d'une répétition simple.</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">02</span>
+        <p>Faire dépendre <strong>un seul</strong> paramètre de <code>i</code>.</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">03</span>
+        <p>Ajouter le second paramètre seulement quand le premier est maîtrisé.</p>
+      </div>
+      <div class="tour-question">
+        <span class="tour-label">04</span>
+        <p>Sauvegarder une version qui marche avant de tenter autre chose. N'hésitez pas à dupliquer votre sketch pour tester des variations.</p>
+      </div>
+    </div>
+
+    <p>Le système doit être configurable : on doit pouvoir changer le nombre d'éléments et les paramètres.</p>
+
+    <br><br>
+    <h3>Si vous êtes bloqué·e</h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Isoler</p>
+          <p class="checklist-desc">Reproduire la partie qui ne marche pas dans un sketch vide. Si elle marche seule, le problème vient d'ailleurs.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Afficher</p>
+          <p class="checklist-desc"><code>console.log()</code> sur la valeur concernée.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Reformuler</p>
+          <p class="checklist-desc">Exprimez en une phrase ce que le système est censé faire avant de continuer à coder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

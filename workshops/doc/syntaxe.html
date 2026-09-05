@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntaxe ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html" class="active">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Syntaxe & usage</h1>
+  <p class="lead">variable ; fonction ; paramètre.</p>
+
+  <section>
+    <h2 id="structure"><a class="anchor-link" href="#structure">La structure d'un sketch</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  // exécuté UNE FOIS au démarrage
+  createCanvas(600, 600);
+}
+
+function draw() {
+  // exécuté EN BOUCLE
+  background(240);
+  circle(300, 300, 100);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>setup()</code> sert à préparer : créer le canvas, charger des assets, définir des variables...</p>
+    <p><code>draw()</code> sert à répéter : tout ce qui doit être redessiné, à chaque image, en boucle</p>
+  </section>
+
+  <!-- ── Variables ── -->
+
+  <section>
+    <h2 id="variables"><a class="anchor-link" href="#variables">Variables</a></h2>
+
+    <p>Une variable stocke une valeur sous un nom, pour la réutiliser ou la faire changer.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let size = 50;        // on déclare et on assigne
+
+size = 80;            // on change la valeur ; pas besoin de "let"
+size = size + 10;     // on ajoute 10 à la valeur de size</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Nommer</h3>
+    <p>Le nom d'une variable est libre, mais il vous parle à vous. C'est une bonne pratique de l'écrire en anglais.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// valide
+let speed = 4;
+let circleCount = 12;
+let shapeColor = 240;
+
+// invalide
+let 2speed = 4;    // ne peut pas commencer par un chiffre
+let my speed = 4;  // pas d'espace</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Scope ── -->
+
+  <section>
+    <h2 id="scope"><a class="anchor-link" href="#scope">Le scope</a></h2>
+
+    <p>Une variable existe à l'intérieur des accolades où elle a été déclarée, et nulle part ailleurs.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let x = 0;  // scope global ; existe partout, et PERSISTE
+
+function draw() {
+  background(240);
+
+  let r = 50;   // déclarée dans draw ; recréée à chaque frame
+
+  circle(x, 200, r);
+  x = x + 2;    // la valeur de x augmente d'une frame à l'autre
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Fonctions ── -->
+
+  <section>
+    <h2 id="fonctions"><a class="anchor-link" href="#fonctions">Fonctions et paramètres</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">circle(300, 200, 80);
+//     └─┬─┘ └┬┘ └┬┘
+//       x    y  diamètre
+
+background(240);      // un seul paramètre
+noFill();             // aucun paramètre ; les parenthèses restent obligatoires</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>L'ordre des paramètres n'est pas modifiable et ne se devine pas toujours. Il est écrit dans <a href="https://p5js.org/reference/" target="_blank">la documentation de p5.js</a>.</p>
+
+    <p>Ouvrez <a href="https://p5js.org/reference/p5/rect/" target="_blank">la page de <code>rect()</code></a> dans la référence. Trois sections :</p>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La <strong>description</strong></p>
+          <p class="checklist-desc">Le fonctionnement et l'utilisation de la fonction expliqués, avec des mots.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Les <strong>exemples</strong></p>
+          <p class="checklist-desc">Souvent exécutables directement dans la page</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La <strong>syntaxe</strong></p>
+          <p class="checklist-desc">Les noms des paramètres, dans l'ordre. Certains sont optionnels.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La liste des <strong>paramètres</strong>/p>
+          <p class="checklist-desc">Ce que chacun signifie, et lesquels sont optionnels.</p>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <p>On peut écrire sa propre fonction.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function fleur(x, y, size) {
+  circle(x, y + size/2, size);
+  circle(x - size / 2, y, size);
+  circle(x, y - size/2, size);
+  circle(x + size / 2, y, size);
+}
+
+function draw() {
+  background(240);
+  fleur(200, 200, 20);
+  fleur(300, 300, 50);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Types et opérations ── -->
+
+  <section>
+    <h2 id="types-operations"><a class="anchor-link" href="#types-operations">Types et opérations</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>10</code><span class="ref-desc">nombre</span></div>
+      <div class="ref-row"><code>6.7</code><span class="ref-desc">nombre décimal (point, pas virgule)</span></div>
+      <div class="ref-row"><code>"hello"</code><span class="ref-desc">chaîne de caractères</span></div>
+      <div class="ref-row"><code>true / false</code><span class="ref-desc">booléen ; vrai ou faux</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">10 + 3   // 13
+10 - 3   // 7
+10 * 3   // 30
+10 / 3   // 3.333…
+10 % 3   // 1  ; le reste de la division</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Le modulo</h3>
+    <p>Pour le modulo <code>%</code>, pensez à la monnaie du pain : si vous avez 7€ et qu'un objet coûte 3€, vous achetez 2 objets et il vous reste 1€ ; donc <code>7 % 3 = 1</code>. C'est particulièrement utile en design génératif : <code>frameCount % 60</code> donne un compteur qui repart à zéro toutes les 60 frames.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">0 % 3  // 0
+1 % 3  // 1
+2 % 3  // 2
+3 % 3  // 0   ← ça recommence
+4 % 3  // 1
+
+i % 2  // 0 ; permet de tester si un nombre est pair
+i % 5  // 0 une fois sur cinq</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Comparer</h3>
+    <div class="ref-table">
+      <div class="ref-row"><code>===</code><span class="ref-desc">est égal à (comparaison)</span></div>
+      <div class="ref-row"><code>!==</code><span class="ref-desc">est différent de</span></div>
+      <div class="ref-row"><code>&gt; &lt;</code><span class="ref-desc">plus grand que, plus petit que</span></div>
+      <div class="ref-row"><code>&gt;= &lt;=</code><span class="ref-desc">plus grand ou égal, plus petit ou égal</span></div>
+      <div class="ref-row"><code>&amp;&amp;</code><span class="ref-desc">et</span></div>
+      <div class="ref-row"><code>||</code><span class="ref-desc">ou</span></div>
+    </div>
+
+    <p>On va les utiliser généralement en combinaison avec des instructions <code>if()</code>, <code>if() else()</code> etc...</p>
+
+    <div class="code-block">
+<pre><code class="language-js">let n = 10;
+
+if (n === 10) {
+  // code à éxécuter si n est strictement égal à 10
+}
+
+if (n > 5) {
+  // code à éxécuter si n est strictement supérieur à 5
+} else if (n <= 10) {
+  // code à éxécuter si n est inférieur ou égal à 10
+} else {
+  // code à éxécuter si les deux autres tests ont échoués
+}
+
+let f = 5.1;
+
+if (n === 10 && f > 5) {
+  // code à éxécuter si les deux comparaisons sont vraie
+  // donc si n === 10 ET f > 5
+}
+
+if (n === 10 || f > 5) {
+  // code à éxécuter si au moins une des deux comparaisons est vraie
+  // donc si n === 10 OU f > 5
+}
+
+// on peut aussi stocker le résultat d'un test
+let test = n < 10; // test sera égal à true si n < 10, autrement test sera égal à false
+</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Un seul <code>=</code> assigne la valeur. Trois <code>===</code> compare les deux valeurs.</p>
+
+    <div class="code-block">
+<pre><code class="language-js">let n = 10;
+console.log(n);
+if (n = 5) {
+  console.log(n);
+}
+</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Pièges ── -->
+
+  <section>
+    <h2 id="pieges"><a class="anchor-link" href="#pieges">Pièges fréquents</a></h2>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Accolade non refermée</p>
+          <p class="checklist-desc">L'erreur signalée peut se trouver à la ligne suivante ou à la toute fin du fichier.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Sensibilité à la casse</p>
+          <p class="checklist-desc"><code>Circle()</code> n'existe pas, c'est <code>circle()</code> qu'il faut utiliser. Même chose pour les fonctions et les variables</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Variable utilisée hors scope</p>
+          <p class="checklist-desc"><code>x is not defined</code>. La variable n'existe pas encore, ou elle a été déclarée dans un autre bloc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Lire une erreur ── -->
+
+  <section>
+    <h2 id="erreurs"><a class="anchor-link" href="#erreurs">Lire une erreur</a></h2>
+
+    <div class="figure">
+      <img src="/workshops/assets/p5-error.png" alt="éditeur p5.js avec une erreur">
+      <p class="figure-caption">Une erreur dans l'éditeur en ligne p5.js</p>
+    </div>
+
+    <p>La console vous donne trois informations : le type d'erreur, le message, et le numéro de ligne. Le numéro de ligne indique où le programme a <em>échoué</em>, pas toujours où est la faute.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">console.log(size);        // afficher une valeur
+console.log('x :', x);   // avec un texte</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="formes.html" class="next">formes &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

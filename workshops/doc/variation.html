@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variation ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html" class="active">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Variation</h1>
+
+  <!-- ── map ── -->
+
+  <section>
+    <h2 id="map"><a class="anchor-link" href="#map">map</a></h2>
+
+    <p><code>map()</code> convertit une valeur d'un intervalle vers un autre.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">map(valeur, fromMin, fromMax, toMin, toMax)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">background(10);
+
+noStroke();
+for (let i = 0; i < 10; i++) {
+  let size = map(i, 0, 10, 10, 200);
+  let a = map(i, 0, 10, 255, 0); // décroissant
+  fill(255, a);
+  circle(width/2, height / 2, size);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Contraindre</h3>
+    <p><code>map()</code> peut dépasser hors des bornes si la valeur les dépasse. <code>constrain()</code> permet d'éviter ça.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let size = constrain(map(mouseX, 0, width/2, 10, 200), 10, 200);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Il existe un cinquième argument optionnel : <code>map(v, a, b, c, d, true)</code> contraint directement le résultat.</p>
+  </section>
+
+  <!-- ── Distance ── -->
+
+  <section>
+    <h2 id="dist"><a class="anchor-link" href="#dist">dist</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let cx = width / 2;
+let cy = height / 2;
+
+let steps = 20;
+for (let x = 0; x < width; x += steps) {
+  for (let y = 0; y < height; y += steps) {
+    let d = dist(x, y, cx, cy);   // distance au centre
+    let size = map(d, 0, 300, 18, 2);
+    circle(x, y, size);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Paramétrer ── -->
+
+  <section>
+    <h2 id="parametrer"><a class="anchor-link" href="#parametrer">Facilitez vous l'experimentation</a></h2>
+    <div class="code-block">
+      <pre><code class="language-js">// difficile d'experimenter
+for (let i = 0; i < 24; i++) {
+  circle(i * 25 + 12, 300, 18);
+}
+
+// parametrable
+let total = 24;
+let size = 18;
+let h = 300;
+
+for (let i = 0; i < total; i++) {
+  let span = width / total;
+  circle(i * span + span / 2, h, size);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="boucles.html">&larr; boucles</a>
+    <a href="animation.html" class="next">animation &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

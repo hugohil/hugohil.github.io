@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interaction ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html" class="active">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Interaction</h1>
+  <p class="lead">Une valeur est controllée par un paramètre extérieur.</p>
+
+  <!-- ── Souris ── -->
+
+  <section>
+    <h2 id="souris"><a class="anchor-link" href="#souris">La souris</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>mouseX, mouseY</code><span class="ref-desc">position actuelle dans le canvas</span></div>
+      <div class="ref-row"><code>pmouseX, pmouseY</code><span class="ref-desc">position à la frame précédente</span></div>
+      <div class="ref-row"><code>mouseIsPressed</code><span class="ref-desc">true tant que le bouton est enfoncé</span></div>
+      <div class="ref-row"><code>mouseButton</code><span class="ref-desc">LEFT, RIGHT ou CENTER</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">function draw() {
+  background(240);
+  circle(mouseX, mouseY, 60);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">function draw() {
+  background(240);
+
+  let total = int(map(mouseX, 0, width, 3, 60));
+  let span = width / total;
+
+  for (let i = 0; i < total; i++) {
+    circle(i * span + span / 2, height / 2, span * 0.7);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note"><code>int()</code> arrondit à l'entier inférieur.</p>
+
+    <h3>Vitesse du geste</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let speed = dist(mouseX, mouseY, pmouseX, pmouseY);
+strokeWeight(map(speed, 0, 50, 1, 30));
+line(pmouseX, pmouseY, mouseX, mouseY);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Clavier ── -->
+
+  <section>
+    <h2 id="clavier"><a class="anchor-link" href="#clavier">Le clavier</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>keyIsPressed</code><span class="ref-desc">true tant qu'une touche est enfoncée</span></div>
+      <div class="ref-row"><code>key</code><span class="ref-desc">le caractère de la dernière touche</span></div>
+      <div class="ref-row"><code>keyCode</code><span class="ref-desc">code des touches spéciales (flèches, entrée…)</span></div>
+      <div class="ref-row"><code>keyIsDown(code)</code><span class="ref-desc">teste une touche précise, en continu</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">let x;
+
+function setup() {
+  createCanvas(400, 400);
+  x = width/2;
+}
+
+function draw() {
+  background(240);
+
+  if (keyIsDown(LEFT_ARROW))  x -= 3;
+  if (keyIsDown(RIGHT_ARROW)) x += 3;
+
+  circle(x, height / 2, 50);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note"><code>keyIsDown()</code> = mouvement continu tant que la touche est maintenue. <code>keyPressed()</code> = déclenchée une seule fois.</p>
+  </section>
+
+  <!-- ── Événements ── -->
+
+  <section>
+    <h2 id="evenements"><a class="anchor-link" href="#evenements">Événements</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function mousePressed() {
+  // une fois, au moment du clic
+}
+
+function mouseReleased() {
+  // au relâchement
+}
+
+function mouseDragged() {
+  // à chaque déplacement, bouton enfoncé
+}
+
+function keyPressed() {
+  // une fois, à l'appui d'une touche
+  if (key === 's') saveCanvas('capture', 'png');
+  if (key === ' ') x = 0;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── État ── -->
+
+  <section>
+    <h2 id="etat"><a class="anchor-link" href="#etat">Gérer un état</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let mode = 0;
+let points = [];
+
+function setup() {
+  createCanvas(600, 600);
+}
+
+function mousePressed() {
+  points.push({ x: mouseX, y: mouseY });
+}
+
+function keyPressed() {
+  if (key === 'm') mode = (mode + 1) % 3;   // cycle entre 0, 1 et 2
+  if (key === 'c') points = [];             // tout effacer
+}
+
+function draw() {
+  background(240);
+  for (let p of points) {
+    if (mode === 0) circle(p.x, p.y, 30);
+    if (mode === 1) rect(p.x, p.y, 30, 30);
+    if (mode === 2) line(p.x - 15, p.y, p.x + 15, p.y);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Zones ── -->
+
+  <section>
+    <h2 id="zones"><a class="anchor-link" href="#zones">Détecter une zone</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+
+  let cx = width/2;
+  let cy = height/2;
+  let radius = 100
+
+  let d = dist(mouseX, mouseY, cx, cy);
+  if (d < radius) {
+    // la souris est dessus
+    circle(width/2, height/2, radius);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Export ── -->
+
+  <section>
+    <h2 id="export"><a class="anchor-link" href="#export">Capturer une image</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function keyPressed() {
+  if (key === 's') {
+    noLoop();
+    saveCanvas('capture', 'png');
+    loop();
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour une vidéo, utilisez un outil de capture d'écran système. C'est plus fiable qu'un enregistrement depuis le navigateur.</p>
+  </section>
+
+  <div class="page-nav">
+    <a href="aleatoire.html">&larr; aléatoire</a>
+    <a href="images.html" class="next">images &rarr;</a>
+  </div>
+
+</main>
+
+<script>
+  function copyCode(btn) {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'copié';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'copier'; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+</script>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

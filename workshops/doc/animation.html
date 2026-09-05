@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html" class="active">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Animation</h1>
+  <p class="lead">Le temps est un paramètre comme un autre.</p>
+
+  <!-- ── La boucle ── -->
+
+  <section>
+    <h2 id="boucle-draw"><a class="anchor-link" href="#boucle-draw">draw est déjà une boucle</a></h2>
+    <div class="code-block">
+      <pre><code class="language-js">let x = 0;
+
+function draw() {
+  background(240);
+  circle(x, height / 2, 50);
+  x = x + 2;              // 2 pixels de plus à chaque frame
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note"><code>x</code> doit être déclaré <strong>en dehors</strong> de <code>draw()</code>, sinon il repart de 0 à chaque frame. Voir <a href="syntaxe.html#scope">scope</a>.</p>
+
+    <h3>Contrôler la boucle</h3>
+    <div class="ref-table">
+      <div class="ref-row"><code>noLoop()</code><span class="ref-desc">arrête l'exécution de draw()</span></div>
+      <div class="ref-row"><code>loop()</code><span class="ref-desc">la relance</span></div>
+      <div class="ref-row"><code>redraw()</code><span class="ref-desc">exécute draw() une seule fois</span></div>
+      <div class="ref-row"><code>frameRate(n)</code><span class="ref-desc">limite la cadence</span></div>
+      <div class="ref-row"><code>frameRate()</code><span class="ref-desc">sans argument renvoie la cadence réelle</span></div>
+    </div>
+
+    <p class="note">Une image fixe se fait avec <code>noLoop()</code> à la fin de <code>setup()</code>. Le sketch se dessine une fois et s'arrête.</p>
+  </section>
+
+  <!-- ── frameCount ── -->
+
+  <section>
+    <h2 id="framecount"><a class="anchor-link" href="#framecount">frameCount et millis</a></h2>
+
+    <p><code>frameCount</code> compte les images écoulées depuis le démarrage.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let size = frameCount * 0.5;   // 0.5 permet de gérer la vitesse
+circle(width / 2, height / 2, size);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>frameCount ou millis ?</h3>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>frameCount</code><span class="ref-desc">nombre d'images</span></div>
+      <div class="ref-row"><code>millis()</code><span class="ref-desc">millisecondes écoulées</span></div>
+      <div class="ref-row"><code>deltaTime</code><span class="ref-desc">millisecondes écoulées depuis la frame précédente</span></div>
+    </div>
+    
+    <div class="code-block">
+      <pre><code class="language-js">let t = millis() * 0.1;
+circle(t, height/2, 100);</code></pre>
+        <button class="copy-btn" onclick="copyCode(this)">copier</button>
+      </div>
+      
+          <p class="note">Si le sketch ralentit, une animation basée sur <code>frameCount</code> ralentit aussi. Une animation basée sur <code>millis()</code> garde sa vitesse réelle, quitte à sauter des positions.</p>
+  </section>
+
+  <!-- ── Trigonométrie ── -->
+
+  <section>
+    <h2 id="trigonometrie"><a class="anchor-link" href="#trigonometrie">sin et cos ; l'oscillation</a></h2>
+
+    <p><code>sin()</code> ou <code>cos()</code> oscille entre <strong>-1 et 1</strong>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let amplitude = 200;    // amplitude
+let speed = 0.05;     // fréquence
+let phase = 0;        // pahse
+
+let x = width / 2 + sin(frameCount * speed + phase) * amplitude;
+circle(x, height / 2, 60);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Ramener dans une plage utile</h3>
+    <p><code>sin()</code> (ou <code>cos()</code>) donne -1 à 1, ce qui est rarement directement exploitable. <code>map()</code> est utile dans ce cas.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let s = map(sin(frameCount * 0.05), -1, 1, 20, 120);   // size entre 20 et 120
+circle(width / 2, height / 2, s);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Mouvement circulaire</h3>
+    <p><code>cos()</code> est le même mouvement décalé d'un quart de cycle. Ensemble, ils décrivent un cercle.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let angle = frameCount * 0.02;
+let x = width / 2 + cos(angle) * 200;
+let y = height / 2 + sin(angle) * 200;
+circle(x, height/2, 40);
+circle(width/2, y, 40);
+circle(x, y, 40);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Décaler chaque élément</h3>
+    <p>Combiné à une boucle, un décalage de phase par élément produit une onde.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < 30; i++) {
+  let x = i * (width / 30);
+  let y = height / 2 + sin(frameCount * 0.05 + i * 0.3) * 100;
+  //                                          └───┬───┘
+  //                                    décalage croissant = onde
+  circle(x, y, 20);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Essayez de jouer avec le coefficient <code>0.3</code> pour transformer l'onde.</p>
+  </section>
+
+  <!-- ── Traces ── -->
+
+  <section>
+    <h2 id="traces"><a class="anchor-link" href="#traces">Traces et rémanence</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(600, 600);
+  background(20);
+}
+
+function draw() {
+  background(20, 20);          // alpha faible = effacement partiel
+  let x = width / 2 + cos(frameCount * 0.03) * 200;
+  let y = height / 2 + sin(frameCount * 0.05) * 200;
+  fill(255);
+  circle(x, y, 20);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Boucle parfaite ── -->
+
+  <section>
+    <h2 id="boucle-parfaite"><a class="anchor-link" href="#boucle-parfaite">Faire une boucle parfaite</a></h2>
+
+    <p>Pour une animation qui boucle parfaitement il faut que l'état final soit identique à l'état initial. Il faut raisonner en cycle plutôt qu'en temps passé.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let duree = 180;   // nombre de frames pour un cycle complet
+
+function draw() {
+  background(240);
+
+  let t = (frameCount % duree) / duree;
+  // (frameCount % duree) va de 0 à 179
+  // (frameCount % duree) / duree va donc de 0 à 1
+  
+  let angle = t * TWO_PI;
+  // TWO_PI = 1 tour complet
+  // donc on progresse dans le cercle en fonction de t
+
+  let x = width / 2 + cos(angle) * 200;
+  let y = height / 2 + sin(angle) * 200;
+  let s = map(sin(angle), -1, 1, 20, 80);
+  circle(x, y, s);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Pièges ── -->
+
+  <section>
+    <h2 id="pieges"><a class="anchor-link" href="#pieges">Pièges fréquents</a></h2>
+
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Ça va beaucoup trop vite</p>
+          <p class="checklist-desc">Le coefficient est trop grand. Testez en le divisant par 10 par exemple.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La forme sort du canvas et ne revient pas</p>
+          <p class="checklist-desc">Il faut soit une oscillation (<code>sin</code>), soit un test de rebond (<code>if (x > width)</code>), soit un <code>%</code>.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">La boucle « saute » au recommencement</p>
+          <p class="checklist-desc">Une des valeurs de l'animation n'est pas cyclique. Vérifiez que chaque paramètre dépend de <code>t</code> et revient bien à son point de départ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="variation.html">&larr; variation</a>
+    <a href="aleatoire.html" class="next">aléatoire &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

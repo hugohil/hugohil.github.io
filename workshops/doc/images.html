@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Images ; documentation</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">documentation ; code créatif</span>
+  <nav>
+    <a href="syntaxe.html">syntaxe</a>
+    <a href="formes.html">formes</a>
+    <a href="couleurs.html">couleurs</a>
+    <a href="boucles.html">boucles</a>
+    <a href="variation.html">variation</a>
+    <a href="animation.html">animation</a>
+    <a href="aleatoire.html">aléatoire</a>
+    <a href="interaction.html">interaction</a>
+    <a href="images.html" class="active">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Documentation</div>
+  <h1>Images</h1>
+  <p class="lead">Une image = un tableau de pixels.</p>
+
+  <!-- ── Charger ── -->
+
+  <section>
+    <h2 id="charger"><a class="anchor-link" href="#charger">Charger et afficher</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let img;
+
+async function setup() {
+  createCanvas(600, 600);
+  img = await loadImage('image.png');
+}
+
+function draw() {
+  image(img, 0, 0);                       // taille d'origine
+  image(img, 0, 0, width, height);        // étirée au canvas
+  image(img, 100, 100, 200, 200);         // à une position et une taille données
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Dans l'éditeur en ligne, déposez le fichier dans le dossier du sketch (panneau de gauche) et référencez-le par son nom.</p>
+    <div class="figure">
+      <img src="../assets/p5-files1.png" alt="">
+      <img src="../assets/p5-files2.png" alt="">
+    </div>
+
+    <h3>Conserver les proportions</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let ratio = img.width / img.height;
+let h = height;
+let w = h * ratio;
+image(img, (width - w) / 2, 0, w, h);   // centrée, non déformée</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>img.width</code><span class="ref-desc">largeur en pixels de l'image source</span></div>
+      <div class="ref-row"><code>img.height</code><span class="ref-desc">hauteur en pixels</span></div>
+      <div class="ref-row"><code>img.resize(w, h)</code><span class="ref-desc">redimensionne définitivement (0 = auto)</span></div>
+      <div class="ref-row"><code>imageMode(CENTER)</code><span class="ref-desc">positionne par le centre</span></div>
+      <div class="ref-row"><code>tint(255, 128)</code><span class="ref-desc">teinte ou opacité appliquée à l'image</span></div>
+      <div class="ref-row"><code>noTint()</code><span class="ref-desc">annule la teinte</span></div>
+    </div>
+  </section>
+
+  <!-- ── Lire les pixels ── -->
+
+  <section>
+    <h2 id="lire"><a class="anchor-link" href="#lire">Lire un pixel</a></h2>
+
+    <p><code>get()</code> renvoie la couleur d'un pixel.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">img.loadPixels(); // obligatoire
+
+let c = img.get(mouseX, mouseY);
+fill(c);
+circle(mouseX, mouseY, 50)</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Échantillonner ── -->
+
+  <section>
+    <h2 id="echantillonner"><a class="anchor-link" href="#echantillonner">Échantillonner</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let img;
+let step = 12;
+
+async function setup() {
+  img = await loadImage('image.png');
+  createCanvas(img.width, img.height);
+  img.loadPixels();
+  noLoop();
+}
+
+function draw() {
+  background(255);
+  noStroke();
+  fill(0);
+
+  for (let x = 0; x < width; x += step) {
+    for (let y = 0; y < height; y += step) {
+      let c = img.get(x, y);
+      let luminosite = (c[0] + c[1] + c[2]) / 3;        // moyenne des trois canaux
+      let taille = map(luminosite, 0, 255, step, 0);      // sombre = grand point
+      circle(x, y, taille);
+    }
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Filtres ── -->
+
+  <section>
+    <h2 id="filters"><a class="anchor-link" href="#filters">Filtres</a></h2>
+    <p>Les filtres s'appliquent <strong>après</strong> avoir dessiné l'image. </p>
+    <div class="code-block">
+      <pre><code class="language-js">img.filter(GRAY);
+img.filter(INVERT);
+img.filter(POSTERIZE, 4);
+img.filter(BLUR, 3);
+img.filter(THRESHOLD, 0.5);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <!-- ── Webcam ── -->
+
+  <section>
+    <h2 id="webcam"><a class="anchor-link" href="#webcam">Flux vidéo</a></h2>
+
+    <p>Une capture webcam se manipule exactement comme une image, à ceci près qu'elle change à chaque frame.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let capture;
+
+function setup() {
+  createCanvas(600, 400);
+
+  capture = createCapture(VIDEO);
+  capture.hide(); // cacher l'élément video du navigateur
+}
+
+function draw() {
+  image(capture, 0, 0, width, width * capture.height / capture.width);
+
+  filter(INVERT);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+  </section>
+
+  <div class="page-nav">
+    <a href="interaction.html">&larr; interaction</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
