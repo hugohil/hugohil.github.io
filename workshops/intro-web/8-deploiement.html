@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8 ; Déploiement</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="7-javascript.html">&larr; JavaScript</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 8</div>
+  <h1>Déploiement</h1>
+
+  <section>
+    <h2 id="optimisations"><a class="anchor-link" href="#optimisations">Optimisations</a></h2>
+
+    <h3>Les images</h3>
+    <ul>
+      <li>inutile de charger des images de très haute résolution
+        <ul>
+          <li>&rarr; exportez vos images en 72dpi, pas plus.</li>
+          <li>&rarr; si c'est une vignette, il faut l'exporter dans la bonne taille (400x200, 300x300, etc&hellip;).</li>
+          <li>&rarr; si c'est une image dans le corps du contenu, au-delà de 1920px ça ne servira à rien.</li>
+          <li>&rarr; si une même image est affichée en vignette et en pleine largeur, faites deux version (<code>img_vignette.png</code> et <code>img_full.png</code> par exemple).</li>
+        </ul>
+      </li>
+      <li>pour les écrans hdpi (retina par ex.), faite une version x2 - càd doublez les dimensions en px, sans toucher aux DPI.</li>
+      <li>JPEG vs. PNG
+        <ul>
+          <li>JPEG : Idéal pour les photographies, car il gère bien les nuances de pixels. Attention cependant aux artefacts sur les aplats.
+            <ul>
+              <li>Une qualité de 90% suffit pour les images pleine largeur</li>
+              <li>70% pour les vignettes.</li>
+            </ul>
+          </li>
+          <li>PNG : Meilleur pour les graphiques avec des aplats de couleur, comme les images vectorielles.</li>
+        </ul>
+      </li>
+      <li>lazyloading
+        <ul>
+          <li>le lazy loading permet de ne charger les images que lorsqu'elles entrent dans le champ de vision au lieu de toutes les télécharger au lancement du site.</li>
+          <li>la plupart des navigateurs modernes supportent l'attribut <code>loading="lazy"</code> dans les balises <code>img</code>.</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="mise-en-ligne"><a class="anchor-link" href="#mise-en-ligne">Mise en ligne</a></h2>
+
+    <h3>Hébergement web</h3>
+    <ul>
+      <li>l'<strong>hébergement</strong> web implique de louer un espace chez un fournisseur pour y stocker vos fichiers, rendus accessibles via une URL ou une adresse IP.</li>
+      <li>les offres varient en termes de coût, de quelques euros à plusieurs centaines par mois, selon l'espace et le trafic nécessaires.</li>
+      <li>pour des besoins basiques, <a href="https://www.alwaysdata.com/en/" target="_blank">alwaysdata</a> offre une option gratuite avec 100 Mo d'espace.</li>
+    </ul>
+
+    <h3>Noms de domaine</h3>
+    <ul>
+      <li>un <strong>nom de domaine</strong> doît être acquis auprès d'un registraire (un type de sociétés habilitées à louer des noms de domaine).</li>
+      <li>pour les extensions standard (par exemple .fr) le coût est généralement autour de 20€/an.</li>
+      <li>pour des extensions plus éxotiques (.cool, .xyz, .design, &hellip;), cela peut monter assez haut.</li>
+      <li><a href="http://gandi.net/" target="_blank">Gandi.net</a> est une bonne option.</li>
+    </ul>
+
+    <h3>Avant toute chose</h3>
+    <ul>
+      <li>Évitez de créer des comptes d'hébergement et de domaine depuis des réseaux partagés comme celui de l'école, alwaysdata ou Gandi pourraient bloquer l'IP de l'école et nous empêcher de travailler. Pour cette étape, <strong>passez en partage de connexion</strong>.</li>
+      <li>Optez pour des noms simples, sans caractères spéciaux ou accentués. Par exemple <code>nomdefamille.fr</code> ou <code>prenom-nom.fr</code>.</li>
+    </ul>
+
+    <h3 id="etapes-mise-en-ligne">Étapes pour la mise en ligne</h3>
+
+    <h4>Création de l'hébergement chez alwaysdata</h4>
+    <ul>
+      <li>inscrivez-vous sur alwaysdata en suivant le lien d'invitation que vous avez reçu par mail.</li>
+      <li>choisissez le plan 100Mo gratuit ainsi qu'un nom de projet cohérent avec votre nom de domaine envisagé, et définissez un mot de passe.</li>
+    </ul>
+
+    <h4>Transfert des fichiers</h4>
+    <div class="figure">
+      <img src="/workshops/assets/Screenshot_2023-12-11_at_10.55.01.png" alt="Interface FTP alwaysdata">
+    </div>
+    <ul>
+      <li>téléchargez <a href="https://filezilla-project.org/" target="_blank">FileZilla</a></li>
+      <li>dans l'admin alwaysdata, allez dans <code>Accès distant &rarr; FTP</code>.
+        <ul>
+          <li>En haut, vous avez l'adresse de votre serveur FTP. C'est le champ &laquo; Hôte &raquo; de FileZilla. Il suit la nomenclature <code>ftp-NOMPROJET.alwaysdata.net</code>.</li>
+          <li>L'identifiant et le mdp sont ceux que vous avez renseigné lorsque vous avez choisi le plan 100Mo.</li>
+        </ul>
+      </li>
+      <li>via FileZilla, connectez-vous à votre serveur FTP.
+        <ul>
+          <li>à gauche, ce sont les fichiers sur votre ordinateur.</li>
+          <li>à droite, c'est le serveur.</li>
+        </ul>
+      </li>
+      <li>ne touchez pas au dossier <code>admin</code>.</li>
+      <li>placez le contenu de votre site dans le dossier <code>www</code> sur le serveur.
+        <ul>
+          <li><strong>attention</strong> : vous uploadez <strong>le contenu de votre dossier</strong>, pas le dossier. Dans la capture d'écran ci-dessous, j'ai transféré <code>fonts/</code> <code>fonts.css</code> <code>index.html</code> et <code>syle.css</code>, pas le dossier <code>poster/</code> à proprement parler.</li>
+          <li>le fichier principal doit impérativement être nommé <code>index.html</code>. C'est celui qui s'affichera lorsqu'on ira sur <code>votre-portfolio.fr</code>.</li>
+        </ul>
+      </li>
+      <li>Pour mettre à jour, écraser simplement les fichiers sur le serveur FTP par vos nouveaux fichiers.</li>
+      <li>Vous devriez pouvoir accéder à votre site depuis <a href="http://votre-portfolio.alwaysdata.net/" target="_blank">votre-portfolio.alwaysdata.net</a></li>
+    </ul>
+    <div class="figure">
+      <img src="/workshops/assets/Screenshot_2023-12-11_at_10.55.57.png" alt="Transfert de fichiers via FileZilla">
+    </div>
+
+    <h4>Achat du nom de domaine (facultatif)</h4>
+    <ul>
+      <li>sur <a href="http://gandi.net/" target="_blank">Gandi.net</a>, recherchez votre nom de domaine et suivez les étapes d'achat pour la durée souhaitée. Attention aux options par défaut lors du paiement.</li>
+      <li>la création de votre nom de domaine peut prendre quelques minutes.</li>
+    </ul>
+    <div class="figure">
+      <img src="/workshops/assets/Screenshot_2023-12-11_at_11.26.34.png" alt="Achat d'un nom de domaine sur Gandi">
+    </div>
+
+    <h4>Lier le nom de domaine et le serveur (facultatif)</h4>
+    <ul>
+      <li>sur Gandi, dans votre espace administrateur, allez dans <code>Nom de domaine &rarr; Serveurs de noms</code> et remplacer les nameservers par ceux de alwaysdata :
+        <ul>
+          <li><code>dns1.alwaysdata.com</code></li>
+          <li><code>dns2.alwaysdata.com</code></li>
+        </ul>
+        <div class="figure">
+          <img src="/workshops/assets/Screenshot_2023-12-11_at_11.29.23.png" alt="Configuration des nameservers sur Gandi">
+        </div>
+      </li>
+      <li>suivez <a href="https://help.alwaysdata.com/fr/domaines/ajouter-un-domaine-externe/" target="_blank">ce tuto</a> alwaysdata pour configurer le nom de domaine du côté de votre serveur.</li>
+      <li>attention : la liaison entre le nom de domaine et le serveur peut prendre du temps, jusqu'à 48h. Patience&hellip;</li>
+      <li>une fois la liaison effectuée, dans l'admin alwaysdata allez dans <code>Web &rarr; Sites &rarr; Modifier</code> puis dans l'onglet <code>SSL</code> sélectionnez &laquo; Forcer le HTTPS &raquo;.</li>
+    </ul>
+    <div class="figure">
+      <img src="/workshops/assets/Untitled_6.png" alt="Forcer le HTTPS dans alwaysdata">
+    </div>
+
+    <p>Enfin, dans <code>Web &gt; Sites</code> cliquez sur <code>Modifier</code> (l'engrenage) et ajouter votre nom de domaine aux adresses, sans oublier de sauvegarder (tout en bas)</p>
+    <div class="figure">
+      <img src="/workshops/assets/Untitled_1_4.png" alt="Ajout du nom de domaine dans alwaysdata">
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="7-javascript.html">&larr; JavaScript</a>
+    <span></span>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

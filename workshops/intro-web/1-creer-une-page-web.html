@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 ; Créer une page web</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="/workshops/intro-web" class="prev">&larr; intro</a>
+    <a href="2-styliser-sa-page-avec-css.html" class="next">styliser sa page avec CSS &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 1</div>
+  <h1>Créer une page web</h1>
+
+  <section>
+    <h2 id="il-vous-faut"><a class="anchor-link" href="#il-vous-faut">Il vous faut</a></h2>
+    <ul>
+      <li>Un <strong>éditeur de texte</strong> (<a href="https://code.visualstudio.com/" target="_blank">VS Code</a>)</li>
+      <li>Un <strong>navigateur</strong> web (préférez Chrome ou Firefox pour développer)</li>
+      <li>un dossier de travail sur votre ordinateur</li>
+      <li>un <strong>serveur local</strong> (<a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">LiveServer</a>)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="ensuite"><a class="anchor-link" href="#ensuite">Ensuite,</a></h2>
+    <ul>
+      <li><strong>Créer un dossier</strong> dans un endroit dédié sur le disque (par ex. <code>~/Documents/www/premier-site</code>)</li>
+      <li>Ouvrir <strong>VS Code</strong></li>
+      <li>Glisser le dossier créé dans VS Code</li>
+      <li>Dans l'explorer de VS Code: clic-droit &gt; <strong>new file&hellip;</strong> &gt; <code>index.html</code></li>
+      <li>taper <code>html:5</code> puis appuyer sur <strong>tab</strong> pour générer la <strong>structure de base</strong> d'un fichier html
+        <ul>
+          <li><em>attention</em>: ce raccourci est spécifique à VS Code, sur d'autres éditeurs de texte il serait différent ou vous auriez à l'écrire vous-même.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>Votre fichier <code>index.html</code> devrait ressembler à ça :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+        
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="premieres-observations"><a class="anchor-link" href="#premieres-observations">Premières observations</a></h2>
+
+    <h3>Remarque #1</h3>
+    <p>Les balises :</p>
+    <ul>
+      <li><code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;title&gt;</code>, &hellip;</li>
+      <li>une balise <strong>ouvrante</strong> : <code>&lt;title&gt;</code></li>
+      <li>une balise <strong>fermante</strong> : <code>&lt;/title&gt;</code></li>
+      <li>un <strong>contenu</strong> : <code>&lt;title&gt;Document&lt;/title&gt;</code></li>
+    </ul>
+
+    <h3>Remarque #2</h3>
+    <p>L'imbrication des balises :</p>
+    <ul>
+      <li>on voit que les balises sont &laquo; <strong>imbriquées</strong> &raquo;</li>
+      <li>c'est à dire que certaines balises sont <strong>contenues</strong> à l'intérieur d'autres balises</li>
+      <li>exemple :
+        <ul>
+          <li><code>head</code> est à l'intérieur de <code>html</code></li>
+          <li><code>title</code> est dans <code>head</code> qui est dans <code>html</code></li>
+        </ul>
+      </li>
+      <li>on va parler de relation <strong>parent</strong> - <strong>enfant</strong> (<em>parent</em> - <em>child</em>)</li>
+      <li>on le sait grâce aux balises <strong>ouvrantes</strong> et <strong>fermantes</strong></li>
+      <li>pour simplifier la lecture, on va <strong>indenter</strong> notre fichier pour faire ressortir visuellement les différents niveaux de hierarchies :
+
+        <div class="code-block">
+          <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+··&lt;head&gt;
+····&lt;meta charset="UTF-8"&gt;
+····&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+····&lt;title&gt;Document&lt;/title&gt;
+··&lt;/head&gt;
+··&lt;body&gt;
+······
+··&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <button class="copy-btn" onclick="copyCode(this)">copier</button>
+        </div>
+      </li>
+      <li>l'<em>indentation</em> s'effectue en utilisant la touche <strong>tab</strong></li>
+      <li>on utilise <strong>maj+tab</strong> pour <em>désindenter</em></li>
+      <li>la plupart du temps, VS Code le fera pour vous</li>
+    </ul>
+
+    <h3>Remarque #3</h3>
+    <p>Les attributs de balises :</p>
+    <ul>
+      <li><code>&lt;html lang="en"&gt;</code> &rarr; la balise <code>html</code> possède l'<strong>attribut</strong> <code>lang</code> dont la <strong>valeur</strong> est <code>en</code></li>
+      <li><code>&lt;meta charset="UTF-8"&gt;</code> &rarr; la balise <code>meta</code> possède l'attribut <code>charset</code> dont la valeur est <code>UTF-8</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="cest-quoi-un-fichier-html"><a class="anchor-link" href="#cest-quoi-un-fichier-html">C'est quoi un fichier HTML ?</a></h2>
+    <p>HTML &rarr; <strong>HyperText Markup Language</strong> &rarr; Langage de Balisage HyperText</p>
+    <ul>
+      <li>Langage &rarr; on va écrire du texte, avec un vocabulaire et une <strong>sémantique</strong></li>
+      <li>Balisage &rarr; on va respecter une structure précise faite de <strong>balises</strong></li>
+      <li>HyperText &rarr; Le contenu est principalement du <strong>texte</strong>, qui peut-être <strong>enrichi</strong> et dans lequel on peut <strong>naviguer</strong> (<em>hyper</em>-<em>texte</em>)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="personnaliser-le-contenu"><a class="anchor-link" href="#personnaliser-le-contenu">Personnaliser le contenu de son site</a></h2>
+    <p>Ça se passe à l'intérieur du <code>body</code> :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;Bonjour :)&lt;/h1&gt;
+  &lt;div&gt;ceci est mon nouveau site&lt;/div&gt;
+  &lt;img src="image.jpg"&gt;
+&lt;/body&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Allons un peu plus loin :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;Bonjour :)&lt;/h1&gt;
+  &lt;div&gt;
+    &lt;p&gt;ceci est mon &lt;strong&gt;nouveau&lt;/strong&gt; site&lt;/p&gt;
+    &lt;img width="200" src="image.jpg"&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;p&gt;Pour aller voir &lt;em&gt;ailleurs&lt;/em&gt;, &lt;a href="https://example.com"&gt;cliquez ici&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="creer-dautres-pages"><a class="anchor-link" href="#creer-dautres-pages">Créer d'autres pages dans mon site</a></h2>
+    <p>Souvent, on a besoin de pouvoir segmenter l'information en plusieurs pages. La page d'accueil donne le ton général et sert de table des matières, puis on créé des pages spécifiques par projets, par articles, &hellip;</p>
+    <p>Pour faire ça, c'est presque la même chose que pour l'index : on créé un fichier html, on décrit son contenu, et on fait un lien pour y accéder.</p>
+    <p>Dans l'explorer de VS Code: clic-droit &gt; <strong>new file&hellip;</strong> &gt; <code>article-1.html</code>,</p>
+    <p>Et on décrit le contenu de notre fichier <code>article-1.html</code> :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Article 1&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Mon premier article :')&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Ensuite on fait fait un lien vers cette page depuis <code>index.html</code> :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">...
+&lt;p&gt;Pour en lire davantage, &lt;a href="article-1.html"&gt;ça se passe ici&lt;/a&gt;&lt;/p&gt;
+...</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Pour faire un lien de retour vers la page d'accueil depuis <code>article-1.html</code>, on utilise le chemin &laquo; racine &raquo; <code>/</code> comme adresse :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">...
+&lt;p&gt;Pour retourner à l'accueil, &lt;a href="/"&gt;cliquer ici&lt;/a&gt;&lt;/p&gt;
+...</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="liste-des-balises"><a class="anchor-link" href="#liste-des-balises">Listes des balises utilisées</a></h2>
+
+    <h3><code>div</code></h3>
+    <p>La balise générique, elle permet de <em>diviser</em> le document (en section, en bloc, &hellip;) :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;div&gt;
+  contenu de mon bloc
+&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3><code>a</code> Liens</h3>
+    <p>Lorsqu'on clique dessus, elle redirige vers l'adresse définie dans l'attribut <code>href</code> &mdash; <code>a</code> pour <em>anchor</em> (ancre), <code>href</code> pour <em>hyper-reference</em> :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;a href="https://example.com"&gt;cliquez ici&lt;/a&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note"><strong>à noter</strong>: pour ouvrir le lien dans un <strong>nouvel onglet</strong>, il faut ajouter l'attribut <code>target="_blank"</code>.</p>
+
+    <h3><code>h1, h2, h3, ...</code> En-têtes</h3>
+    <p>Les balises <code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code> et <code>h6</code> permettent de créer des titres (<em>header</em>) jusqu'à 6 niveaux de hiérarchie :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;h1&gt;Camille Dupond&lt;/h1&gt;
+&lt;h2&gt;Typographe&lt;/h2&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3><code>p</code> Paragraphe</h3>
+    <p>On définit un paragraphe avec la balise <code>p</code>. Contrairement à une <code>div</code> qui a une fonction générique (diviser la page en blocs abstraits), la balise <code>p</code> a une réelle fonction de mise en page, et s'utilise pour afficher du texte, gérer les espacement, etc.</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;p&gt;De tout temps à jamais, la communication entre les humains a revêtu une importance capitale&lt;/p&gt;
+...
+&lt;p&gt;En conclusion, nous pouvons dire que le web est une création majeure du XXe sicèle.&lt;/p&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3><code>img</code></h3>
+    <p>On affiche des images avec la balise <code>img</code> et on définit le chemin vers cette image avec l'attribut <code>src</code> (<em>source)</em>.</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;img src="image-01.jpg"/&gt;
+&lt;!-- image-01.jpg est située dans le même dossier que ma page sur le disque --&gt;
+&lt;img src="images/02.jpg"/&gt;
+&lt;!-- 02.jpg est située dans un dossier "images", lui-même dans au même niveau que ma page sur le disque --&gt;
+&lt;!-- on utilise : dossier/sous-dossier/fichier.extension --&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note"><strong>à noter:</strong> la balise <code>img</code> n'a pas de contenu à proprement parler, et n'a donc pas de balise fermante. On dit qu'elle est <em>auto-fermante.</em></p>
+
+    <h3><code>//</code> commentaires</h3>
+    <p>On peut écrire du texte sans l'afficher dans le navigateur en utilisant des <em>commentaires</em>. On utilise alors :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!-- ce commentaire sera lisible dans le fichier, mais pas afficher dans le navigateur --&gt;
+&lt;!-- c'est pratique pour documenter du code, ou pour désactiver temporairement une balise sans l'effacer --&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour aller plus loin : <a href="principales-balises-html.html">Principales balises HTML</a></p>
+  </section>
+
+  <div class="page-nav">
+    <a href="/workshops/intro-web" class="prev">&larr; intro</a>
+    <a href="2-styliser-sa-page-avec-css.html" class="next">styliser sa page avec CSS &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

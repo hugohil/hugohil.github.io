@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 ; Styliser sa page avec CSS</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="1-creer-une-page-web.html">&larr; créer une page web</a>
+    <!-- <a href="3-mettre-en-page-son-site.html" class="next">HTML sémantique &amp; flex &rarr;</a> -->
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 2</div>
+  <h1>Styliser sa page avec CSS</h1>
+  <p class="lead">Le style par défaut d'une page HTML est assez&hellip; brut.</p>
+
+  <section>
+    <p>Afin de le personaliser, on utilise un autre langage appelé <strong>CSS</strong> (<em>Cascading Style Sheets</em>). HTML et CSS vont quasi systématiquement de paire, le premier afin de <strong>structurer le contenu</strong>, le second pour apporter des <strong>modifications visuelles</strong>.</p>
+  </section>
+
+  <section>
+    <h2 id="utiliser-css"><a class="anchor-link" href="#utiliser-css">Utiliser CSS dans sa page HTML</a></h2>
+    <p>Pour utiliser CSS dans notre page HTML, on va créer un lien entre les deux fichiers.</p>
+    <ul>
+      <li>Dans le même dossier que le fichier <code>index.html</code>, on créé un fichier <code>style.css</code></li>
+      <li>À l'intérieur du <code>head</code> de notre fichier <code>index.html</code>, on ajoute la ligne suivante :</li>
+    </ul>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;head&gt;
+    …
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Ensuite, grâce au CSS on va assigner des <strong>propriétés</strong> de style (couleur, typo, mise en page, &hellip;) à nos éléments HTML. Dans le fichier <code>style.css</code> :</p>
+
+    <div class="code-block">
+      <pre><code class="language-css">h1 {
+  color: red;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>On a les éléments de base du CSS :</p>
+    <ul>
+      <li>un <strong>sélecteur</strong> &rarr; <code>h1</code></li>
+      <li>une <strong>propriété</strong> &rarr; <code>color</code></li>
+      <li>une <strong>valeur</strong> &rarr; <code>red</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="les-selecteurs"><a class="anchor-link" href="#les-selecteurs">Les selecteurs</a></h2>
+
+    <h3>Les balise</h3>
+    <p>Ils permettent de <strong>cibler</strong> des éléments HTML.</p>
+    <p>Lorsque j'écris :</p>
+    <div class="code-block">
+      <pre><code class="language-css">div {
+	font-size: 24px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p>Je dis au navigateur de cibler <strong>toutes les div</strong> de ma page, et de leur appliquer une taille de font de 24 pixels.</p>
+    <p>De la même façon, si j'écris :</p>
+    <div class="code-block">
+      <pre><code class="language-css">a {
+	font-style: italic;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p>Mon navigateur va passer en italique tous mes liens.</p>
+
+    <h3>Les classes</h3>
+    <p>Souvent, on ne veut pas cibler toutes les div, tous les titres de niveau 1 ou tous les liens, mais plutôt certaines div, certains liens, etc.</p>
+    <p>Pour cela, on utilise des <strong>classes</strong>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;div class="special-text"&gt;Ce texte sera souligné et en italique&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-css">.special-text {
+	font-style: italic;
+	text-decoration: underline;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Tous les éléments avec la classe <code>.special-text</code> auront ce style appliqué, les autres <code>div</code> ne seront pas affectées.</p>
+  </section>
+
+  <section>
+    <h2 id="padding-margin-border"><a class="anchor-link" href="#padding-margin-border">Padding, margin et border</a></h2>
+
+    <div class="code-block">
+      <pre><code>+---------------------+
+|  Margin             |
+| +-----------------+ |
+| |  Border         | |
+| | +-------------+ | |
+| | |  Padding    | | |
+| | | +---------+ | | |
+| | | | Content | | | |
+| | | +---------+ | | |
+| | +-------------+ | |
+| +-----------------+ |
++---------------------+</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <ul>
+      <li><code>padding</code> ajoute un espacement à <strong>l'intérieur</strong> du bloc
+        <ul>
+          <li><code>padding: [all];</code> &rarr; <code>padding: 20px</code></li>
+          <li><code>padding: [top-bottom] [left-right];</code> &rarr; <code>padding: 10px 20px</code></li>
+          <li><code>padding: [top] [right] [bottom] [left];</code> &rarr; <code>padding: 10px 20px 30px 40px;</code></li>
+          <li><code>padding-top: 10px;</code></li>
+          <li><code>padding-right: 10px;</code></li>
+          <li><code>padding-bottom: 10px;</code></li>
+          <li><code>padding-left: 10px;</code></li>
+        </ul>
+      </li>
+      <li><code>border</code> permet d'ajouter une bordure au bloc
+        <ul>
+          <li><code>border: [width] [style] [color];</code></li>
+          <li><code>border: 1px solid black;</code></li>
+          <li><code>border-bottom: 3px;</code></li>
+        </ul>
+      </li>
+      <li><code>margin</code> ajoute un espacement à <strong>l'extérieur</strong> du bloc
+        <ul>
+          <li>syntaxe identique à <code>padding</code></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="ajouter-des-fontes"><a class="anchor-link" href="#ajouter-des-fontes">Ajouter des fontes</a></h2>
+
+    <h3>Utiliser ses propres fichiers</h3>
+    <p>Il faut utiliser différents formats :</p>
+    <ul>
+      <li><code>ttf</code> : universel mais lourd</li>
+      <li><code>otf</code> : largement supporté, plus complet</li>
+      <li><code>woff</code> : conçu pour le web (meilleure compression), support moins large</li>
+      <li><code>woff2</code> : évolution de <code>woff</code>, légèrement moins supporté</li>
+    </ul>
+
+    <p>Dans le dossier où se trouve notre fichier <code>index.html</code> :</p>
+    <ul>
+      <li>créer un dossier <code>fonts</code></li>
+      <li>placer les fichiers de fonts dans le dossier</li>
+    </ul>
+
+    <p>Pour définir la police, on ajoute un bloc <code>@font-face</code> spécifique <strong>en haut</strong> de notre fichier CSS :</p>
+
+    <div class="code-block">
+      <pre><code class="language-css">@font-face {
+  font-family: 'myfont';
+  font-weight: normal;
+  font-style: normal;
+  src: 
+    url('fonts/myfont.woff2') format('woff2'), 
+    url('fonts/myfont.woff') format('woff'),
+    url('fonts/myfont.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'myfont';
+  font-weight: 800;
+  font-style: normal;
+  src: 
+    url('fonts/myfont-black.woff2') format('woff2'), 
+    url('fonts/myfont-black.woff') format('woff'),
+    url('fonts/myfont-black.otf') format('opentype');
+}
+
+body {
+  font-family: 'myfont';
+}
+
+.font-black {
+  font-weight: 800;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Utiliser Google Font</h3>
+    <div class="figure">
+      <img src="/workshops/assets/google-fonts.png" alt="Interface Google Fonts">
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;head&gt;
+	...
+  &lt;!-- Google Font --&gt;
+	&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+	&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+	&lt;link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;700&amp;display=swap" rel="stylesheet"&gt;
+
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-css">body {
+	font-family: 'Martian Mono', monospace;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour aller plus loin : <a href="principales-proprietes-css.html">Principales propriétés CSS</a></p>
+  </section>
+
+  <div class="page-nav">
+    <a href="1-creer-une-page-web.html">&larr; créer une page web</a>
+    <a href="3-mettre-en-page-son-site.html" class="next">HTML sémantique &amp; flex &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

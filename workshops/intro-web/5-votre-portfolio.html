@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 ; Votre portfolio</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="4-grid-et-position.html">&larr; grid &amp; position</a>
+    <a href="6-html-et-css-avance.html" class="next">HTML et CSS avancé &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 5</div>
+  <h1>Votre portfolio</h1>
+
+  <section>
+    <h2 id="structure-et-noms"><a class="anchor-link" href="#structure-et-noms">Structure et noms de fichiers</a></h2>
+
+    <p>Il est primordial de garder une <strong>structure de fichiers précise</strong> et claire dans le développement de votre portfolio :</p>
+
+    <div class="code-block">
+      <pre><code>mon-portfolio
+├── fonts
+│   ├── font.otf
+│   ├── font.woff
+│   └── font.woff2
+├── medias
+│   ├── image-01.png
+│   ├── image-02.jpg
+│   ├── audio-A.mp3
+│   └── ma-video.mp4
+├── projets
+│   ├── nom-du-projet-1.html
+│   └── nom-du-projet-2.html
+├── pages
+│   ├── about.html
+│   └── contact.html
+├── index.html
+└── style.css</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>/</code> désigne le &laquo; <strong>répertoire racine</strong> &raquo;, ici c'est le dossier <code>mon-portfolio</code>. Cela nous permet d'écrire le bon <strong>chemin</strong> vers un certain fichier. On aura par exemple :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;img src="/medias/image-01.png" /&gt;
+&lt;a href="/projets/nom-du-projet-1.html"&gt;Mon 1er projet&lt;/a&gt;
+&lt;a href="/pages/about.html"&gt;À propos de moi&lt;/a&gt;
+&lt;a href="/"&gt;HOME&lt;/a&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Tous les fichiers auront besoin du fichier <code>style.css</code>, n'oubliez pas de bien l'inclure dans le <code>head</code> de <strong>chaque</strong> page HTML :</p>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;link href="/style.css" rel="stylesheet"&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Quant aux <strong>noms de fichiers</strong>, ils doivent absolument respecter la <strong>nomenclature</strong> :</p>
+    <ul>
+      <li>leur nom est <strong>descriptif</strong> (<code>nom-projet-detail-01.jpg</code> plutôt que <code>img-aeb6594cxh-e12.jpg</code>)</li>
+      <li>pas de majuscules, pas d'espaces, pas de caractères spéciaux (<code>!</code>, <code>@</code>, <code>#</code>, <code>%</code>, <code>^</code>, <code>&amp;</code>, <code>*</code>, <code>(</code>, <code>)</code>)</li>
+      <li><strong>uniquement</strong> :
+        <ul>
+          <li>lettres minuscules non-accentuées</li>
+          <li>chiffres <code>0-9</code></li>
+          <li>underscore <code>_</code></li>
+          <li>tiret <code>-</code></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <div class="page-nav">
+    <a href="4-grid-et-position.html">&larr; grid &amp; position</a>
+    <a href="6-html-et-css-avance.html" class="next">HTML et CSS avancé &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

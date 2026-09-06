@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 ; grid et position</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="3-mettre-en-page-son-site.html">&larr; HTML sémantique &amp; flex</a>
+    <a href="5-votre-portfolio.html" class="next">votre portfolio &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 4</div>
+  <h1>grid et position</h1>
+  <p class="lead">Positionner en deux dimensions, puis superposer et fixer des éléments.</p>
+  <section>
+    <h2 id="grid"><a class="anchor-link" href="#grid"><code>grid</code></a></h2>
+    <p class="note">&rarr; Pour positionner dynamiquement les blocs dans une <strong>grille</strong> 2D (XY).</p>
+    <p>CSS Grid pour créer des layouts complexes. Contrairement à Flexbox qui fonctionne sur un axe, Grid vous permet de contrôler les lignes <strong>et</strong> les colonnes.</p>
+
+    <div class="code-block">
+      <pre><code class="language-css">.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="html-exercice-grid">HTML fourni pour l'exercice</h3>
+    <p>Voici une version simplifiée pour comprendre la structure :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+  &lt;link rel="stylesheet" href="fonts.css"&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+
+  &lt;title&gt;Poster&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="header"&gt;Titre&lt;/div&gt;
+
+  &lt;!-- Ligne 1 --&gt;
+  &lt;div class="grid"&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;!-- ... 5 autres cellules --&gt;
+	&lt;/div&gt;
+	&lt;!-- Lignes 2 à 6 : même structure --&gt;
+  &lt;!-- Faites 6 lignes de 8 colonnes (48 cellules) --&gt;
+
+  &lt;div class="footer"&gt;Footer&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="definir-conteneur-grille">Définir un conteneur de grille</h3>
+    <p><code>display: grid</code></p>
+    <div class="code-block">
+      <pre><code class="language-css">.grid {
+  display: grid;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="definir-colonnes-lignes">Définir des colonnes et des lignes</h3>
+    <p><code>grid-template-columns</code>, <code>grid-template-rows</code></p>
+    <div class="code-block">
+      <pre><code class="language-css">.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: repeat(10, 1fr);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p>L'unité <strong>fr</strong> (<em>fraction</em>) est une unité spécifique à CSS Grid. Elle représente <strong>une fraction de l'espace disponible</strong> dans le conteneur de la grille.</p>
+    <p>Dans l'exemple ci-dessus, on compte un total de 4 fractions ; la première colonne prendra donc 1 quart, la deuxième 2 quarts, et la troisième 1 quart.</p>
+
+    <h3 id="placement-des-elements">Placement des éléments</h3>
+    <p><strong>Placement automatique</strong></p>
+    <ul>
+      <li><strong>Flux normal</strong> : Par défaut, les éléments sont placés <strong>de gauche à droite</strong>, <strong>de haut en bas</strong>, en suivant ce que l'on appelle le "flux de grille" (<strong>grid flow</strong>). Cela ressemble au comportement en ligne du texte dans un paragraphe.</li>
+      <li><strong>Gestion des espaces</strong> : Si un élément ne peut pas être placé dans une colonne en raison de sa taille il sera déplacé à la ligne suivante - en créant potentiellement un espace vide dans la ligne précédente.</li>
+      <li><strong>Ordre des Éléments</strong> : Les éléments sont placés dans l'ordre où ils apparaissent dans le code HTML, à moins que l'ordre ne soit modifié avec la propriété CSS <strong>order</strong>.</li>
+    </ul>
+
+    <p><strong>Placement manuel</strong></p>
+    <p><code>grid-column</code>, <code>grid-row</code></p>
+    <div class="code-block">
+      <pre><code class="language-css">.item1 {
+  grid-column: 1 / 3; /* de la ligne verticale 1 à 3 */
+  grid-row: 1 / 2; /* de la ligne horizontale 1 à 2 */
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><strong>Espacement manuel avec</strong> <code>span</code></p>
+    <div class="code-block">
+      <pre><code class="language-css">.item2 {
+  grid-column: span 2; /* s'étend sur 2 colonnes */
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="espacement-grid">Espacement</h3>
+    <p><code>grid-gap</code>, <code>column-gap</code>, <code>row-gap</code></p>
+    <div class="code-block">
+      <pre><code class="language-css">.grid-container {
+  grid-gap: 10px; /* espacement entre toutes les cellules */
+}
+
+/* Ou séparément */
+.grid-container {
+  column-gap: 20px;
+  row-gap: 10px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="utilisations-avancees">Utilisations avancées</h3>
+    <p><strong>Grilles nommées avec</strong> <code>grid-template-areas</code></p>
+    <p>Permet de créer un layout en définissant la structure avec des noms.</p>
+    <div class="code-block">
+      <pre><code class="language-css">.grid-container {
+  grid-template-areas:
+    "header header header"
+    "sidebar main main"
+    "footer footer footer";
+}
+
+.item1 {
+  grid-area: header;
+}
+.item2 {
+  grid-area: main;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><strong>Fonctions de répétition et autres unités</strong></p>
+    <ul>
+      <li><code>repeat</code> : Répète une colonne ou une ligne un certain nombre de fois.
+        <ul>
+          <li><strong>Syntaxe</strong> : <code>repeat(num_repeats, size)</code></li>
+          <li><strong>Exemple</strong> : Crée 3 colonnes de taille égale (<code>1fr</code> chacune).
+            <div class="code-block">
+              <pre><code class="language-css">.grid-container {  grid-template-columns: repeat(3, 1fr);}</code></pre>
+              <button class="copy-btn" onclick="copyCode(this)">copier</button>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li><code>minmax</code> : Définit une taille minimale et une taille maximale pour une colonne ou une ligne. Utile pour les grilles responsives.
+        <ul>
+          <li><strong>Syntaxe</strong> : <code>minmax(min_size, max_size)</code></li>
+          <li><strong>Exemple</strong> : Définit la taille minimale de la colonne à <code>100px</code> et la taille maximale à <code>1fr</code>.
+            <div class="code-block">
+              <pre><code class="language-css">.grid-container {  grid-template-columns: minmax(100px, 1fr);}</code></pre>
+              <button class="copy-btn" onclick="copyCode(this)">copier</button>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li><code>auto-fill</code> : Remplit automatiquement le nombre de colonnes ou de lignes dans un conteneur, en fonction de l'espace disponible.
+        <ul>
+          <li><strong>Syntaxe</strong> : Utilisé avec <code>repeat</code> : <code>repeat(auto-fill, size)</code></li>
+          <li><strong>Exemple</strong> : Crée autant de colonnes que possible avec une taille minimale de <code>100px</code> et une taille maximale de <code>1fr</code>.
+            <div class="code-block">
+              <pre><code class="language-css">.grid-container {  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));}</code></pre>
+              <button class="copy-btn" onclick="copyCode(this)">copier</button>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="position"><a class="anchor-link" href="#position"><code>position</code></a></h2>
+    <p class="note">&rarr; Pour donner une position précise au bloc, souvent pour <strong>superposer</strong> des éléments ou les <strong>fixer</strong> à l'écran.</p>
+
+    <h3>Positionnement statique</h3>
+    <ul>
+      <li>Le positionnement statique est la valeur <strong>par défaut</strong> pour tous les éléments.</li>
+      <li>Les éléments sont positionnés dans le <strong>flux normal</strong> du document HTML (de haut en bas, dans l'ordre du code source).</li>
+    </ul>
+
+    <h3>Positionnement relatif</h3>
+    <p><code>position: relative;</code> déplace un élément <strong>par rapport à sa position initiale</strong> dans le flux normal.</p>
+    <ul>
+      <li>Utilisez <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> pour décaler l'élément.</li>
+      <li>L'espace qu'il occupait initialement reste réservé (les autres éléments ne bougent pas) &rarr; il reste dans le flux</li>
+    </ul>
+    <p><strong>Exemple</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.relative-box {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Positionnement absolu</h3>
+    <p><code>position: absolute;</code> <strong>sort</strong> un élément du flux normal et le positionne <strong>par rapport à son premier parent positionné</strong> (c'est-à-dire qui a <code>position: relative</code>, <code>absolute</code>, <code>fixed</code>, ou <code>sticky</code>).</p>
+    <ul>
+      <li>Utilisez <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> pour positionner l'élément.</li>
+      <li>L'espace qu'il occupait est récupéré par les autres éléments &rarr; il est sorti du flux</li>
+    </ul>
+    <p><strong>Exemple</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.container {
+  position: relative; /* devient le parent de référence */
+}
+
+.absolute-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Positionnement fixe</h3>
+    <p><code>position: fixed;</code> positionne un élément <strong>par rapport à la fenêtre du navigateur</strong>.</p>
+    <ul>
+      <li>L'élément reste fixe même lors du défilement de la page.</li>
+      <li>Pour les menus sticky, les boutons flottants, etc.</li>
+    </ul>
+    <p><strong>Exemple</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.fixed-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Positionnement sticky</h3>
+    <p><code>position: sticky;</code> est un <strong>hybride</strong> entre les positionnements relatif et fixe.</p>
+    <ul>
+      <li>L'élément se comporte comme <code>relative</code> jusqu'à ce qu'il atteigne un certain point de défilement, après quoi il devient <code>fixed</code>.</li>
+      <li>Pour les headers de sections qui restent visibles au scroll.</li>
+    </ul>
+    <p><strong>Exemple</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.sticky-box {
+  position: sticky;
+  top: 0;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Propriété <code>z-index</code></h3>
+    <p>Contrôle la <strong>superposition</strong> des éléments positionnés. Plus le <code>z-index</code> est élevé, plus l'élément est au-dessus.</p>
+    <p><strong>Exemple</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.below {
+  position: absolute;
+  z-index: 1;
+}
+
+.above {
+  position: absolute;
+  z-index: 2;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+  <section>
+    <h2 id="erreurs-courantes"><a class="anchor-link" href="#erreurs-courantes">Erreurs courantes</a></h2>
+
+    <h3>Avec <code>grid</code></h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Ma grille ne s'affiche pas.</p>
+          <p class="checklist-desc">Solution : Avez-vous bien mis <code>display: grid;</code> sur le conteneur parent ?</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mes colonnes ne sont pas égales.</p>
+          <p class="checklist-desc">Solution : Utilisez <code>1fr</code> pour chaque colonne, pas des valeurs fixes en pixels.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément ne se place pas où je veux.</p>
+          <p class="checklist-desc">Solution : Vérifiez vos valeurs de <code>grid-column</code> et <code>grid-row</code>. Les numéros correspondent aux <strong>lignes de la grille</strong>, pas aux cellules.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Il y a trop d'espace entre mes cellules.</p>
+          <p class="checklist-desc">Solution : Réduisez la valeur de <code>grid-gap</code> ou utilisez <code>gap: 0;</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Avec <code>position</code></h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément <code>absolute</code> ne se positionne pas par rapport à son parent.</p>
+          <p class="checklist-desc">Solution : Le parent doit avoir <code>position: relative;</code> (ou <code>absolute</code>, <code>fixed</code>, <code>sticky</code>). Par défaut, les éléments ont <code>position: static;</code> et ne servent pas de référence.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément <code>fixed</code> défile avec la page.</p>
+          <p class="checklist-desc">Solution : Vérifiez qu'aucun parent n'a de propriété <code>transform</code>, <code>filter</code>, ou <code>perspective</code> qui peut casser le <code>fixed</code>.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément <code>sticky</code> ne se fixe pas.</p>
+          <p class="checklist-desc">Solution : Vérifiez que vous avez défini au moins une valeur (<code>top</code>, <code>bottom</code>, <code>left</code>, ou <code>right</code>) ; le parent doit avoir assez de hauteur pour permettre le scroll ; pas de <code>overflow: hidden;</code> sur les parents</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon <code>z-index</code> ne fonctionne pas.</p>
+          <p class="checklist-desc">Solution : <code>z-index</code> ne fonctionne que sur les éléments <strong>positionnés</strong> (<code>relative</code>, <code>absolute</code>, <code>fixed</code>, ou <code>sticky</code>).</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">Pour aller plus loin :</p>
+    <ul class="link-list">
+      <li><a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_grid_layout" target="_blank">Documentation MDN sur les grilles CSS</a></li>
+      <li><a href="https://developer.mozilla.org/fr/docs/Web/CSS/position" target="_blank">Documentation MDN sur le positionnement</a></li>
+    </ul>
+  </section>
+
+  <div class="page-nav">
+    <a href="3-mettre-en-page-son-site.html">&larr; HTML sémantique &amp; flex</a>
+    <a href="5-votre-portfolio.html" class="next">votre portfolio &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

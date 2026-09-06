@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 ; HTML sémantique &amp; Flexbox</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="2-styliser-sa-page-avec-css.html">&larr; styliser sa page avec CSS</a>
+    <a href="4-grid-et-position.html" class="next">grid &amp; position &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 3</div>
+  <h1>HTML sémantique &amp; Flexbox</h1>
+  <p class="lead">Structurer sa page avec du sens, puis la mettre en page sur un axe.</p>
+
+  <section>
+    <h2 id="html-semantique"><a class="anchor-link" href="#html-semantique">Le HTML sémantique</a></h2>
+    <p>Jusqu'ici, <code>&lt;div&gt;</code> a servi de conteneur générique pour tout découper. Le HTML propose aussi des balises qui décrivent le <strong>rôle</strong> du bloc qu'elles contiennent, pas seulement sa présence.</p>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>&lt;header&gt;</code><span class="ref-desc">En-tête d'une page ou d'une section ; logo, titre, navigation principale</span></div>
+      <div class="ref-row"><code>&lt;nav&gt;</code><span class="ref-desc">Regroupe les liens de navigation principaux</span></div>
+      <div class="ref-row"><code>&lt;main&gt;</code><span class="ref-desc">Le contenu principal de la page ; un seul par page</span></div>
+      <div class="ref-row"><code>&lt;section&gt;</code><span class="ref-desc">Un regroupement thématique de contenu, en général avec son propre titre</span></div>
+      <div class="ref-row"><code>&lt;article&gt;</code><span class="ref-desc">Un contenu autonome, qui aurait du sens seul ; un projet de portfolio, un article de blog</span></div>
+      <div class="ref-row"><code>&lt;aside&gt;</code><span class="ref-desc">Contenu connexe, en marge du contenu principal ; une sidebar, une note</span></div>
+      <div class="ref-row"><code>&lt;footer&gt;</code><span class="ref-desc">Pied d'une page ou d'une section ; crédits, contact, liens secondaires</span></div>
+      <div class="ref-row"><code>&lt;figure&gt;/&lt;figcaption&gt;</code><span class="ref-desc">Une image (ou autre média) accompagnée de sa légende</span></div>
+    </div>
+
+    <h3 id="pourquoi-semantique">Pourquoi c'est important</h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Accessibilité</p>
+          <p class="checklist-desc">Les lecteurs d'écran utilisent ces balises pour permettre à leurs utilisateurs de naviguer directement d'une section à l'autre.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">SEO</p>
+          <p class="checklist-desc">Les moteurs de recherche comprennent mieux la structure et l'importance relative du contenu.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Lisibilité du code</p>
+          <p class="checklist-desc">Un fichier avec <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> se comprend d'un coup d'œil, sans avoir à lire les classes.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Comparez :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!-- avant : que des div --&gt;
+&lt;div class="header"&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content"&gt;
+  &lt;div class="post"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!-- après : sémantique --&gt;
+&lt;header&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;...&lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note">Les classes (<code>logo</code>, etc.) restent utiles pour le style ; les balises sémantiques décrivent le rôle, les classes décrivent l'apparence. On continue d'utiliser <code>&lt;div&gt;</code> et <code>&lt;span&gt;</code> pour tout ce qui n'a pas de rôle sémantique particulier.</p>
+  </section>
+
+  <section>
+    <h2 id="quelle-methode"><a class="anchor-link" href="#quelle-methode">Quelle méthode de mise en page utiliser ?</a></h2>
+    <div class="ref-table">
+      <div class="ref-row"><code>margin: auto</code><span class="ref-desc">Centrer un élément horizontalement ; Logo, image pleine taille, conteneur</span></div>
+      <div class="ref-row"><code>flex</code><span class="ref-desc">Aligner des éléments sur <strong>un axe</strong> (ligne ou colonne) ; Barre de navigation, galerie d'images, boutons</span></div>
+      <div class="ref-row"><code>grid</code><span class="ref-desc">Créer un layout <strong>2D</strong> complexe ; Mise en page complète, poster, grille de produits</span></div>
+      <div class="ref-row"><code>position</code><span class="ref-desc">Superposer des éléments ou les fixer ; Menu sticky, badge de notification, overlay</span></div>
+    </div>
+    <p class="note">Grid et position sont couverts en détail dans la <a href="4-grid-et-position.html">session suivante</a>.</p>
+  </section>
+
+  <section>
+    <h2 id="margin-auto"><a class="anchor-link" href="#margin-auto"><code>margin: auto</code></a></h2>
+    <p class="note">&rarr; Pour centrer <strong>horizontalement</strong> un bloc.</p>
+    <p><strong>Important</strong> : L'élément doit avoir une <strong>largeur définie</strong> pour que cela fonctionne.</p>
+
+    <div class="code-block">
+      <pre><code class="language-css">.element {
+  width: 600px; /* largeur définie */
+  margin: 20px auto; /* centré horizontalement, avec marge verticale de 20px */
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="flex"><a class="anchor-link" href="#flex"><code>flex</code></a></h2>
+    <p class="note">&rarr; Pour positionner dynamiquement les blocs sur un <strong>axe</strong> (lignes ou colonnes).</p>
+    <p>Flexbox pour aligner des éléments dans une direction, avec un contrôle précis sur l'espacement et l'alignement.</p>
+
+    <div class="code-block">
+      <pre><code class="language-css">.container {
+  display: flex;
+  flex-direction: row; /* ou column */
+  justify-content: space-between; /* alignement sur l'axe principal */
+  align-items: center; /* alignement sur l'axe transversal */
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3 id="comprendre-les-axes">Comprendre les axes</h3>
+    <ul>
+      <li><strong>Axe principal</strong> : la direction définie par <code>flex-direction</code> (horizontal si <code>row</code>, vertical si <code>column</code>)</li>
+      <li><strong>Axe transversal</strong> : perpendiculaire à l'axe principal</li>
+    </ul>
+
+    <h3 id="proprietes-principales">Propriétés principales</h3>
+    <p><strong>Sur le conteneur</strong> :</p>
+    <ul>
+      <li><code>flex-direction</code> : définit la direction (<code>row</code>, <code>column</code>, <code>row-reverse</code>, <code>column-reverse</code>)</li>
+      <li><code>justify-content</code> : aligne les éléments sur l'axe principal (<code>flex-start</code>, <code>center</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code>)</li>
+      <li><code>align-items</code> : aligne les éléments sur l'axe transversal (<code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>stretch</code>)</li>
+      <li><code>gap</code> : espacement entre les éléments</li>
+      <li><code>flex-wrap</code> : permet aux éléments de passer à la ligne (<code>nowrap</code>, <code>wrap</code>)</li>
+    </ul>
+    <p><strong>Sur les éléments enfants</strong> :</p>
+    <ul>
+      <li><code>flex-grow</code> : capacité à grandir (par défaut <code>0</code>)</li>
+      <li><code>flex-shrink</code> : capacité à rétrécir (par défaut <code>1</code>)</li>
+      <li><code>flex-basis</code> : taille de base de l'élément</li>
+    </ul>
+
+    <h3 id="exemples-concrets-flex">Exemples concrets</h3>
+
+    <h4>Navigation horizontale</h4>
+    <p><strong>HTML</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;nav class="navbar"&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+  &lt;ul class="nav-links"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p><strong>CSS</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h4>Galerie d'images responsive</h4>
+    <p><strong>HTML</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;div class="gallery"&gt;
+  &lt;img src="https://picsum.photos/seed/1/200" alt="Photo 1"&gt;
+  &lt;img src="https://picsum.photos/seed/2/200" alt="Photo 2"&gt;
+  &lt;img src="https://picsum.photos/seed/3/200" alt="Photo 3"&gt;
+  &lt;img src="https://picsum.photos/seed/4/200" alt="Photo 4"&gt;
+  &lt;img src="https://picsum.photos/seed/5/200" alt="Photo 5"&gt;
+  &lt;img src="https://picsum.photos/seed/6/200" alt="Photo 6"&gt;
+&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p><strong>CSS</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gallery img {
+  flex: 1 1 200px; /* grow, shrink, basis */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h4>Centrer verticalement et horizontalement</h4>
+    <p><strong>HTML</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;section class="hero"&gt;
+  &lt;div class="hero-content"&gt;
+    &lt;h1&gt;Bienvenue&lt;/h1&gt;
+    &lt;p&gt;Découvrez mon portfolio&lt;/p&gt;
+    &lt;button&gt;En savoir plus&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p><strong>CSS</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h4>Card avec footer en bas</h4>
+    <p><strong>HTML</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;div class="card"&gt;
+  &lt;img src="https://picsum.photos/seed/DT1-2025/400" alt="Produit" class="card-image"&gt;
+  &lt;div class="card-content"&gt;
+    &lt;h3&gt;Titre du projet&lt;/h3&gt;
+    &lt;p&gt;Description du projet qui peut être plus ou moins longue selon le contenu.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;span class="year"&gt;2025&lt;/span&gt;
+    &lt;span class="tags"&gt;typography, graphic design&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p><strong>CSS</strong> :</p>
+    <div class="code-block">
+      <pre><code class="language-css">.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  flex-grow: 1; /* prend tout l'espace disponible */
+  padding: 20px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+}
+
+.card-footer span {
+  font-size: 12px;
+  font-style: italic;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="erreurs-courantes"><a class="anchor-link" href="#erreurs-courantes">Erreurs courantes</a></h2>
+
+    <h3>Avec <code>margin: auto</code></h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément ne se centre pas.</p>
+          <p class="checklist-desc">Solution : Vérifiez que l'élément a une <code>width</code> définie (en <code>px</code>, <code>%</code>, etc.).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Avec <code>flex</code></h3>
+    <div class="checklist">
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mes éléments dépassent du conteneur.</p>
+          <p class="checklist-desc">Solution : Ajoutez <code>flex-wrap: wrap;</code> au conteneur pour permettre le retour à la ligne.</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Je confonds <code>justify-content</code> et <code>align-items</code>.</p>
+          <p class="checklist-desc">Solution : <code>justify-content</code> = axe principal (horizontal si <code>row</code>, vertical si <code>column</code>) ; <code>align-items</code> = axe transversal (perpendiculaire)</p>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <span class="checklist-marker">&rarr;</span>
+        <div>
+          <p class="checklist-label">Problème : Mon élément ne prend pas toute la hauteur.</p>
+          <p class="checklist-desc">Solution : Utilisez <code>align-items: stretch;</code> (c'est la valeur par défaut) ou donnez une hauteur au conteneur.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">Pour aller plus loin :</p>
+    <ul class="link-list">
+      <li><a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout" target="_blank">Documentation MDN sur Flexbox</a></li>
+    </ul>
+  </section>
+
+  <div class="page-nav">
+    <a href="2-styliser-sa-page-avec-css.html">&larr; styliser sa page avec CSS</a>
+    <a href="4-grid-et-position.html" class="next">grid &amp; position &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

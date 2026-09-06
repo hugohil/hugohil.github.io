@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principales propriétés CSS</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="index.html">sommaire</a>
+    <a href="principales-balises-html.html">balises HTML</a>
+    <a href="principales-proprietes-css.html" class="active">propriétés CSS</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">Ressource</div>
+  <h1>Principales propriétés CSS</h1>
+
+  <section>
+    <div class="ref-table">
+      <div class="ref-row"><code>color</code><span class="ref-desc">Définit la couleur du texte &mdash; Couleurs CSS. Exemple : <code>color: red;</code></span></div>
+      <div class="ref-row"><code>background-color</code><span class="ref-desc">Définit la couleur d'arrière-plan &mdash; Couleurs CSS. Exemple : <code>background-color: blue;</code></span></div>
+      <div class="ref-row"><code>font-size</code><span class="ref-desc">Définit la taille de la police &mdash; <code>px</code>, <code>em</code>, <code>%</code>. Exemple : <code>font-size: 16px;</code></span></div>
+      <div class="ref-row"><code>font-family</code><span class="ref-desc">Définit la famille de polices &mdash; Noms de polices. Exemple : <code>font-family: Arial;</code></span></div>
+      <div class="ref-row"><code>font-weight</code><span class="ref-desc">Définit la graisse de la police &mdash; <code>normal</code>, <code>bold</code>, <code>bolder</code>, <code>lighter</code>, <code>100</code>-<code>900</code>. Exemple : <code>font-weight: bold;</code></span></div>
+      <div class="ref-row"><code>font-style</code><span class="ref-desc">Définit le style de la police &mdash; <code>normal</code>, <code>italic</code>, <code>oblique</code>. Exemple : <code>font-style: italic;</code></span></div>
+      <div class="ref-row"><code>line-height</code><span class="ref-desc">Hauteur de ligne &mdash; <code>px</code>, <code>em</code>, <code>normal</code>. Exemple : <code>line-height: 1.5;</code></span></div>
+      <div class="ref-row"><code>text-align</code><span class="ref-desc">Alignement du texte &mdash; <code>left</code>, <code>right</code>, <code>center</code>, <code>justify</code>. Exemple : <code>text-align: center;</code></span></div>
+      <div class="ref-row"><code>letter-spacing</code><span class="ref-desc">Espacement des caractères &mdash; <code>normal</code>, <code>&lt;length&gt;</code>. Exemple : <code>letter-spacing: 0.1em;</code></span></div>
+      <div class="ref-row"><code>margin</code><span class="ref-desc">Espacement extérieur &mdash; <code>px</code>, <code>em</code>, <code>%</code>. Exemple : <code>margin: 10px;</code></span></div>
+      <div class="ref-row"><code>padding</code><span class="ref-desc">Espacement intérieur &mdash; <code>px</code>, <code>em</code>, <code>%</code>. Exemple : <code>padding: 10px;</code></span></div>
+      <div class="ref-row"><code>border</code><span class="ref-desc">Définit la bordure &mdash; Style, largeur, couleur. Exemple : <code>border: 1px solid black;</code></span></div>
+      <div class="ref-row"><code>width</code><span class="ref-desc">Largeur de l'élément &mdash; <code>px</code>, <code>%</code>, <code>auto</code>. Exemple : <code>width: 100px;</code></span></div>
+      <div class="ref-row"><code>height</code><span class="ref-desc">Hauteur de l'élément &mdash; <code>px</code>, <code>%</code>, <code>auto</code>. Exemple : <code>height: 100px;</code></span></div>
+      <div class="ref-row"><code>display</code><span class="ref-desc">Mode d'affichage &mdash; <code>block</code>, <code>inline</code>, <code>flex</code>, <code>grid</code>. Exemple : <code>display: block;</code></span></div>
+      <div class="ref-row"><code>position</code><span class="ref-desc">Positionnement de l'élément &mdash; <code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>. Exemple : <code>position: relative;</code></span></div>
+      <div class="ref-row"><code>z-index</code><span class="ref-desc">Ordre de superposition &mdash; Un nombre entier. Exemple : <code>z-index: 1;</code></span></div>
+      <div class="ref-row"><code>opacity</code><span class="ref-desc">Transparence de l'élément &mdash; 0 à 1. Exemple : <code>opacity: 0.5;</code></span></div>
+      <div class="ref-row"><code>overflow</code><span class="ref-desc">Gère le contenu débordant &mdash; <code>visible</code>, <code>hidden</code>, <code>scroll</code>, <code>auto</code>. Exemple : <code>overflow: hidden;</code></span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="notes"><a class="anchor-link" href="#notes">Notes</a></h2>
+
+    <h3>Couleurs CSS</h3>
+    <p>En CSS, vous pouvez spécifier des couleurs de plusieurs manières :</p>
+    <ul>
+      <li><strong>Noms de couleurs prédéfinis</strong> : comme <code>red</code>, <code>blue</code>, <code>green</code>, etc.</li>
+      <li><strong>Notation HEX</strong> : comme <code>#FF0000</code> pour le rouge.</li>
+      <li><strong>Notation RGB/RGBA</strong> : comme <code>rgb(255,0,0)</code> pour le rouge ou <code>rgba(255,0,0,0.5)</code> pour un rouge semi-transparent.</li>
+      <li><strong>Notation HSL/HSLA</strong> : permet de définir les couleurs en utilisant les valeurs de teinte, de saturation et de luminosité.</li>
+    </ul>
+
+    <h3>px (pixels)</h3>
+    <p>C'est une unité <strong>fixe</strong> et qui ne change pas en fonction de la taille de la fenêtre ou de l'écran.</p>
+
+    <h3>em</h3>
+    <p>Cette <strong>unité est relative à la taille de la police du parent</strong> le plus proche ayant une taille de police définie. Par exemple, si la taille de la police parente est de 16px, alors <code>1em</code> équivaudra à 16px.</p>
+
+    <h3>%</h3>
+    <p>Une <strong>unité relative qui dépend de la taille de l'élément parent</strong>. Si la largeur de l'élément parent est de 500px, alors un élément enfant avec une largeur de <code>50%</code> aura une largeur de 250px.</p>
+
+    <h3>vw/vh</h3>
+    <p>proportion du viewport width/height</p>
+  </section>
+
+  <section>
+    <h2 id="display"><a class="anchor-link" href="#display">Valeurs de <code>display</code></a></h2>
+
+    <h3>block</h3>
+    <p>L'élément prend toute la largeur disponible et crée un saut de ligne avant et après lui. Exemples typiques : <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>.</p>
+
+    <h3>inline</h3>
+    <p>L'élément n'entraîne pas de saut de ligne et prend seulement la largeur nécessaire pour son contenu. Exemples : <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>.</p>
+
+    <h3>inline-block</h3>
+    <p>Se comporte comme un élément inline, mais vous pouvez lui appliquer des propriétés de bloc comme la hauteur et la largeur.</p>
+
+    <h3>flex</h3>
+    <p>L'élément devient un conteneur flexible et ses enfants deviennent des éléments flexibles. C'est utile pour des mises en page complexes et alignements d'éléments.</p>
+
+    <h3>grid</h3>
+    <p>Transforme l'élément en un conteneur de grille.</p>
+
+    <h3>none</h3>
+    <p>L'élément est complètement retiré du flux du document. Il n'est pas visible et n'occupe aucun espace.</p>
+  </section>
+
+  <section>
+    <h2 id="position"><a class="anchor-link" href="#position">Valeurs de <code>position</code></a></h2>
+
+    <h3>static</h3>
+    <p>C'est la valeur par défaut. L'élément est positionné selon le flux normal du document. Les propriétés <code>top</code>, <code>right</code>, <code>bottom</code> et <code>left</code> n'ont aucun effet.</p>
+
+    <h3>relative</h3>
+    <p>L'élément est positionné selon le flux normal, mais vous pouvez le déplacer par rapport à sa position initiale en utilisant les propriétés <code>top</code>, <code>right</code>, <code>bottom</code>, et <code>left</code>.</p>
+
+    <h3>absolute</h3>
+    <p>L'élément est retiré du flux normal et positionné par rapport à son conteneur parent le plus proche en position <code>relative</code>, <code>absolute</code>, ou <code>fixed</code>. Utilisez <code>top</code>, <code>right</code>, <code>bottom</code>, et <code>left</code> pour le positionner.</p>
+
+    <h3>fixed</h3>
+    <p>L'élément est retiré du flux normal et positionné par rapport au viewport. Il reste à la même place même lorsque la page est défilée.</p>
+
+    <h3>sticky</h3>
+    <p>C'est un mélange entre <code>relative</code> et <code>fixed</code>. L'élément est positionné relativement jusqu'à ce qu'il atteigne un certain point de défilement, après quoi il se comporte comme un élément <code>fixed</code>.</p>
+
+    <blockquote>
+      <p>Les bases des CSS - Apprendre le développement web | MDN<br>
+      Les CSS (Cascading Style Sheets en anglais, ou &laquo; feuilles de style en cascade &raquo;) sont le code utilisé pour mettre en forme une page web.<br>
+      <a href="https://developer.mozilla.org/fr/docs/Learn/Getting_started_with_the_web/CSS_basics" target="_blank">developer.mozilla.org/fr/docs/Learn/Getting_started_with_the_web/CSS_basics</a></p>
+    </blockquote>
+  </section>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

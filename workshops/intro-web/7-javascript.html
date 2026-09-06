@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 ; JavaScript</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="6-html-et-css-avance.html">&larr; HTML et CSS avancé</a>
+    <a href="8-deploiement.html" class="next">déploiement &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 7</div>
+  <h1>JavaScript</h1>
+
+  <section>
+    <h2 id="introduction"><a class="anchor-link" href="#introduction">Introduction</a></h2>
+
+    <h3>Qu'est-ce que JavaScript ?</h3>
+    <p><strong>JavaScript</strong> est un langage de <strong>programmation</strong> qui permet d'ajouter des fonctionnalités <strong>interactives</strong> à des sites web. Conçu à l'origine pour le navigateur, il est désormais présent à peu près partout.</p>
+
+    <h3>Un peu d'histoire</h3>
+    <ul>
+      <li>Créé en 1995 par Brendan Eich, chez Netscape (un navigateur qui n'existe plus aujourd'hui).</li>
+      <li>Commencé comme Mocha, renommé en LiveScript, finalement appelé <strong>JavaScript</strong>, pour capitaliser sur la popularité de Java.</li>
+      <li>Malgré le nom, <strong>Java et JavaScript sont deux langages distincts</strong> et très différents.</li>
+      <li>Aujourd'hui l'un des langages de programmation les plus utilisés, au-delà des navigateurs web.</li>
+    </ul>
+
+    <h3>À savoir</h3>
+    <ul>
+      <li>C'est le <strong>navigateur</strong> qui exécute directement le code.</li>
+      <li>Il y a un <strong>écosystème</strong> riche et de nombreuses bibliothèques et frameworks, comme React, Vue.js ou Three.js.</li>
+      <li>WebGL pour le rendu graphique 3D.</li>
+      <li>WebGPU pour le calcul haute performance.</li>
+      <li>WebRTC pour la communication en temps réel.</li>
+      <li>WebAudio pour le traitement audio.</li>
+      <li>Fetch pour les requêtes HTTP.</li>
+      <li>WebSockets pour des connexions bidirectionnelles en temps réel.</li>
+      <li>IndexedDB pour le stockage local.</li>
+    </ul>
+
+    <h3>Exemples</h3>
+    <ul>
+      <li><strong>Art génératif</strong>: Avec des bibliothèques comme p5.js.</li>
+      <li><strong>AR/VR</strong>: Grâce à des API comme WebXR.</li>
+      <li><strong>Musique &amp; son</strong>: En utilisant l'API WebAudio (instruments virtuels, synthétiseurs, séquenceurs, effets audio, &hellip;)</li>
+      <li><strong>Jeux multijoueurs en temps réel</strong>: Avec WebSockets ou WebRTC et Canvas2D ou WebGL.</li>
+    </ul>
+
+    <h3>Charger son script</h3>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;body&gt;
+  &lt;!-- Contenu de la page --&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Variables et types de données</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let name = "Alice"; // string
+const age = 25; // number
+var isStudent = true; // boolean</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Opérations de base</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let sum = 10 + 5; // 15
+let isAdult = age > 18; // = true</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>if &hellip; else</h3>
+    <div class="code-block">
+      <pre><code class="language-js">if (keyCode === "SPACE") {
+  console.log("space key hit");
+} else if (keyCode === "ENTER") {
+	console.log("enter key hit");
+} else {
+  console.log("any other key hit");
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Fonctions</h3>
+    <div class="code-block">
+      <pre><code class="language-js">function greet (name) {
+  console.log("Bonjour " + name);
+}
+greet("Alice"); // renvoie "Bonjour Alice"</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Tableaux et objets</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let fruits = ["pomme", "banane"];
+
+fruits[0]; // "pomme"
+fruits[1]; // "banane"
+
+let person = { name: "Alice", age: 25 };</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Boucles</h3>
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+fruits.forEach(function (element) {
+	console.log(element);
+});
+// "pomme"
+// "banane"</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Interagir avec le DOM</h3>
+    <p class="note">&rarr; DOM = Document Object Model (votre page HTML, en gros)</p>
+    <div class="code-block">
+      <pre><code class="language-js">const title = document.querySelector("h1");
+title.textContent = "Nouveau titre";
+
+const container = document.querySelector(".container");
+container.classList.add("active");</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">const projects = document.querySelectorAll(".is-project");
+for (let i = 0; i < projects.length; i++) {
+	console.log(projects[i]);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Événements</h3>
+    <div class="code-block">
+      <pre><code class="language-js">const button = document.querySelector(".btn");
+button.addEventListener("click", function() {
+  console.log("Bouton cliqué");
+});</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Fonctions anonymes et fonctions fléchées</h3>
+    <div class="code-block">
+      <pre><code class="language-js">fruits.forEach((fruit) => {
+  console.log(fruit);
+});
+
+// vs.
+
+function logFruit (fruit) {
+	console.log(fruit);
+}
+fruits.forEach(logFruit);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="cas-pratiques"><a class="anchor-link" href="#cas-pratiques">Cas pratiques</a></h2>
+
+    <h3>Filtrer des éléments</h3>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;JavaScript&lt;/title&gt;
+
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button class="filter-all"&gt;all&lt;/button&gt;
+  &lt;button class="filter-typo"&gt;typography&lt;/button&gt;
+  &lt;button class="filter-illu"&gt;illustration&lt;/button&gt;
+
+  &lt;ul&gt;
+    &lt;li class="is-project is-typography"&gt;project 1&lt;/li&gt;
+    &lt;li class="is-project is-illustration"&gt;project 2&lt;/li&gt;
+    &lt;li class="is-project is-illustration"&gt;project 3&lt;/li&gt;
+    &lt;li class="is-project is-typography"&gt;project 4&lt;/li&gt;
+    &lt;li class="is-project is-typography"&gt;project 5&lt;/li&gt;
+    &lt;li class="is-project is-illustration"&gt;project 6&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;script src="main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">const allFilterBtn = document.querySelector(".filter-all");
+allFilterBtn.addEventListener("click", function() {
+  filterProjects("is-project");
+});
+
+
+const typoFilterBtn = document.querySelector(".filter-typo");
+typoFilterBtn.addEventListener("click", function() {
+  filterProjects("is-typography");
+});
+
+const illuFilterBtn = document.querySelector(".filter-illu");
+illuFilterBtn.addEventListener("click", function() {
+  filterProjects("is-illustration");
+});
+
+const projects = document.querySelectorAll(".is-project");
+
+function filterProjects (filter) {
+  console.log(filter);
+
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].classList.contains(filter) === false) {
+      projects[i].classList.add("hidden");
+    } else {
+      projects[i].classList.remove("hidden");
+    }
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-css">.hidden {
+  display: none;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Type tester</h3>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Type tester&lt;/title&gt;
+
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;label for="fontSizeControl"&gt;Taille de police : &lt;/label&gt;
+  &lt;input type="range" id="fontSizeControl" min="6" max="92" value="16"&gt;
+
+  &lt;textarea id="textArea" style="font-size: 16px;"&gt;hello&lt;/textarea&gt;
+
+  &lt;script src="type-tester.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">document.addEventListener('DOMContentLoaded', function() {
+  const fontSizeControl = document.getElementById('fontSizeControl');
+  const textArea = document.getElementById('textArea');
+
+  fontSizeControl.addEventListener('input', function() {
+      textArea.style.fontSize = fontSizeControl.value + 'px';
+  });
+});</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-css">body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="6-html-et-css-avance.html">&larr; HTML et CSS avancé</a>
+    <a href="8-deploiement.html" class="next">déploiement &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

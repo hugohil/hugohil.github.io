@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6 ; HTML et CSS avancé</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title"><a href="index.html">dev web</a></span>
+  <nav>
+    <a href="5-votre-portfolio.html">&larr; votre portfolio</a>
+    <a href="7-javascript.html" class="next">JavaScript &rarr;</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 6</div>
+  <h1>HTML et CSS avancé</h1>
+
+  <section>
+    <h2 id="ancres"><a class="anchor-link" href="#ancres">Les ancres</a></h2>
+    <p class="note">&rarr; pour la navigation intra-page</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;a href="#section1"&gt;
+&lt;a href="#section2"&gt;
+
+&lt;!-- ... --&gt;
+
+&lt;div id="section1"&gt;
+&lt;/div&gt;
+
+&lt;!-- ... --&gt;
+
+&lt;div id="section2"&gt;
+&lt;/div&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="nouvel-onglet"><a class="anchor-link" href="#nouvel-onglet">Ouvrir un lien dans un nouvel onglet</a></h2>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;a href="https://site-externe.com" target="_blank"&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="lien-email"><a class="anchor-link" href="#lien-email">Lien email</a></h2>
+    <p class="note">&rarr; pour ouvrir l'application mail par défaut</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;a href="mailto:example@example.com"&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="pseudo-classes"><a class="anchor-link" href="#pseudo-classes">Les Pseudo-classes CSS</a></h2>
+    <p class="note">&rarr; permet de modifier le style d'un élément en fonction de son état</p>
+    <div class="code-block">
+      <pre><code class="language-css">/* le style suivant ne sera appliqué que lorsqu'un lien sera survolé */
+a:hover {
+	font-weight: bold;
+}
+/* cible une image lorsque son parent est survolé */
+div:hover a {
+	border: 1px solid black;
+}
+/* cible tous les paragraphes pairs (1 liens sur 2) */
+p:nth-child(odd) {
+	background-color: light-grey;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="transitions"><a class="anchor-link" href="#transitions">Transitions CSS</a></h2>
+    <p class="note">&rarr; Transition fluides lors du changement d'état d'un élément</p>
+    <div class="code-block">
+      <pre><code class="language-css">/* Transition simple sur le survol d'un élément */
+.button {
+  background-color: blue;
+  transition: background-color 0.5s ease;
+}
+
+.button:hover {
+  background-color: red;
+}
+
+/* Transition multiple (couleur et transformation) */
+.icon {
+  color: black;
+  transform: scale(1);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon:hover {
+  color: green;
+  transform: scale(1.2);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="media-queries"><a class="anchor-link" href="#media-queries">Media Queries</a></h2>
+    <p class="note">&rarr; Pour adapter son design à différentes tailles d'écran</p>
+    <div class="code-block">
+      <pre><code class="language-css">/* Style de base pour mobile */
+.container {
+  background-color: lightblue;
+}
+
+/* Changement de style pour les écrans > 1280px */
+@media (min-width: 1280px) {
+  .container {
+    background-color: coral;
+  }
+}
+
+/* Changement de style pour les écrans < 600px */
+@media (max-width: 600px) {
+  .container {
+    background-color: pink;
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="curseur-custom"><a class="anchor-link" href="#curseur-custom">Curseur Custom</a></h2>
+    <div class="code-block">
+      <pre><code class="language-css">body {
+  cursor: url('path-to-cursor-image.png'), auto;
+}
+img {
+	cursor: pointer;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="rotation"><a class="anchor-link" href="#rotation">Rotation</a></h2>
+    <div class="code-block">
+      <pre><code class="language-css">.rotate {
+  transition: transform 0.3s ease;
+}
+
+.rotate:hover {
+  transform: rotate(45deg);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="filtres"><a class="anchor-link" href="#filtres">Filtres</a></h2>
+    <p class="note">&rarr; Application de <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter" target="_blank">filtres visuels</a> aux éléments</p>
+    <div class="code-block">
+      <pre><code class="language-css">.blur {
+  filter: blur(5px);
+}
+
+.brightness {
+  filter: brightness(150%);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="iframe"><a class="anchor-link" href="#iframe">iFrame</a></h2>
+    <p class="note">&rarr; Intégration de contenu externe</p>
+    <div class="code-block">
+      <pre><code class="language-html">&lt;iframe src="https://www.example.com" width="300" height="200"&gt;&lt;/iframe&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="animation-css"><a class="anchor-link" href="#animation-css">Animation CSS</a></h2>
+    <p class="note">&rarr; Création d'animations clés avec CSS</p>
+    <div class="code-block">
+      <pre><code class="language-css">@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
+.animated-element {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: example;
+  animation-duration: 4s;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <div class="page-nav">
+    <a href="5-votre-portfolio.html">&larr; votre portfolio</a>
+    <a href="7-javascript.html" class="next">JavaScript &rarr;</a>
+  </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
