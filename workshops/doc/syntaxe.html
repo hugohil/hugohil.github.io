@@ -93,11 +93,17 @@ let my speed = 4;  // pas d'espace</code></pre>
     <div class="code-block">
       <pre><code class="language-js">let x = 0;  // scope global ; existe partout, et PERSISTE
 
+function setup() {
+  createCanvas(600, 600);
+  let cy = height/2;
+}
+
 function draw() {
   background(240);
 
   let r = 50;   // déclarée dans draw ; recréée à chaque frame
 
+  circle(x, cy, r); // cause une erreur
   circle(x, 200, r);
   x = x + 2;    // la valeur de x augmente d'une frame à l'autre
 }</code></pre>
