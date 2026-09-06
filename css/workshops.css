@@ -394,12 +394,12 @@ pre code {
 
 /* ── Tour de table ── */
 
-.tour-de-table {
+.numbered-list {
   border-top: 1px solid var(--border);
   margin: 1.25rem 0;
 }
 
-.tour-question {
+.numbered-list-item {
   display: grid;
   grid-template-columns: 40px 1fr;
   gap: 1rem;
@@ -408,9 +408,9 @@ pre code {
   border-bottom: 1px solid var(--border);
 }
 
-.tour-question p { margin-bottom: 0; font-size: var(--fs-base); }
+.numbered-list-item p { margin-bottom: 0; font-size: var(--fs-base); }
 
-.tour-label {
+.numbered-list-label {
   font-size: var(--fs-2xs);
   color: var(--muted);
   letter-spacing: 0.05em;
