@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session 3 ; le temps et l'aléatoire</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">session 3 ; le temps et l'aléatoire</span>
+  <nav>
+    <a href="doc/boucles.html">boucles</a>
+    <a href="doc/variation.html">variation</a>
+    <a href="doc/animation.html">animation</a>
+    <a href="doc/aleatoire.html">aléatoire</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 3</div>
+  <h1>Le temps et l'aléatoire</h1>
+  <p class="lead">Deux nouvelles sources de variation.</p>
+
+  <section>
+    <h2 id="framecount"><a class="anchor-link" href="#framecount">draw est déjà une boucle</a></h2>
+
+    <p><code>frameCount</code> compte les images écoulées depuis le démarrage.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function draw() {
+  background(240);
+  let taille = frameCount * 0.5;
+  circle(width / 2, height / 2, taille);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Figer</h3>
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(600, 900);
+  noLoop();     // draw() ne s'exécute qu'une fois
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="oscillation"><a class="anchor-link" href="#oscillation">Oscillation</a></h2>
+
+    <p><code>frameCount</code> monte indéfiniment. Pour un mouvement qui va et vient, on utilise <code>sin()</code>, qui oscille entre <strong>-1 et 1</strong>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let x = width / 2 + sin(frameCount * 0.05) * 200;
+circle(x, height / 2, 60);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Trois paramètres</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let amplitude = 200;
+let speed = 0.05;
+let phase = 0;
+
+let x = width / 2 + sin(frameCount * speed + phase) * amplitude;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Manipulez-les un par un. Ce sont trois paramètres très différents.</p>
+
+    <h3>Ramener dans une plage utile</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let s = map(sin(frameCount * 0.05), -1, 1, 20, 120);
+circle(width / 2, height / 2, s);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <h3>Mouvement circulaire</h3>
+    <div class="code-block">
+      <pre><code class="language-js">let angle = frameCount * 0.02;
+let x = width / 2 + cos(angle) * 200;
+let y = height / 2 + sin(angle) * 200;
+circle(x, y, 40);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="croisement"><a class="anchor-link" href="#croisement">Deux sources en même temps</a></h2>
+
+    <p><code>i</code> détermine la position dans la série et <code>frameCount</code> la position dans le temps. On peut les combiner.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < 30; i++) {
+  let x = i * (width / 30);
+  let y = height / 2 + sin(frameCount * 0.05 + i * 0.3) * 100;
+  //                                          └───┬───┘
+  //                                    décalage croissant = onde
+  circle(x, y, 20);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Chaque élément oscille à la même vitesse, mais démarre son cycle un peu plus tard que le précédent.</p>
+
+    <div class="exercise">
+      <div class="exercise-label">mini-exercice</div>
+      <ul>
+        <li>Reprendre votre série de la séance 2</li>
+        <li>Y ajouter une seule oscillation, sur <strong>un seul paramètre</strong></li>
+        <li>Puis y ajouter un décalage de phase selon <code>i</code></li>
+        <li>Régler amplitude et vitesse jusqu'à obtenir quelque chose de lisible</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="random"><a class="anchor-link" href="#random">random</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>random()</code><span class="ref-desc">valeur entre 0 et 1</span></div>
+      <div class="ref-row"><code>random(max)</code><span class="ref-desc">valeur entre 0 et max</span></div>
+      <div class="ref-row"><code>random(min, max)</code><span class="ref-desc">valeur entre min et max</span></div>
+      <div class="ref-row"><code>random(tableau)</code><span class="ref-desc">un élément au hasard</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < 50; i++) {
+  circle(random(width), random(height), random(10, 60));
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="noise"><a class="anchor-link" href="#noise">noise</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">random(), random(), random()          // 0.83 ; 0.12 ; 0.67
+
+noise(0.1), noise(0.2), noise(0.3)    // 0.51 ; 0.54 ; 0.58</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p><code>noise()</code> renvoie aussi une valeur entre 0 et 1, mais permet de controller l'écart entre deux valeurs demandées.</p>
+      
+    <div class="code-block">
+      <pre><code class="language-js">let t = 0;
+
+function draw() {
+  background(240);
+
+  circle(random(width), 100, 40);
+
+  circle(noise(t) * width, 300, 40);
+  t += 0.01;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">let scale = 0.01;   // plus petit = relief plus lisse
+
+noFill();
+beginShape();
+for (let x = 0; x < width; x++) {
+  let y = (noise(x * scale)) * height;
+  vertex(x, y);
+}
+endShape();</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="choisir"><a class="anchor-link" href="#choisir">Choisir sa source</a></h2>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>i</code><span class="ref-desc">progression régulière le long de la série</span></div>
+      <div class="ref-row"><code>dist()</code><span class="ref-desc">effet radial, gradient depuis un point</span></div>
+      <div class="ref-row"><code>frameCount</code><span class="ref-desc">évolution continue dans le temps</span></div>
+      <div class="ref-row"><code>sin(), cos()</code><span class="ref-desc">oscillation prévisible et cyclique</span></div>
+      <div class="ref-row"><code>random()</code><span class="ref-desc">choix ponctuel ; une couleur, une forme, une décision</span></div>
+      <div class="ref-row"><code>noise()</code><span class="ref-desc">dérive continue ; mouvement, relief, texture</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="projet"><a class="anchor-link" href="#projet">Projet intermédiaire</a></h2>
+
+    <div class="exercise">
+      <div class="exercise-label">contraintes</div>
+      <ul>
+        <li>Niveaux de gris uniquement</li>
+        <li>Pas d'interaction</li>
+        <li>Format libre</li>
+        <li>N'essayez pas de mélanger répétition, accumulation, oscilliation, bruit, ... Faites une chose à la fois, faites le bien. Soyez intentionnel.le.s</li>
+        <li>Votre système doit être <strong>lisible</strong>. Surtout, vous devez être en mesure de l'expliquer <strong>en détail</strong></li>
+      </ul>
+    </div>
+
+    <h3>Méthode</h3>
+    <div class="numbered-list">
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">01</span>
+        <p>Écrire en une phrase ce que le système est censé faire, avant de coder. Impossible de programmer ce que vous ne savez pas exprimer.</p>
+      </div>
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">02</span>
+        <p>Décomposez votre travail en plusieurs étapes simples.</p>
+      </div>
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">03</span>
+        <p>Sauvegarder chaque version qui fonctionne avant de tenter autre chose. Toujours avoir un état stable auquel revenir.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

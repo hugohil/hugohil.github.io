@@ -29,7 +29,7 @@
 
   <div class="eyebrow">Documentation</div>
   <h1>Animation</h1>
-  <p class="lead">Le temps est un paramètre comme un autre.</p>
+  <p class="lead">Le temps est un paramètre.</p>
 
   <!-- ── La boucle ── -->
 
@@ -41,7 +41,7 @@
 function draw() {
   background(240);
   circle(x, height / 2, 50);
-  x = x + 2;              // 2 pixels de plus à chaque frame
+  x = x + 2;  // 2 pixels de plus à chaque frame
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
@@ -56,8 +56,6 @@ function draw() {
       <div class="ref-row"><code>frameRate(n)</code><span class="ref-desc">limite la cadence</span></div>
       <div class="ref-row"><code>frameRate()</code><span class="ref-desc">sans argument renvoie la cadence réelle</span></div>
     </div>
-
-    <p class="note">Une image fixe se fait avec <code>noLoop()</code> à la fin de <code>setup()</code>. Le sketch se dessine une fois et s'arrête.</p>
   </section>
 
   <!-- ── frameCount ── -->
@@ -208,7 +206,7 @@ function draw() {
         <span class="checklist-marker">&rarr;</span>
         <div>
           <p class="checklist-label">Ça va beaucoup trop vite</p>
-          <p class="checklist-desc">Le coefficient est trop grand. Testez en le divisant par 10 par exemple.</p>
+          <p class="checklist-desc">Le coefficient su <code>frameCount</code> est trop grand. Testez en le divisant par 10 par exemple.</p>
         </div>
       </div>
       <div class="checklist-item">
