@@ -166,36 +166,6 @@ function draw() {
     </div>
   </section>
 
-  <!-- ── Boucle parfaite ── -->
-
-  <section>
-    <h2 id="boucle-parfaite"><a class="anchor-link" href="#boucle-parfaite">Faire une boucle parfaite</a></h2>
-
-    <p>Pour une animation qui boucle parfaitement il faut que l'état final soit identique à l'état initial. Il faut raisonner en cycle plutôt qu'en temps passé.</p>
-
-    <div class="code-block">
-      <pre><code class="language-js">let duree = 180;   // nombre de frames pour un cycle complet
-
-function draw() {
-  background(240);
-
-  let t = (frameCount % duree) / duree;
-  // (frameCount % duree) va de 0 à 179
-  // (frameCount % duree) / duree va donc de 0 à 1
-  
-  let angle = t * TWO_PI;
-  // TWO_PI = 1 tour complet
-  // donc on progresse dans le cercle en fonction de t
-
-  let x = width / 2 + cos(angle) * 200;
-  let y = height / 2 + sin(angle) * 200;
-  let s = map(sin(angle), -1, 1, 20, 80);
-  circle(x, y, s);
-}</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">copier</button>
-    </div>
-  </section>
-
   <!-- ── Pièges ── -->
 
   <section>
@@ -214,13 +184,6 @@ function draw() {
         <div>
           <p class="checklist-label">La forme sort du canvas et ne revient pas</p>
           <p class="checklist-desc">Il faut soit une oscillation (<code>sin</code>), soit un test de rebond (<code>if (x > width)</code>), soit un <code>%</code>.</p>
-        </div>
-      </div>
-      <div class="checklist-item">
-        <span class="checklist-marker">&rarr;</span>
-        <div>
-          <p class="checklist-label">La boucle « saute » au recommencement</p>
-          <p class="checklist-desc">Une des valeurs de l'animation n'est pas cyclique. Vérifiez que chaque paramètre dépend de <code>t</code> et revient bien à son point de départ.</p>
         </div>
       </div>
     </div>
