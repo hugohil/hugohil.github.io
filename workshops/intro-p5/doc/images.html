@@ -101,10 +101,10 @@ circle(mouseX, mouseY, 50)</code></pre>
 
     <div class="code-block">
       <pre><code class="language-js">let img;
-let step = 12;
+let stepSize = 12;
 
 async function setup() {
-  img = await loadImage('image.png');
+  img = await loadImage('image.jpg');
   createCanvas(img.width, img.height);
   img.loadPixels();
   noLoop();
@@ -115,11 +115,11 @@ function draw() {
   noStroke();
   fill(0);
 
-  for (let x = 0; x < width; x += step) {
-    for (let y = 0; y < height; y += step) {
+  for (let x = 0; x < width; x += stepSize) {
+    for (let y = 0; y < height; y += stepSize) {
       let c = img.get(x, y);
-      let luminosite = (c[0] + c[1] + c[2]) / 3;        // moyenne des trois canaux
-      let taille = map(luminosite, 0, 255, step, 0);      // sombre = grand point
+      let mean = (c[0] + c[1] + c[2]) / 3;        // moyenne de R, G et B
+      let taille = map(mean, 0, 255, stepSize, 0);      // sombre = grand point
       circle(x, y, taille);
     }
   }

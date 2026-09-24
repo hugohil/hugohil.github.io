@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session 4 ; rendu et projet final</title>
+  <link rel="stylesheet" href="/css/workshops.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-title">session 4 ; rendu et projet final</span>
+  <nav>
+    <a href="doc/variation.html">variation</a>
+    <a href="doc/animation.html">animation</a>
+    <a href="doc/aleatoire.html">aléatoire</a>
+    <a href="doc/images.html">images</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">partie 4</div>
+  <h1>Rendu et projet final</h1>
+  <p class="lead">Présentation du projet intermédiaire, puis lancement du projet final.</p>
+
+  <section>
+    <h2 id="presentation"><a class="anchor-link" href="#presentation">Format de présentation</a></h2>
+
+    <p>Prototype présenté en direct, 5 minutes maximum.</p>
+
+    <div class="numbered-list">
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">01</span>
+        <p><strong>L'intention</strong> ; ce que vous vouliez construire.</p>
+      </div>
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">02</span>
+        <p><strong>La démonstration</strong> ; montrez le projet en fonctionnement. Sachez dans quel ordre montrer les choses, ayez des valeurs intéressantes en tête.</p>
+      </div>
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">03</span>
+        <p><strong>Le code</strong> ; montrez les variables principales, les blocs importants, ...</p>
+      </div>
+      <div class="numbered-list-item">
+        <span class="numbered-list-label">04</span>
+        <p><strong>La suite</strong> ; ce que vous feriez avec plus de temps, ou différemment avec le recul.</p>
+      </div>
+    </div>
+
+    <p class="note">Si une ligne vient d'ailleurs et que vous ne savez pas l'expliquer, dites-le. Ne pas savoir n'est pas un problème, faire semblant en est un.</p>
+  </section>
+
+  <section>
+    <h2 id="critique"><a class="anchor-link" href="#critique">Critique collective</a></h2>
+
+    <p>Prenez des notes pendant les passages. Pour chaque prototype : une chose qui fonctionne, une piste à explorer. On critique le système, pas la personne. Et on évite les &laquo;&nbsp;j'aime bien&nbsp;&raquo; : dites ce que vous voyez.</p>
+
+    <h3>Critères :</h3>
+    <ul>
+      <li>Intention</li>
+      <li>Lisibilité du système</li>
+      <li>Maîtrise du code</li>
+      <li>Rendu visuel</li>
+    </ul>
+
+  </section>
+
+  <section>
+    <h2 id="images"><a class="anchor-link" href="#images">Utiliser des images</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">let img;
+
+async function setup() {
+  img = await loadImage('image.jpeg');
+  createCanvas(img.width, img.height);
+  noLoop();
+}
+
+function draw() {
+  background(255);
+  noStroke();
+  fill(0);
+
+  image(img, 0, 0);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="figure">
+      <img src="/workshops/assets/p5-files2.png" alt="éditeur p5.js">
+      <p class="figure-caption">Déposez le fichier dans le dossier du sketch (panneau de gauche) et référencez-le par son nom.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="sample"><a class="anchor-link" href="#sample">Echantillonner l'image</a></h2>
+
+    <div class="clode-block">
+      <pre><code class="language-js">let img;
+let stepSize = 12;
+
+async function setup() {
+  img = await loadImage('image.jpg');
+  createCanvas(img.width, img.height);
+  img.loadPixels();
+  noLoop();
+}
+
+function draw() {
+  background(255);
+  noStroke();
+  fill(0);
+
+  for (let x = 0; x < width; x += stepSize) {
+    for (let y = 0; y < height; y += stepSize) {
+      let c = img.get(x, y);
+      let mean = (c[0] + c[1] + c[2]) / 3;        // moyenne de R, G et B
+      let taille = map(mean, 0, 255, stepSize, 0);      // sombre = grand point
+      circle(x, y, taille);
+    }
+  }
+}</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="texte"><a class="anchor-link" href="#texte">Texte</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">textSize(48);
+textAlign(CENTER, CENTER);
+fill(0);
+text('HELLO', width / 2, height / 2);</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">let font;
+
+async function setup() {
+  createCanvas(600, 600);
+  font = await loadFont('my-font.ttf');
+  textFont(font);
+}
+
+function draw() {
+  textSize(48);
+  textAlign(CENTER, CENTER);
+  fill(0);
+  text('HELLO', width / 2, height / 2);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Les fichiers de font se chargent comme les images</p>
+
+    <br><br>
+
+    <p>Une chaîne de caractères s'indexe comme un tableau : <code>word[0]</code> = la première lettre, <code>mot.length</code> = le nombre de caractères.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">let font;
+
+async function setup() {
+  createCanvas(600, 600);
+  font = await loadFont('ma-font.ttf');
+  textFont(font);
+}
+
+function draw() {
+  background(20);
+  textAlign(CENTER, CENTER);
+  fill(220);
+
+  let word = 'HELLO';
+  
+  for (let i = 0; i < word.length; i++) {
+    let x = map(i, 0, word.length - 1, 80, width - 80);
+    let y = height / 2 + sin(frameCount * 0.05 + i * 0.4) * 60;
+    textSize(map(i, 0, word.length - 1, 24, 72));
+    text(word[i], x, y);
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="capturer"><a class="anchor-link" href="#capturer">Capturer</a></h2>
+
+    <div class="code-block">
+      <pre><code class="language-js">function keyPressed() {
+  if (key === 's') {
+    noLoop();
+    saveCanvas('capture', 'png');
+    loop();
+  }
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p class="note">Pour une vidéo : utilisez un outil de capture d'écran système.</p>
+  </section>
+
+  <section>
+    <h2 id="push-pop"><a class="anchor-link" href="#push-pop">push et pop</a></h2>
+
+    <p>Régulièrement, on va vouloir <strong>déplacer le repère</strong>.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+
+  rect(-50, -50, 100, 100);
+
+  push(); // on sort de l'état de base
+  translate(width/2, height/2); // l'origine (0,0) se déplace ici
+  rotate(PI / 4); // rotation autour de la nouvelle origine
+  scale(2);
+  rect(-50, -50, 100, 100);
+  pop(); // on revient dans l'état de base
+}
+      </code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>Sans <code>pop()</code> les transformations vont se cumuler : chaque <code>translate()</code> part du repère déjà déplacé par le précédent.</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">// les positions s'additionnent
+for (let i = 0; i < 5; i++) {
+  translate(80, 20);   // (80,20) puis (160,40) puis (240,60) ...
+  circle(0, 0, 40);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>C'est parfois ce qu'on veut, mais pour que chaque élément parte du même repère, il faut l'isoler :</p>
+
+    <div class="code-block">
+      <pre><code class="language-js">for (let i = 0; i < 5; i++) {
+  push();
+  translate(80 + i * 100, 200);
+  rotate(i * 0.3);
+  rect(0, 0, 60, 60);
+  pop();
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>push()</code><span class="ref-desc">mémorise le repère <strong>et</strong> les styles</span></div>
+      <div class="ref-row"><code>pop()</code><span class="ref-desc">revient à l'état mémorisé</span></div>
+      <div class="ref-row"><code>translate(x, y)</code><span class="ref-desc">déplace l'origine</span></div>
+      <div class="ref-row"><code>rotate(a)</code><span class="ref-desc">tourne le repère ; angle en radians</span></div>
+      <div class="ref-row"><code>scale(n)</code><span class="ref-desc">agrandit ou réduit</span></div>
+    </div>
+
+    <p><code>push()</code> sauvegarde aussi <code>fill()</code>, <code>stroke()</code>, <code>strokeWeight()</code>, <code>rectMode()</code>, <code>textSize()</code>&hellip; Un <code>fill()</code> posé entre un <code>push()</code> et un <code>pop()</code> disparaît au <code>pop()</code>.</p>
+
+    <p>Documentation : <a href="doc/formes.html#transformations">transformations</a></p>
+  </section>
+
+  <section>
+    <h2 id="boucle"><a class="anchor-link" href="#boucle">Boucle parfaite</a></h2>
+
+    <div class="exercise">
+      <div class="exercise-label">expliquez le code ci-dessous</div>
+      <ul>
+        <li>vous devez expliquer le fonctionnement du code ci-dessous</li>
+        <li>vous commenterez où c'est nécessaire</li>
+        <li>l'écriture de ces commentaires par une IA est interdite</li>
+        <li>si vous ne connaissez pas une function, allez chercher dans la doc de p5</li>
+        <li>si vous voulez vérifier le fonctionnement d'un paramètre, isolez-le</li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-js">let duration = 240; // cycle en fps
+let cols = 6;
+let rows = 6;
+let noiseRadius = 0.5;
+let vamp = 0.2;
+let ramp = 2;
+
+function setup() {
+  createCanvas(600, 600);
+  rectMode(CENTER);
+  noStroke();
+  fill(20);
+}
+
+function draw() {
+  background(242);
+
+  let t = (frameCount % duration) / duration;
+  let angle = t * TWO_PI;
+
+  let cw = width / cols;
+  let ch = height / rows;
+
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+
+      let nx = cos(angle) * noiseRadius + i * 10;
+      let ny = sin(angle) * noiseRadius + j * 10;
+      let n = noise(nx, ny);
+      
+      let phase = (i + j);
+      let offset = sin(angle + phase) * ch * vamp;
+      
+      let x = i * cw + cw / 2;
+      let y = j * ch + ch / 2 + offset;
+
+      let len = map(n, 0, 1, cw * 0.2, cw * 0.8);
+
+      let rotation = angle * n * ramp;
+
+      push();
+      translate(x, y);
+      rotate(rotation);
+      rect(0, 0, len, ch * 0.1);
+      pop();
+    }
+  }
+
+  // repère dans le cycle
+  rect(t * width, height - 4, 4, 8);
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <br><br>
+
+  <section>
+    <h2 id="projet"><a class="anchor-link" href="#projet">Projet final ; poster animé</a></h2>
+
+    <div class="exercise">
+      <div class="exercise-label">contraintes</div>
+      <ul>
+        <li>Palette limitée, déclarée dans un tableau</li>
+        <li>Du texte, avec une font custom</li>
+        <li>Pas d'interaction</li>
+        <li>L'animation doit être boucle parfaite</li>
+        <li>Livrables : le sketch commenté, une capture vidéo de la boucle, deux images fixes, un court texte de présentation</li>
+      </ul>
+    </div>
+
+    <h3>Conseils</h3>
+
+    <ul>
+      <li>faites un moodoard</li>
+      <li>faires une maquette sur figma ou sur papier</li>
+      <li>ne commencez pas à coder tant que vous ne savez pas ce que vous voulez faire</li>
+      <li>il faut avancer étape par étape, donc il faut décomposer votre travail</li>
+      <li>pensez paramètres</li>
+    </ul>
+
+    <p class="note">C'est normal que le resultat diverge de votre maquette.</p>
+  </section>
+
+</main>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
