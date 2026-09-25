@@ -322,7 +322,7 @@ function draw() {
 
       let len = map(n, 0, 1, cw * 0.2, cw * 0.8);
 
-      let rotation = angle * n * ramp;
+      let rotation = angle + n * ramp;
 
       push();
       translate(x, y);
