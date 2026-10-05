@@ -91,6 +91,20 @@
   </section>
 
   <section>
+    <h2 id="reset-css"><a class="anchor-link" href="#reset-css">Le reset CSS</a></h2>
+    <p>Le navigateur applique ses <strong>propres styles par défaut</strong> à de nombreuses balises : marges autour du <code>&lt;body&gt;</code>, des titres, des paragraphes, retrait des listes, etc. Ces valeurs varient d'un navigateur à l'autre et gênent la mise en page.</p>
+    <p>Un <strong>reset</strong> remet ces valeurs à zéro, au tout début de la feuille de style, pour partir d'une base propre :</p>
+    <div class="code-block">
+      <pre><code class="language-css">* {
+  margin: 0;
+  padding: 0;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note">Le sélecteur <code>*</code> cible <strong>tous</strong> les éléments de la page. On redonne ensuite des marges uniquement là où on en veut.</p>
+  </section>
+
+  <section>
     <h2 id="quelle-methode"><a class="anchor-link" href="#quelle-methode">Quelle méthode de mise en page utiliser ?</a></h2>
     <div class="ref-table">
       <div class="ref-row"><code>margin: auto</code><span class="ref-desc">Centrer un élément horizontalement ; Logo, image pleine taille, conteneur</span></div>
