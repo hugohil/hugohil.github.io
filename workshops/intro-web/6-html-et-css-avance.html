@@ -61,6 +61,68 @@
   </section>
 
   <section>
+    <h2 id="entites-html"><a class="anchor-link" href="#entites-html">Les entités HTML</a></h2>
+    <p class="note">&rarr; pour écrire des caractères réservés, invisibles ou difficiles à taper au clavier</p>
+    <p>Une entité commence par <code>&amp;</code> et finit par <code>;</code>. Elle s'écrit soit avec un nom (<code>&amp;nbsp;</code>), soit avec un numéro (<code>&amp;#8239;</code>). Elles ont l'inconvénient de rendre votre HTML plus difficile à lire.</p>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>&amp;lt; &amp;gt;</code><span class="ref-desc">&lt; et &gt; ; pour afficher un chevron sans qu'il soit interprété comme un élément d'une balise</span></div>
+      <div class="ref-row"><code>&amp;amp;</code><span class="ref-desc">&amp; ; esperluette se dit <code>ampersand</code> en anglais</span></div>
+      <div class="ref-row"><code>&amp;nbsp;</code><span class="ref-desc">Espace insécable</span></div>
+      <div class="ref-row"><code>&amp;#8239;</code><span class="ref-desc">Espace fine insécable (cf. <a href="https://fr.wikipedia.org/wiki/Espace_ins%C3%A9cable#Espace_fine_ins%C3%A9cable" target="_blank">Wikipédia</a>)</span></div>
+      <div class="ref-row"><code>&amp;thinsp;</code><span class="ref-desc">Espace fine, mais sécable.</span></div>
+      <div class="ref-row"><code>&amp;rarr; &amp;hellip; &amp;copy;</code><span class="ref-desc">&rarr; &hellip; &copy; ; flèches, points de suspension, symboles&hellip;</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;p&gt;Vous êtes prêts&amp;#8239;? On y va&amp;#8239;!&lt;/p&gt;
+&lt;p&gt;&amp;laquo;&amp;#8239;Bonjour&amp;#8239;&amp;raquo;, dit-elle.&lt;/p&gt;
+&lt;p&gt;Ce fichier pèse 12&amp;nbsp;Mo.&lt;/p&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note">Vous avez une liste des caractères disponibles sur <a href="https://fr.wikipedia.org/wiki/Liste_des_entit%C3%A9s_de_caract%C3%A8re_de_XML_et_HTML#Entit%C3%A9s_de_caract%C3%A8re_de_HTML" target="_blank">Wikipédia</a>.</p>
+
+    <h3>Entités et fonte</h3>
+    <p>Une entité est un caractère, donc il faut que la police ait le glyphe. Si votre font ne contient pas un symbole, le navigateur va le chercher dans les polices suivantes de <code>font-family</code>, puis dans les polices du système. Le rendu change alors d'un ordinateur à l'autre, et peut même s'afficher comme un carré vide (&laquo;&#8239;tofu&#8239;&raquo;). Pour garder le contrôle, on peut ajouter en fallback une police dédiée aux symboles, comme <a href="https://fonts.google.com/noto/specimen/Noto+Sans+Symbols" target="_blank">Noto Sans Symbols</a>&nbsp;:</p>
+    <div class="code-block">
+      <pre><code class="language-css">@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols&amp;family=Noto+Sans+Symbols+2&amp;display=swap');
+
+body {
+  /* si un caractère manque dans "Ma Police", on essaie les polices suivantes */
+  font-family: 'Ma Police', 'Noto Sans Symbols', 'Noto Sans Symbols 2', sans-serif;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="text-wrap"><a class="anchor-link" href="#text-wrap">Retour à la ligne avec <code>text-wrap</code></a></h2>
+    <p class="note">&rarr; contrôler la façon dont le navigateur coupe les lignes d'un texte (cf. <a href="https://developer.mozilla.org/fr/docs/Web/CSS/Reference/Properties/text-wrap" target="_blank">MDN</a>)</p>
+    <div class="code-block">
+      <pre><code class="language-css">/* retour à la ligne automatique (valeur par défaut) */
+p {
+  text-wrap: wrap;
+}
+
+/* empêche le retour à la ligne automatique */
+p {
+  text-wrap: nowrap;
+}
+
+/* équilibre la longueur des lignes */
+h1, h2 {
+  text-wrap: balance;
+}
+
+/* évite les orphelines */
+p {
+  text-wrap: pretty;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
     <h2 id="pseudo-classes"><a class="anchor-link" href="#pseudo-classes">Les Pseudo-classes CSS</a></h2>
     <p class="note">&rarr; permet de modifier le style d'un élément en fonction de son état</p>
     <div class="code-block">

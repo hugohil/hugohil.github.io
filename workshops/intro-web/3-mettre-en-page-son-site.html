@@ -91,6 +91,40 @@
   </section>
 
   <section>
+    <h2 id="block-inline"><a class="anchor-link" href="#block-inline"><code>div</code> vs <code>span</code> : block et inline</a></h2>
+    <p><code>&lt;div&gt;</code> et <code>&lt;span&gt;</code> sont deux conteneurs génériques, sans rôle sémantique. La seule différence : <code>&lt;div&gt;</code> est un élément <strong>block</strong>, <code>&lt;span&gt;</code> est un élément <strong>inline</strong>.</p>
+
+    <br>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>block</code><span class="ref-desc">Commence sur une <strong>nouvelle ligne</strong> et prend <strong>toute la largeur</strong> disponible. Accepte <code>width</code>, <code>height</code> et toutes les marges ; <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;ul&gt;</code>…</span></div>
+      <div class="ref-row"><code>inline</code><span class="ref-desc">Reste <strong>dans le flux du texte</strong> et ne prend que la place de son contenu. <code>width</code>, <code>height</code> et les marges verticales sont ignorées ; <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;img&gt;</code>…</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;div&gt;Un bloc qui prend toute la ligne&lt;/div&gt;
+&lt;div&gt;Un autre bloc, en dessous&lt;/div&gt;
+
+&lt;p&gt;Du texte avec un &lt;span class="highlight"&gt;mot surligné&lt;/span&gt; au milieu de la phrase.&lt;/p&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+
+    <p>On utilise donc <code>&lt;div&gt;</code> pour <strong>découper la page en blocs</strong>, et <code>&lt;span&gt;</code> pour <strong>cibler un morceau de texte</strong> à l'intérieur d'une ligne.</p>
+
+    <p>La propriété CSS <code>display</code> permet de changer ce comportement :</p>
+    <div class="code-block">
+      <pre><code class="language-css">a {
+  display: block; /* le lien se comporte comme un block */
+}
+
+.badge {
+  display: inline-block; /* reste dans la ligne, mais accepte width, height et marges */
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+  </section>
+
+  <section>
     <h2 id="reset-css"><a class="anchor-link" href="#reset-css">Le reset CSS</a></h2>
     <p>Le navigateur applique ses <strong>propres styles par défaut</strong> à de nombreuses balises : marges autour du <code>&lt;body&gt;</code>, des titres, des paragraphes, retrait des listes, etc. Ces valeurs varient d'un navigateur à l'autre et gênent la mise en page.</p>
     <p>Un <strong>reset</strong> remet ces valeurs à zéro, au tout début de la feuille de style, pour partir d'une base propre :</p>
@@ -102,6 +136,49 @@
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
     <p class="note">Le sélecteur <code>*</code> cible <strong>tous</strong> les éléments de la page. On redonne ensuite des marges uniquement là où on en veut.</p>
+  </section>
+
+  <section>
+    <h2 id="selecteurs-imbriques"><a class="anchor-link" href="#selecteurs-imbriques">Les sélecteurs imbriqués</a></h2>
+    <p>On peut combiner plusieurs sélecteurs pour cibler un élément <strong>selon l'endroit où il se trouve (hiérarchiquement)</strong> dans la page, sans lui ajouter de classe supplémentaire.</p>
+
+    <div class="ref-table">
+      <div class="ref-row"><code>.parent p</code><span class="ref-desc">Tous les <code>&lt;p&gt;</code> situés <strong>quelque part</strong> à l'intérieur d'un élément <code>.parent</code></span></div>
+      <div class="ref-row"><code>.parent .child</code><span class="ref-desc">Tous les éléments <code>.child</code> situés à l'intérieur d'un élément <code>.parent</code></span></div>
+      <div class="ref-row"><code>.parent &gt; p</code><span class="ref-desc">Uniquement les <code>&lt;p&gt;</code> <strong>enfants directs</strong> de <code>.parent</code> (un seul niveau de profondeur)</span></div>
+      <div class="ref-row"><code>.parent.target</code><span class="ref-desc">Un élément qui a <strong>les deux classes</strong> à la fois (attentions aux espace !)</span></div>
+      <div class="ref-row"><code>.parent.target .child</code><span class="ref-desc">Les <code>.child</code> situés dans un élément qui a les classes <code>parent</code> <strong>et</strong> <code>target</code></span></div>
+      <div class="ref-row"><code>h2, p</code><span class="ref-desc">Les élements <code>h2</code> et <code>p</code> (plusieurs sélecteurs indépendants)</span></div>
+    </div>
+
+    <div class="code-block">
+      <pre><code class="language-html">&lt;nav class="menu"&gt;
+  &lt;a href="#"&gt;Accueil&lt;/a&gt;
+  &lt;a href="#" class="active"&gt;Projets&lt;/a&gt;
+  &lt;div class="sous-menu"&gt;
+    &lt;a href="#"&gt;Projet 1&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <div class="code-block">
+      <pre><code class="language-css">/* tous les liens du menu, y compris ceux du sous-menu */
+.menu a {
+  color: black;
+}
+
+/* seulement les liens directement dans .menu */
+.menu &gt; a {
+  font-weight: bold;
+}
+
+/* un lien du menu qui a aussi la classe .active */
+.menu a.active {
+  color: red;
+}</code></pre>
+      <button class="copy-btn" onclick="copyCode(this)">copier</button>
+    </div>
+    <p class="note">Attention : <code>.parent .target</code> (avec espace) cible un <code>.target</code> <strong>à l'intérieur</strong> de <code>.parent</code>, alors que <code>.parent.target</code> (sans espace) cible <strong>un seul élément</strong> qui porte les deux classes.</p>
   </section>
 
   <section>
