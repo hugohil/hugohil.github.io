@@ -29,7 +29,7 @@
     <p>CSS Grid pour créer des layouts complexes. Contrairement à Flexbox (voir plus bas) qui fonctionne sur un axe, Grid vous permet de contrôler les lignes <strong>et</strong> les colonnes.</p>
 
     <div class="code-block">
-      <pre><code class="language-css">.container {
+      <pre><code class="language-css">.grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
@@ -55,11 +55,15 @@
   &lt;div class="header"&gt;Titre&lt;/div&gt;
 
   &lt;!-- Ligne 1 --&gt;
-  &lt;div class="grid"&gt;
+  &lt;div class="grid-container"&gt;
     &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;!-- ... 5 autres cellules --&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;div class="box"&gt;&lt;h3&gt;DT1&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
 	&lt;/div&gt;
 	&lt;!-- Lignes 2 à 6 : même structure --&gt;
   &lt;!-- Faites 6 lignes de 8 colonnes (48 cellules) --&gt;
@@ -73,7 +77,7 @@
     <h3 id="definir-conteneur-grille">Définir un conteneur de grille</h3>
     <p><code>display: grid</code></p>
     <div class="code-block">
-      <pre><code class="language-css">.grid {
+      <pre><code class="language-css">.grid-container {
   display: grid;
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
@@ -82,15 +86,15 @@
     <h3 id="definir-colonnes-lignes">Définir des colonnes et des lignes</h3>
     <p><code>grid-template-columns</code>, <code>grid-template-rows</code></p>
     <div class="code-block">
-      <pre><code class="language-css">.grid {
+      <pre><code class="language-css">.grid-container {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
   grid-template-rows: repeat(10, 1fr);
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
     <p>L'unité <strong>fr</strong> (<em>fraction</em>) est une unité spécifique à CSS Grid. Elle représente <strong>une fraction de l'espace disponible</strong> dans le conteneur de la grille.</p>
-    <p>Dans l'exemple ci-dessus, on compte un total de 4 fractions ; la première colonne prendra donc 1 quart, la deuxième 2 quarts, et la troisième 1 quart.</p>
+    <p>Dans l'exemple ci-dessus, on compte un total de 5 fractions (1+2+1+1) réparties sur 4 colonnes ; la première colonne prendra donc 1/5, la deuxième 2/5, et les troisième et quatrième 1/5 chacune.</p>
 
     <h3 id="placement-des-elements">Placement des éléments</h3>
     <p><strong>Placement automatique</strong></p>
@@ -106,6 +110,7 @@
       <pre><code class="language-css">.item1 {
   grid-column: 1 / 3; /* de la ligne verticale 1 à 3 */
   grid-row: 1 / 2; /* de la ligne horizontale 1 à 2 */
+  background-color: darkcyan;
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
@@ -132,63 +137,6 @@
 }</code></pre>
       <button class="copy-btn" onclick="copyCode(this)">copier</button>
     </div>
-
-    <h3 id="utilisations-avancees">Utilisations avancées</h3>
-    <p><strong>Grilles nommées avec</strong> <code>grid-template-areas</code></p>
-    <p>Permet de créer un layout en définissant la structure avec des noms.</p>
-    <div class="code-block">
-      <pre><code class="language-css">.grid-container {
-  grid-template-areas:
-    "header header header"
-    "sidebar main main"
-    "footer footer footer";
-}
-
-.item1 {
-  grid-area: header;
-}
-.item2 {
-  grid-area: main;
-}</code></pre>
-      <button class="copy-btn" onclick="copyCode(this)">copier</button>
-    </div>
-
-    <p><strong>Fonctions de répétition et autres unités</strong></p>
-    <ul>
-      <li><code>repeat</code> : Répète une colonne ou une ligne un certain nombre de fois.
-        <ul>
-          <li><strong>Syntaxe</strong> : <code>repeat(num_repeats, size)</code></li>
-          <li><strong>Exemple</strong> : Crée 3 colonnes de taille égale (<code>1fr</code> chacune).
-            <div class="code-block">
-              <pre><code class="language-css">.grid-container {  grid-template-columns: repeat(3, 1fr);}</code></pre>
-              <button class="copy-btn" onclick="copyCode(this)">copier</button>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <li><code>minmax</code> : Définit une taille minimale et une taille maximale pour une colonne ou une ligne. Utile pour les grilles responsives.
-        <ul>
-          <li><strong>Syntaxe</strong> : <code>minmax(min_size, max_size)</code></li>
-          <li><strong>Exemple</strong> : Définit la taille minimale de la colonne à <code>100px</code> et la taille maximale à <code>1fr</code>.
-            <div class="code-block">
-              <pre><code class="language-css">.grid-container {  grid-template-columns: minmax(100px, 1fr);}</code></pre>
-              <button class="copy-btn" onclick="copyCode(this)">copier</button>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <li><code>auto-fill</code> : Remplit automatiquement le nombre de colonnes ou de lignes dans un conteneur, en fonction de l'espace disponible.
-        <ul>
-          <li><strong>Syntaxe</strong> : Utilisé avec <code>repeat</code> : <code>repeat(auto-fill, size)</code></li>
-          <li><strong>Exemple</strong> : Crée autant de colonnes que possible avec une taille minimale de <code>100px</code> et une taille maximale de <code>1fr</code>.
-            <div class="code-block">
-              <pre><code class="language-css">.grid-container {  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));}</code></pre>
-              <button class="copy-btn" onclick="copyCode(this)">copier</button>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </section>
 
 
